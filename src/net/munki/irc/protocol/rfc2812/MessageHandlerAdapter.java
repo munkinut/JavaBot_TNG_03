@@ -13,7 +13,7 @@ public abstract class MessageHandlerAdapter implements MessageHandlerInterface {
     }
 
     /** 3.2.1 Join message  */
-    public void JOIN(String[] channels) throws MessageHandlerException {
+    public void JOIN(String[] channels) {
     }
     
     /** 3.5.2 Squery  */
@@ -53,7 +53,7 @@ public abstract class MessageHandlerAdapter implements MessageHandlerInterface {
     }
     
     /** 3.3.1 Private messages  */
-    public void PRIVMSG(String target, String text) throws MessageHandlerException {
+    public void PRIVMSG(String target, String text) {
     }
     
     public void JOIN(String[] channels, String[] keys) throws MessageHandlerException {
@@ -100,7 +100,7 @@ public abstract class MessageHandlerAdapter implements MessageHandlerInterface {
     }
     
     /** 3.1.2 Nick Message  */
-    public void NICK(String nick) throws MessageHandlerException {
+    public void NICK(String nick) {
     }
     
     /** 3.1.1 Password Message  */
@@ -112,7 +112,7 @@ public abstract class MessageHandlerAdapter implements MessageHandlerInterface {
     }
     
     /** 3.1.3 User Message  */
-    public void USER(String user, String mode, String unused, String real) throws MessageHandlerException {
+    public void USER(String user, String mode, String unused, String real) {
     }
     
     /** 3.1.4 Oper Message  */
@@ -139,7 +139,7 @@ public abstract class MessageHandlerAdapter implements MessageHandlerInterface {
     }
     
     /** 3.7.3 Pong message  */
-    public void PONG(String server_1) throws MessageHandlerException {
+    public void PONG(String server_1) {
     }
     
     /** 3.4.10 Info Command  */

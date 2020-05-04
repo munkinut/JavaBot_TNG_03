@@ -58,10 +58,9 @@ public class JBConfig {
     }
     
     /** Reads default configuration settings into a Properties object.
-     * @throws JBConfigurationException Thrown if there is a problem reading the properties.
      * @return A Properties object containing configuration data.
      */    
-    public static Properties read() throws JBConfigurationException {
+    public static Properties read() {
         return getDefaultProperties();
     }
     

@@ -14,7 +14,7 @@ import net.munki.irc.event.IRCScriptListener;
 public abstract class BeanshellScriptAdapter implements BeanshellScriptInterface, IRCScriptListener {
 
     /** The script interpreter. */    
-    protected Interpreter interpreter;
+    protected final Interpreter interpreter;
 
     /** Creates a new IRCScriptAdapter. */    
     public BeanshellScriptAdapter() {

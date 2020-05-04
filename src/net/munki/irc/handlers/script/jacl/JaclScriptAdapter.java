@@ -14,7 +14,7 @@ import tcl.lang.*;
 public abstract class JaclScriptAdapter implements JaclScriptInterface, IRCScriptListener {
 
     /** The script interpreter. */    
-    protected Interp interpreter;
+    protected final Interp interpreter;
 
     /** Creates a new JaclScriptAdapter. */    
     public JaclScriptAdapter() {

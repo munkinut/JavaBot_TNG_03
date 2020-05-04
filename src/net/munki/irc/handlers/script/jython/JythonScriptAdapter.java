@@ -14,7 +14,7 @@ import org.python.util.PythonInterpreter;
 public abstract class JythonScriptAdapter implements JythonScriptInterface, IRCScriptListener {
 
     /** The script interpreter. */    
-    protected PythonInterpreter interpreter;
+    protected final PythonInterpreter interpreter;
 
     /** Creates a new IRCScriptAdapter. */    
     public JythonScriptAdapter() {
