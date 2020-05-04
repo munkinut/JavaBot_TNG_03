@@ -32,7 +32,7 @@ public class Connection extends Observable implements Runnable {
     private Thread connectionThread = null;
     /** Connected flag
      */    
-    private boolean connected = false;
+    private boolean connected;
     /** The logger to which all log data should be sent for this class. */    
     private Logger logger;
     

@@ -89,7 +89,7 @@ public class IRCScriptResource {
         
         // if the addressee is a channel, reply to the channel
         // otherwise the addressee should be me, so reply to nick
-        String recipient = "";
+        String recipient;
         
         if (addressee.startsWith("#") || addressee.startsWith("+") ||
             addressee.startsWith("!") || addressee.startsWith("&")) {

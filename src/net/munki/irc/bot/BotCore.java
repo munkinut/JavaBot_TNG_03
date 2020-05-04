@@ -239,7 +239,7 @@ public class BotCore implements Observer, ServiceListenerInterface {
             String fileStr = file.toString();
             if (file.isDirectory()) outList.addAll(getPluginList(fileStr));
             else { // it's a file
-                String replaceSlash = null;
+                String replaceSlash;
                 String replacement = ".";
                 String replaceClass = ".mod";
                 String replacePlugins = StringTool.cat(new String[] {PLUGINS_DIR, "."});
@@ -322,7 +322,7 @@ public class BotCore implements Observer, ServiceListenerInterface {
      * @return True if a connection was established, false if not
      */    
     public boolean connect() {
-        boolean success = false;
+        boolean success;
         if (server != null) {
             report(StringTool.cat(new String[] {"Requesting a connection to ", server.toString(), " ..."}));
             try {
@@ -416,7 +416,7 @@ public class BotCore implements Observer, ServiceListenerInterface {
      * dispatched, otherwise false.
      */    
     private boolean nick(String nick) {
-        boolean success = false;
+        boolean success;
         if (connection != null) {
             IRCCommandEvent evt = new IRCCommandEvent(env, MessageNames.NICK);
             evt.addParameter(nick);
@@ -445,7 +445,7 @@ public class BotCore implements Observer, ServiceListenerInterface {
      * dispatched, otherwise false.
      */    
     private boolean user(String user, String real) {
-        boolean success = false;
+        boolean success;
         if (connection != null) {
             IRCCommandEvent evt = new IRCCommandEvent(env, MessageNames.USER);
             evt.addParameter(user);

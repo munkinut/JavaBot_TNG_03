@@ -507,7 +507,7 @@ public class JBSecurityManager extends SecurityManager {
 
     private boolean isListenAllowed(String port) {
         boolean returnValue = false;
-        File file = null;
+        File file;
         try {
             file = new File(LISTENERS_ALLOW);
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -565,7 +565,7 @@ public class JBSecurityManager extends SecurityManager {
     private boolean isConnectAllowed(String host, int port) {
         boolean returnValue = false;
         if (host != null) {
-            File file = null;
+            File file;
             try {
                 file = new File(SERVERS_ALLOW);
                 BufferedReader br = new BufferedReader(new FileReader(file));
@@ -642,7 +642,7 @@ public class JBSecurityManager extends SecurityManager {
     private boolean isAcceptAllowed(String client) {
         boolean returnValue = false;
         if (client != null) {
-            File file = null;
+            File file;
             try {
                 file = new File(HOSTS_ALLOW);
                 BufferedReader br = new BufferedReader(new FileReader(file));

@@ -230,10 +230,10 @@ public class MessageFactory {
     private static CommandMessageInterface createCommandMessage(String prefix, String command, String arguments) {
         
         CommandMessageInterface cmi = null;
-        String from = "";
+        String from;
         String usermod = "";
         String modifier = "";
-        String user = "";
+        String user;
         String host = "";
         
         // If we have a user and host specified

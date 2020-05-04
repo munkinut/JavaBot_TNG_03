@@ -73,7 +73,7 @@ public class ControlService implements ServiceInterface {
             pw = new PrintWriter(bw);
             pw.println("Connected to " + getServiceName() + " ...");
             pw.flush();
-            String s = null;
+            String s;
             while ((s = br.readLine()) != null) {
                 notifyServiceListeners(s);
                 if (s.equals("QUIT")) break;
