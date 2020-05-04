@@ -279,7 +279,7 @@ public class MessageFactory {
                 break;
             }
             case MessageNames.PART -> {
-                String channel = "";
+                String channel;
                 String partMessage = "";
                 if (arguments.indexOf(" :") > -1) {
                     channel = arguments.substring(0, arguments.indexOf(" :"));
