@@ -36,13 +36,11 @@ public class WelcomeMessage implements ReplyMessageInterface {
         return message;
     }
     
-// --Commented out by Inspection START (04/05/2020 21:37):
-//    /**
-//     * @return
-//     */
-//    public String getMask() {
-//        return mask;
-//    }
-// --Commented out by Inspection STOP (04/05/2020 21:37)
-
+    /**
+     * @return
+     */    
+    public String getMask() {
+        return mask;
+    }
+    
 }

@@ -180,13 +180,11 @@ public class JBSecurityManager extends SecurityManager {
     public void checkSystemClipboardAccess() {
     }
 
-// --Commented out by Inspection START (04/05/2020 21:37):
-//    public boolean checkTopLevelWindow() {
-//        // return super.checkTopLevelWindow(obj);
-//    	// TODO: above is deprecated, see advice.
-//    	return true;
-//    }
-// --Commented out by Inspection STOP (04/05/2020 21:37)
+    public boolean checkTopLevelWindow() {
+        // return super.checkTopLevelWindow(obj);
+    	// TODO: above is deprecated, see advice.
+    	return true;
+    }
 
     public void checkWrite(FileDescriptor fileDescriptor) {
     }

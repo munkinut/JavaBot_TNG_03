@@ -38,16 +38,14 @@ public class DefaultBotUserManager implements BotUserManagerInterface {
         logger = Logger.getLogger(this.getClass().getName());
     }
     
-// --Commented out by Inspection START (04/05/2020 21:37):
-//    /** Returns a singleton instance of the class.
-//     * @return A DefaultBotUserManager.
-//     */
-//    public static synchronized DefaultBotUserManager getInstance() {
-//        if (botUserManager == null) botUserManager = new DefaultBotUserManager();
-//        return botUserManager;
-//    }
-// --Commented out by Inspection STOP (04/05/2020 21:37)
-
+    /** Returns a singleton instance of the class.
+     * @return A DefaultBotUserManager.
+     */    
+    public static synchronized DefaultBotUserManager getInstance() {
+        if (botUserManager == null) botUserManager = new DefaultBotUserManager();
+        return botUserManager;
+    }
+    
     /** Determines whether or not the given user is allowed to op.
      * @param channelUser The user trying to op someone through the bot.
      * @return True if op is allowed, otherwise false.

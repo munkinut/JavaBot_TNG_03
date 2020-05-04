@@ -21,13 +21,11 @@ public interface IRCCommandInterface extends MessageHandlerInterface {
      */
     void setConnection(Connection connection);
     
-// --Commented out by Inspection START (04/05/2020 21:37):
-//    /** Writes to the connection.
-//     * @param msg Message to write
-//     * @throws IOException Thrown if an error occurs during writing
-//     */
-//    void write(String msg) throws IOException;
-// --Commented out by Inspection STOP (04/05/2020 21:37)
+    /** Writes to the connection.
+     * @param msg Message to write
+     * @throws IOException Thrown if an error occurs during writing
+     */
+    void write(String msg) throws IOException;
 
     /** 3.4.7 Connect message
      * @param target

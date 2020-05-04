@@ -50,76 +50,66 @@ public class IRCScriptResource {
         logger = Logger.getLogger(this.getClass().getName());
     }
     
-// --Commented out by Inspection START (04/05/2020 21:37):
-//    /** Returns the bot's nickname.
-//     * @return The bot's nickname.
-//     */
-//    public String getNick() {
-//        if (nick != null) return nick;
-//        else return "";
-//    }
-// --Commented out by Inspection STOP (04/05/2020 21:37)
+    /** Returns the bot's nickname.
+     * @return The bot's nickname.
+     */    
+    public String getNick() {
+        if (nick != null) return nick;
+        else return "";
+    }
+    
+    /** Returns the bot's hostmask.
+     * @return The bot's hostmask.
+     */    
+    public String getMask() {
+        if (mask != null) return mask;
+        else return "";
+    }
+    
+    /** Returns the addressee of the script.
+     * @return The addressee.
+     */    
+    public String getAddressee() {
+        if (addressee != null) return addressee;
+        else return "";
+    }
+    
+    /** Returns the arguments passed to the script.
+     * @return The script arguments.
+     */    
+    public String[] getArguments() {
+        if (arguments != null) return arguments;
+        else return new String[] { "" };
+    }
 
-// --Commented out by Inspection START (04/05/2020 21:37):
-//    /** Returns the bot's hostmask.
-//     * @return The bot's hostmask.
-//     */
-//    public String getMask() {
-//        if (mask != null) return mask;
-//        else return "";
-//    }
-// --Commented out by Inspection STOP (04/05/2020 21:37)
-
-// --Commented out by Inspection START (04/05/2020 21:37):
-//    /** Returns the addressee of the script.
-//     * @return The addressee.
-//     */
-// --Commented out by Inspection START (04/05/2020 21:37):
-////    public String getAddressee() {
-//// --Commented out by Inspection START (04/05/2020 21:37):
-//////        if (addressee != null) return addressee;
-//////        else return "";
-//////    }
-////// --Commented out by Inspection STOP (04/05/2020 21:37)
-////
-////    /** Returns the arguments passed to the script.
-////     * @return The script arguments.
-////     */
-////    public String[] getArguments() {
-//// --Commented out by Inspection STOP (04/05/2020 21:37)
-//        if (arguments != null) return arguments;
-//        else return new String[] { "" };
-//    }
-//
-//    /** Provides a means for the script to send messages back to the caller.
-//     * @param reply The reply string.
-//     */
-//    public void reply(String reply) {
-//
-//        // if the addressee is a channel, reply to the channel
-//        // otherwise the addressee should be me, so reply to nick
-//        String recipient;
-//
-//        if (addressee.startsWith("#") || addressee.startsWith("+") ||
-//            addressee.startsWith("!") || addressee.startsWith("&")) {
-//
-//                // addressee is a channel
-//                logger.fine("Script resource replying to a channel ...");
-//                recipient = addressee;
-//        }
-//        else {
-//
-//                // addressee is the client
-//                logger.fine("Script resource replying to a nickname ...");
-//                recipient = nick;
-//        }
-//
-//        // create an IRCCommandEvent and send it to the environment
-//        IRCCommandEvent ice = new IRCCommandEvent(env, MessageNames.PRIVMSG);
-//        ice.addParameter(recipient);
-//        ice.addParameter(reply);
-//        logger.finer(StringTool.cat(new String[] {"Recipient is ", recipient}));
-// --Commented out by Inspection STOP (04/05/2020 21:37)
+    /** Provides a means for the script to send messages back to the caller.
+     * @param reply The reply string.
+     */    
+    public void reply(String reply) {
+        
+        // if the addressee is a channel, reply to the channel
+        // otherwise the addressee should be me, so reply to nick
+        String recipient;
+        
+        if (addressee.startsWith("#") || addressee.startsWith("+") ||
+            addressee.startsWith("!") || addressee.startsWith("&")) {
+                
+                // addressee is a channel
+                logger.fine("Script resource replying to a channel ...");
+                recipient = addressee;
+        }
+        else {
+            
+                // addressee is the client
+                logger.fine("Script resource replying to a nickname ...");
+                recipient = nick;
+        }
+        
+        // create an IRCCommandEvent and send it to the environment
+        IRCCommandEvent ice = new IRCCommandEvent(env, MessageNames.PRIVMSG);
+        ice.addParameter(recipient);
+        ice.addParameter(reply);
+        logger.finer(StringTool.cat(new String[] {"Recipient is ", recipient}));
         logger.finer(StringTool.cat(new String[] {"Reply is ", reply}));
         try {
             logger.fine("Firing command event ...");

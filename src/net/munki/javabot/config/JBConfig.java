@@ -37,19 +37,17 @@ public class JBConfig {
         return defaultProps;
     }
     
-// --Commented out by Inspection START (04/05/2020 21:37):
-//    /** Reads configuration settings into a Properties object.
-//     * @param defaultFile The file containing default properties.
-//     * @param configFile The file containing non-default properties.
-//     * @throws JBConfigurationException Thrown if there is a problem reading the properties.
-//     * @return A Properties object containing configuration data.
-//     */
-//    public static Properties read(String defaultFile, String configFile) throws JBConfigurationException {
-//        Properties defaultProps = loadProperties(null, defaultFile);
-//        return loadProperties(defaultProps, configFile);
-//    }
-// --Commented out by Inspection STOP (04/05/2020 21:37)
-
+    /** Reads configuration settings into a Properties object.
+     * @param defaultFile The file containing default properties.
+     * @param configFile The file containing non-default properties.
+     * @throws JBConfigurationException Thrown if there is a problem reading the properties.
+     * @return A Properties object containing configuration data.
+     */    
+    public static Properties read(String defaultFile, String configFile) throws JBConfigurationException {
+        Properties defaultProps = loadProperties(null, defaultFile);
+        return loadProperties(defaultProps, configFile);
+    }
+    
     /** Reads configuration settings into a Properties object.
      * @param configFile The file containing the properties.
      * @throws JBConfigurationException Thrown if there is a problem reading the properties.
@@ -76,25 +74,23 @@ public class JBConfig {
             in.close();
         }
         catch (IOException ioe) {
-// --Commented out by Inspection START (04/05/2020 21:37):
-//            throw new JBConfigurationException("Could not load configuration properties ...", ioe);
-//        }
-//        return config;
-//    }
-//
-//    /** Writes config data back to a file.
-//     * @param config The properties object containing the configuration.
-//     * @param configFile The file to write to.
-//     * @throws JBConfigurationException Thrown if there is a problem reading the properties.
-//     */
-//    public static void write(Properties config, String configFile) throws JBConfigurationException {
-//        try {
-//            FileOutputStream out = new FileOutputStream(configFile);
-//            config.store(out, "--- no comment ---");
-//            out.close();
-//        }
-//        catch (IOException ioe) {
-// --Commented out by Inspection STOP (04/05/2020 21:37)
+            throw new JBConfigurationException("Could not load configuration properties ...", ioe);
+        }
+        return config;
+    }
+    
+    /** Writes config data back to a file.
+     * @param config The properties object containing the configuration.
+     * @param configFile The file to write to.
+     * @throws JBConfigurationException Thrown if there is a problem reading the properties.
+     */    
+    public static void write(Properties config, String configFile) throws JBConfigurationException {
+        try {
+            FileOutputStream out = new FileOutputStream(configFile);
+            config.store(out, "--- no comment ---");
+            out.close();
+        }
+        catch (IOException ioe) {
             throw new JBConfigurationException("Could not save configuration properties ...", ioe);
         }
     }

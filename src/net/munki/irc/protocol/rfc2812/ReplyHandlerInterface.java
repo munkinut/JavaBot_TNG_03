@@ -10,7 +10,7 @@ public interface ReplyHandlerInterface {
 
     // 5.1 Command responses
     
-    // --Commented out by Inspection (04/05/2020 21:37):void RPL_WELCOME() throws ReplyHandlerException;    //001";
+    void RPL_WELCOME() throws ReplyHandlerException;    //001";
     void RPL_YOURHOST(String reply) throws ReplyHandlerException;    //002";
     void RPL_CREATED(String reply) throws ReplyHandlerException;    //003";
     void RPL_MYINFO(String reply) throws ReplyHandlerException;    //004";
@@ -151,7 +151,7 @@ public interface ReplyHandlerInterface {
 
     void ERR_NONICKNAMEGIVEN(String reply) throws ReplyHandlerException;    //431";
     void ERR_ERRONEUSNICKNAME(String reply) throws ReplyHandlerException;    //432";
-    // --Commented out by Inspection (04/05/2020 21:37):void ERR_NICKNAMEINUSE() throws ReplyHandlerException;    //433";
+    void ERR_NICKNAMEINUSE() throws ReplyHandlerException;    //433";
 
     void ERR_NICKCOLLISION(String reply) throws ReplyHandlerException;    //436";
     void ERR_UNAVAILRESOURCE(String reply) throws ReplyHandlerException;    //437";

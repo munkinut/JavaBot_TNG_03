@@ -56,15 +56,13 @@ public class Server {
         return this.host;
     }
     
-// --Commented out by Inspection START (04/05/2020 21:37):
-//    /** Get available ports
-//     * @return Available ports
-//     */
-//    public int[] getPorts() {
-//        return this.ports;
-//    }
-// --Commented out by Inspection STOP (04/05/2020 21:37)
-
+    /** Get available ports
+     * @return Available ports
+     */    
+    public int[] getPorts() {
+        return this.ports;
+    }
+    
     /** Get the preferred server port, either the first port in the available ports or the default port
      * @return Preferred port
      */    
@@ -84,14 +82,12 @@ public class Server {
         return this.host;
     }
     
-// --Commented out by Inspection START (04/05/2020 21:37):
-//    /** Determines equality with another Server object.
-//     * @param s The Server object with which to determine equality.
-//     * @return True if Server object is the same as this one, otherwise false.
-//     */
-//    public boolean equals(Server s) {
-//        return ((this.getHost()).equals(s.getHost()));
-//    }
-// --Commented out by Inspection STOP (04/05/2020 21:37)
+    /** Determines equality with another Server object.
+     * @param s The Server object with which to determine equality.
+     * @return True if Server object is the same as this one, otherwise false.
+     */    
+    public boolean equals(Server s) {
+        return ((this.getHost()).equals(s.getHost()));
+    }
 
 }

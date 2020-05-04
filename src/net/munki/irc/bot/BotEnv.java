@@ -154,15 +154,13 @@ public class BotEnv {
         scriptListeners.remove(scriptHandler);
     }
     
-// --Commented out by Inspection START (04/05/2020 21:37):
-//    /** Returns the bots current nickname.
-//     * @return The bots current nickname
-//     */
-//    public String getNick() {
-//        return nicks[nickIndex];
-//    }
-// --Commented out by Inspection STOP (04/05/2020 21:37)
-
+    /** Returns the bots current nickname.
+     * @return The bots current nickname
+     */    
+    public String getNick() {
+        return nicks[nickIndex];
+    }
+    
     /** Returns the bots next available nickname.
      * @return The next available nickname
      */    
@@ -181,16 +179,14 @@ public class BotEnv {
         return nick;
     }            
     
-// --Commented out by Inspection START (04/05/2020 21:37):
-//    /** Returns the list of channels.
-//     * @return The list of channels
-//     */
-//    public List getChannels() {
-//        return channels;
-//    }
-//
-//    /** Returns the print stream for output.
-// --Commented out by Inspection STOP (04/05/2020 21:37)
+    /** Returns the list of channels.
+     * @return The list of channels
+     */    
+    public List getChannels() {
+        return channels;
+    }
+    
+    /** Returns the print stream for output.
      * @return The printstream
      */    
     public PrintStream getPrintStream() {
