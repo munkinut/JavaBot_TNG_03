@@ -21,8 +21,7 @@ public class ScriptTool {
     public static String pathToBeanshellScript(String command) {
         String fs = java.io.File.separator;
         String[] toCat = {"scripts",fs,command,".bsh"};
-        String path = StringTool.cat(toCat);
-        return path;
+        return StringTool.cat(toCat);
     }
 
     /** Provides the correct path to script files based on the name passed by the user.
@@ -32,8 +31,7 @@ public class ScriptTool {
     public static String pathToJaclScript(String command) {
         String fs = java.io.File.separator;
         String[] toCat = {"scripts",fs,command,".tcl"};
-        String path = StringTool.cat(toCat);
-        return path;
+        return StringTool.cat(toCat);
     }
 
     /** Provides the correct path to script files based on the name passed by the user.
@@ -43,7 +41,6 @@ public class ScriptTool {
     public static String pathToJythonScript(String command) {
         String fs = java.io.File.separator;
         String[] toCat = {"scripts",fs,command,".py"};
-        String path = StringTool.cat(toCat);
-        return path;
+        return StringTool.cat(toCat);
     }
 }

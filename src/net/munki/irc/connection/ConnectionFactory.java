@@ -26,8 +26,7 @@ public class ConnectionFactory {
     public static Connection getConnection(Server server) throws ConnectionException {
         String host = server.getHost();
         int port = server.getPreferredPort();
-        Connection connection = new Connection(host, port);
-        return connection;
+        return new Connection(host, port);
     }
     
 }

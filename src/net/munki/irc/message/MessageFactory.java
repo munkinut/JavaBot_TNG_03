@@ -59,9 +59,8 @@ public class MessageFactory {
         String parameters = message.substring(message.indexOf(":")+1);
         
         // Add the rest to the message
-        CommandMessageInterface pmi = new PingMessage(parameters);
-        
-        return pmi;
+
+        return new PingMessage(parameters);
     }
     
     private static GenericMessageInterface createPrefixMessage(String message) {
@@ -312,7 +311,6 @@ public class MessageFactory {
                 target.startsWith("!") || target.startsWith("&")) {
                     
                 // we have a channel
-                String channel = target;
                 String modesAndParams = arguments.substring(arguments.indexOf(" ")+1);
                 
                 // separate the modes from the mode params and pass separately
@@ -320,7 +318,7 @@ public class MessageFactory {
                 String modes = modesAndParams.substring(0, modesAndParams.indexOf(" "));
                 String params = modesAndParams.substring(modesAndParams.indexOf(" ")+1);
                 
-                cmi = new ChannelModeMessage(from, modifier, user, host, channel, modes, params);
+                cmi = new ChannelModeMessage(from, modifier, user, host, target, modes, params);
             }
             
             else {
