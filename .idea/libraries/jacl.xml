@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jacl">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jacl.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

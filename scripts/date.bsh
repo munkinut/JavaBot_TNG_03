@@ -1,0 +1,7 @@
+// date.bsh - date script for net.munki.irc framework
+//
+// invoked using !date
+
+message = new Date().toString();
+scriptResource.reply(message);
+

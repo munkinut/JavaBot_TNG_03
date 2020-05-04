@@ -1,0 +1,18 @@
+// wibble.bsh - example BeanShell script for the net.munki.irc framework
+// 
+// for more info on BeanShell scripting, go to :
+//
+// http://www.beanshell.org
+//
+// a scriptResource provides the essential framework API
+// it's public methods are :
+//
+// getNick() - returns the nick that invoked the script
+// getMask() - returns the hostmask that invoked the script
+// getAddressee() - returns the addressee (a channel name or a nickname)
+// getArguments() - returns an Array of arguments that were passed
+// reply(String message) - sends a msg to the addresser that invoked the script
+//
+
+nick = scriptResource.getNick();
+scriptResource.reply("hi " + nick + ".  wibble wibble :)");

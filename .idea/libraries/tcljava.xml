@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="tcljava">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/tcljava.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

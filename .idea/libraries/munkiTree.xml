@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="munkiTree">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/munkiTree.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

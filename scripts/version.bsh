@@ -1,0 +1,6 @@
+// version.bsh - version script for JavaBot
+//
+// invoked using !version either to the channel or in a msg
+
+message = "JavaBot TNG v0.15";
+scriptResource.reply(message);

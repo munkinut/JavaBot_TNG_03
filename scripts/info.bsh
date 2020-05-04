@@ -1,0 +1,9 @@
+nick = scriptResource.getNick();
+mask = scriptResource.getMask();
+addressee = scriptResource.getAddressee();
+arguments = scriptResource.getArguments();
+args = "";
+for (int i = 0; i < arguments.length; i++) {
+    args = args + arguments[i] + " ";
+}
+scriptResource.reply(nick + " | " + mask + " | " + addressee + " | " + args);
