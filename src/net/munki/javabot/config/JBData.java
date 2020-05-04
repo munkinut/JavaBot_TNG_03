@@ -6,7 +6,7 @@ public class JBData {
     private JBData() {}
  
     public static final String NAME = "JavaBot TNG";
-    public static final String VERSION = "0.15";
+    public static final String VERSION = "3.0";
     public static final String USAGE_1 = "    java -jar jbTNG";
     public static final String USAGE_2 = "    java -jar jbTNG <options>";
     public static final String USAGE_3 = "      Options :";
@@ -35,12 +35,12 @@ public class JBData {
     public static final String PROP_JYTHON = "jython";
     public static final String PROP_JACL = "jacl";
     public static final String PROP_SECURITY_MANAGER = "security-manager";
-    public static final String DEFAULT_SERVER = "irc.icq.com";
+    public static final String DEFAULT_SERVER = "eu.ircnet.org";
     public static final String DEFAULT_PORT = "6665";
-    public static final String DEFAULT_NICKNAMES = "jb_0_15";
-    public static final String DEFAULT_USERNAME = "jb_0_15";
-    public static final String DEFAULT_REALNAME = "jb_0_15";
-    public static final String DEFAULT_CHANNELS = "#jbtest";
+    public static final String DEFAULT_NICKNAMES = "periotu";
+    public static final String DEFAULT_USERNAME = "periotu";
+    public static final String DEFAULT_REALNAME = "periotu";
+    public static final String DEFAULT_CHANNELS = "#lkdjfghlkj";
     public static final String DEFAULT_BEANSHELL = "true";
     public static final String DEFAULT_JYTHON = "true";
     public static final String DEFAULT_JACL = "true";

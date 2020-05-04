@@ -25,7 +25,7 @@ public class JavaBotTNGMain {
     public static void main (String args[]) {
         
         Properties config = null;
-        boolean securityManager = true;
+        boolean securityManager = false;
         boolean beanshell = true;
         boolean python = true;
         boolean tcl = true;
