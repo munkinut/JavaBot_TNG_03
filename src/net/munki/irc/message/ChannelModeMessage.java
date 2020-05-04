@@ -44,20 +44,26 @@ public class ChannelModeMessage implements CommandMessageInterface {
         return MessageNames.CHANNEL_MODE;
     }
     
-    /**
-     * @return
-     */    
-    public String getNick() {
-        return this.nick;
-    }
-    
-    /**
-     * @return
-     */    
-    public String getModifier() {
-        return this.modifier;
-    }
-    
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    /**
+//     * @return
+//     */
+//    public String getNick() {
+//        return this.nick;
+//    }
+// --Commented out by Inspection START (04/05/2020 21:37):
+//// --Commented out by Inspection STOP (04/05/2020 21:37)
+//
+//// --Commented out by Inspection START (04/05/2020 21:37):
+////    /**
+////     * @return
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+//     */
+//    public String getModifier() {
+//        return this.modifier;
+//    }
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+
     /**
      * @return
      */    
@@ -65,20 +71,28 @@ public class ChannelModeMessage implements CommandMessageInterface {
         return this.user;
     }
     
-    /**
-     * @return
-     */    
-    public String getHost() {
-        return this.host;
-    }
-    
-    /**
-     * @return
-     */    
-    public String getChannel() {
-        return this.channel;
-    }
-    
+// --Commented out by Inspection START (04/05/2020 21:37):
+// --Commented out by Inspection START (04/05/2020 21:37):
+////    /**
+////     * @return
+////     */
+////    public String getHost() {
+////        return this.host;
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+//    }
+// --Commented out by Inspection START (04/05/2020 21:37):
+//// --Commented out by Inspection STOP (04/05/2020 21:37)
+//
+//// --Commented out by Inspection START (04/05/2020 21:37):
+////    /**
+////     * @return
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+//     */
+//    public String getChannel() {
+//        return this.channel;
+//    }
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+
     /**
      * @return
      */    

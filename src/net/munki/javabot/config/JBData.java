@@ -16,12 +16,24 @@ public class JBData {
     public static final String USAGE_7 = "        -b (--without-beanshell)";
     public static final String USAGE_8 = "        -p (--without-python)";
     public static final String USAGE_9 = "        -t (--without-tcl)";
-    public static final String START_MESSAGE = "Starting...";
-    public static final String CONFIG_MESSAGE = "Parsing configuration data...";
-    public static final String CONFIG_FAILED = "Configuration failed...";
-    public static final String INIT_MESSAGE = "Initializing...";
-    public static final String CONNECT_MESSAGE = "Connecting...";
-    public static final String INIT_FAILED = "Initialization failed...";
+    // --Commented out by Inspection (04/05/2020 21:37):public static final String START_MESSAGE = "Starting...";
+    // --Commented out by Inspection (04/05/2020 21:37):public static final String CONFIG_MESSAGE = "Parsing configuration data...";
+// --Commented out by Inspection START (04/05/2020 21:37):
+//// --Commented out by Inspection START (04/05/2020 21:37):
+//// --Commented out by Inspection START (04/05/2020 21:37):
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection START (04/05/2020 21:37):
+//////    // --Commented out by Inspection (04/05/2020 21:37):public static final String CONFIG_FAILED = "Configuration failed...";
+//////    public static final String INIT_MESSAGE = "Initializing...";
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection START (04/05/2020 21:37):
+// --Commented out by Inspection START (04/05/2020 21:37):
+////    public static final String CONNECT_MESSAGE = "Connecting...";
+////    public static final String INIT_FAILED = "Initialization failed...";
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection STOP (04/05/2020 21:37)
     public static final String CONNECT_FAILED = "Connection failed...";
     public static final String INIT_SUCCEEDED = "Initialization succeeded...";
     public static final String CONNECT_SUCCEEDED = "Connection succeeded...";

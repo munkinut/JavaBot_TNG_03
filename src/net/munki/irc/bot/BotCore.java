@@ -255,32 +255,38 @@ public class BotCore implements Observer, ServiceListenerInterface {
         return outList;
     }
     
-    /** Sets the output stream.
-     * @param out Output stream to use
-     */    
-    public void setOutput(PrintStream out) {
-        env.setOutput(out);
-    }
-    
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    /** Sets the output stream.
+//     * @param out Output stream to use
+//     */
+//    public void setOutput(PrintStream out) {
+//        env.setOutput(out);
+//    }
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+
     /** Registers a message handler, allowing multiple message handlers.
      * @param messageHandler A message handler that handles messages defined in net.munki.irc.protocol.rfc2812.MessageNames
      */    
-    public void registerMessageHandler(IRCMessageListener messageHandler) {
-        env.registerMessageHandler(messageHandler);
-    }
-    
-    /** Unregister a message handler.
-     * @param messageHandler Message handler to unregister
-     */    
-    public void unregisterMessageHandler(IRCMessageListener messageHandler) {
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    public void registerMessageHandler(IRCMessageListener messageHandler) {
+//        env.registerMessageHandler(messageHandler);
+//    }
+//
+//    /** Unregister a message handler.
+//     * @param messageHandler Message handler to unregister
+//     */
+//    public void unregisterMessageHandler(IRCMessageListener messageHandler) {
+// --Commented out by Inspection STOP (04/05/2020 21:37)
         env.unregisterMessageHandler(messageHandler);
     }
     
-    /** Registers a reply handler, allowing multiple reply handlers.
-     * @param replyHandler The reply handler to register.
-     */    
-    public void registerReplyHandler(IRCReplyListener replyHandler) {
-        env.registerReplyHandler(replyHandler);
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    /** Registers a reply handler, allowing multiple reply handlers.
+//     * @param replyHandler The reply handler to register.
+//     */
+//    public void registerReplyHandler(IRCReplyListener replyHandler) {
+//        env.registerReplyHandler(replyHandler);
+// --Commented out by Inspection STOP (04/05/2020 21:37)
     }
     
     /** Unregister a reply handler.
@@ -293,15 +299,19 @@ public class BotCore implements Observer, ServiceListenerInterface {
     /** Registers a command handler.
      * @param commandHandler Command handler to register
      */    
-    public void registerCommandHandler(IRCCommandListener commandHandler) {
-        env.registerCommandHandler(commandHandler);
-    }
-    
-    /** Unregister a command handler.
-     * @param commandHandler Command handler to unregister
-     */    
-    public void unregisterCommandHandler(IRCCommandListener commandHandler) {
-        env.unregisterCommandHandler(commandHandler);
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    public void registerCommandHandler(IRCCommandListener commandHandler) {
+//        env.registerCommandHandler(commandHandler);
+//    }
+//
+//    /** Unregister a command handler.
+// --Commented out by Inspection START (04/05/2020 21:37):
+////     * @param commandHandler Command handler to unregister
+////     */
+////    public void unregisterCommandHandler(IRCCommandListener commandHandler) {
+//// --Commented out by Inspection STOP (04/05/2020 21:37)
+//        env.unregisterCommandHandler(commandHandler);
+// --Commented out by Inspection STOP (04/05/2020 21:37)
     }
     
     /** Registers a script handler.

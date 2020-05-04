@@ -37,20 +37,26 @@ public class QuitMessage implements CommandMessageInterface {
         return MessageNames.QUIT;
     }
     
-    /**
-     * @return
-     */    
-    public String getNick() {
-        return this.nick;
-    }
-    
-    /**
-     * @return
-     */    
-    public String getModifier() {
-        return this.modifier;
-    }
-    
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    /**
+//     * @return
+//     */
+//    public String getNick() {
+//        return this.nick;
+//    }
+// --Commented out by Inspection START (04/05/2020 21:37):
+//// --Commented out by Inspection STOP (04/05/2020 21:37)
+//
+//// --Commented out by Inspection START (04/05/2020 21:37):
+////    /**
+////     * @return
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+//     */
+//    public String getModifier() {
+//        return this.modifier;
+//    }
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+
     /**
      * @return
      */    
@@ -58,13 +64,17 @@ public class QuitMessage implements CommandMessageInterface {
         return this.user;
     }
     
-    /**
-     * @return
-     */    
-    public String getHost() {
-        return this.host;
-    }
-    
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    /**
+//     * @return
+//     */
+// --Commented out by Inspection START (04/05/2020 21:37):
+////    public String getHost() {
+////        return this.host;
+////    }
+//// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+
     /**
      * @return
      */    

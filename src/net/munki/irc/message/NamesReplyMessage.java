@@ -36,13 +36,21 @@ public class NamesReplyMessage implements ReplyMessageInterface {
         return ReplyNames.RPL_NAMREPLY;
     }
     
-    /**
-     * @return
-     */    
-    public String getChannel() {
-        return this.channel;
-    }
-    
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    /**
+//     * @return
+//     */
+// --Commented out by Inspection START (04/05/2020 21:37):
+////    public String getChannel() {
+// --Commented out by Inspection START (04/05/2020 21:37):
+//////        return this.channel;
+//////    }
+// --Commented out by Inspection START (04/05/2020 21:37):
+//////// --Commented out by Inspection STOP (04/05/2020 21:37)
+////// --Commented out by Inspection STOP (04/05/2020 21:37)
+//// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+
     /**
      * @return
      */    

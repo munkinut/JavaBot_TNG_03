@@ -55,38 +55,50 @@ public class ChannelUser {
         this.flags = Flags.NORMAL;
     }
     
-    /** Set the channel user nickname
-     * @param nick Channel user nickname
-     */    
-    public void setNick(String nick) {
-        this.nick = nick;
-    }
-    
-    /** Get channel user nickname
-     * @return Channel user nickname
-     */    
-    public String getNick() {
-        return this.nick;
-    }
-    
-    /** Returns the modifier.
-     * @return The modifier.
-     */    
-    public String getModifier() {
-        return this.modifier;
-    }
-    
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    /** Set the channel user nickname
+//     * @param nick Channel user nickname
+//     */
+//    public void setNick(String nick) {
+//        this.nick = nick;
+//    }
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    /** Get channel user nickname
+//     * @return Channel user nickname
+//     */
+//    public String getNick() {
+//        return this.nick;
+//    }
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    /** Returns the modifier.
+//     * @return The modifier.
+//     */
+//    public String getModifier() {
+//        return this.modifier;
+//    }
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+
     /** Get channel user ident
-     * @return Channel user ident
-     */    
-    public String getIdent() {
-        return this.ident;
-    }
-    
-    /** Get channel user host
-     * @return Channel user host
-     */    
-    public String getHost() {
+// --Commented out by Inspection START (04/05/2020 21:37):
+// --Commented out by Inspection START (04/05/2020 21:37):
+////     * @return Channel user ident
+////     */
+////    public String getIdent() {
+////        return this.ident;
+//// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    }
+//
+//    /** Get channel user host
+//     * @return Channel user host
+//     */
+//    public String getHost() {
+// --Commented out by Inspection STOP (04/05/2020 21:37)
         return this.host;
     }
     
@@ -103,22 +115,36 @@ public class ChannelUser {
     }
     
     /** Set voice flag
-     */    
-    public void voice() {
-        flags = flags | Flags.VOICE;
-    }
-    
-    /** Unset op flag
-     */
-    public void deop() {
-        flags = flags & ~Flags.OP;
-    }
-    
-    /** Unset hop flag */
-    public void dehop() {
-        flags = flags & ~Flags.HOP;
-    }
-    
+// --Commented out by Inspection START (04/05/2020 21:37):
+//     */
+//    public void voice() {
+//        flags = flags | Flags.VOICE;
+//    }
+//
+//// --Commented out by Inspection START (04/05/2020 21:37):
+////    /** Unset op flag
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection START (04/05/2020 21:37):
+//// --Commented out by Inspection START (04/05/2020 21:37):
+//////     */
+//////    public void deop() {
+//////        flags = flags & ~Flags.OP;
+//////    }
+////// --Commented out by Inspection START (04/05/2020 21:37):
+//////// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+//
+// --Commented out by Inspection START (04/05/2020 21:37):
+////// --Commented out by Inspection START (04/05/2020 21:37):
+//////    /** Unset hop flag */
+//// --Commented out by Inspection STOP (04/05/2020 21:37)
+////    public void dehop() {
+////        flags = flags & ~Flags.HOP;
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+//    }
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+
     /** Unset voice flag */
     public void devoice() {
         flags = flags & ~Flags.VOICE;
@@ -135,21 +161,23 @@ public class ChannelUser {
      * @return True if user has hop flag, false if not
      */
     public boolean isHop() {
-        return ((flags & Flags.HOP) != 0x00);
-    }
-    
-    /** Test for voice
-     * @return True if user has voice flag, false if not
-     */
-    public boolean isVoice() {
-        return ((flags & Flags.VOICE) != 0x00);
-    }
-    
-    /** Test for normal
-     * @return True if user has normal flag
-     */
-    public boolean isNormal() {
-        return ((flags & Flags.NORMAL) != 0x00);
+// --Commented out by Inspection START (04/05/2020 21:37):
+//        return ((flags & Flags.HOP) != 0x00);
+//    }
+//
+//    /** Test for voice
+//     * @return True if user has voice flag, false if not
+//     */
+//    public boolean isVoice() {
+//        return ((flags & Flags.VOICE) != 0x00);
+//    }
+//
+//    /** Test for normal
+//     * @return True if user has normal flag
+//     */
+//    public boolean isNormal() {
+//        return ((flags & Flags.NORMAL) != 0x00);
+// --Commented out by Inspection STOP (04/05/2020 21:37)
     }
     
     /** Determines equality with another ChannelUser.

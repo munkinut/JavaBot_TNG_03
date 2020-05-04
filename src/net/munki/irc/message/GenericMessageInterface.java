@@ -8,9 +8,11 @@ package net.munki.irc.message;
 
 public interface GenericMessageInterface {
 
-    /**
-     * @return
-     */
-    String getMessageType();
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    /**
+//     * @return
+//     */
+//    String getMessageType();
+// --Commented out by Inspection STOP (04/05/2020 21:37)
 }
 

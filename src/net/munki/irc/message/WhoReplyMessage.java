@@ -44,34 +44,54 @@ public class WhoReplyMessage implements ReplyMessageInterface {
         return ReplyNames.RPL_WHOREPLY;
     }
 
-    public String getChannel() {
-        return this.channel;
-    }
-    
-    public String getUser() {
+// --Commented out by Inspection START (04/05/2020 21:37):
+// --Commented out by Inspection START (04/05/2020 21:37):
+////    public String getChannel() {
+////        return this.channel;
+////    }
+//// --Commented out by Inspection START (04/05/2020 21:37):
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection START (04/05/2020 21:37):
+////// --Commented out by Inspection STOP (04/05/2020 21:37)
+////
+// --Commented out by Inspection START (04/05/2020 21:37):
+//// --Commented out by Inspection START (04/05/2020 21:37):
+////////    public String getUser() {
+////// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection STOP (04/05/2020 21:37)
         return this.user;
     }
     
-    public String getHost() {
-        return this.host;
-    }
-    
-    public String getNick() {
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    public String getHost() {
+//        return this.host;
+//    }
+//
+// --Commented out by Inspection START (04/05/2020 21:37):
+////    public String getNick() {
+//// --Commented out by Inspection STOP (04/05/2020 21:37)
+// --Commented out by Inspection STOP (04/05/2020 21:37)
         return this.nick;
     }
     
     public String getHG() {
-        return this.HG;
+// --Commented out by Inspection START (04/05/2020 21:37):
+//        return this.HG;
+//    }
+//
+//    public String getServer() {
+//        return this.server;
+// --Commented out by Inspection STOP (04/05/2020 21:37)
     }
     
-    public String getServer() {
-        return this.server;
-    }
-    
-    public String getAsterisk() {
-        return this.asterisk;
-    }
-    
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    public String getAsterisk() {
+//        return this.asterisk;
+//    }
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+
     public String getUserStatus() {
         return this.userStatus;
     }

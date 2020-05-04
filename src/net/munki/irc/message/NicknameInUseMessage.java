@@ -28,20 +28,24 @@ public class NicknameInUseMessage implements ReplyMessageInterface {
         return ReplyNames.ERR_NICKNAMEINUSE;
     }
     
-    /**
-     * @return
-     */    
-    public String getServer() {
-        return server;
-    }
-    
-    /**
-     * @return
-     */    
-    public String getNick() {
-        return nick;
-    }
-    
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    /**
+//     * @return
+//     */
+//    public String getServer() {
+//        return server;
+//    }
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    /**
+//     * @return
+//     */
+//    public String getNick() {
+//        return nick;
+//    }
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+
     /**
      * @return
      */    

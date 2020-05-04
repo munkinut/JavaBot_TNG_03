@@ -13,10 +13,14 @@ public interface MessageHandlerInterface {
     /** 3.1.1 Password Message */
     void PASS(String pass) throws MessageHandlerException;
     
-    /** 3.1.2 Nick Message */
-    void NICK(String nick) throws MessageHandlerException;
-    
-    /** 3.1.3 User Message */
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    /** 3.1.2 Nick Message */
+// --Commented out by Inspection START (04/05/2020 21:37):
+////    void NICK(String nick) throws MessageHandlerException;
+//// --Commented out by Inspection STOP (04/05/2020 21:37)
+//
+//    /** 3.1.3 User Message */
+// --Commented out by Inspection STOP (04/05/2020 21:37)
     void USER(String user, String mode, String unused, String real) throws MessageHandlerException;
     
     /** 3.1.4 Oper Message */
@@ -37,8 +41,10 @@ public interface MessageHandlerInterface {
 
     // 3.2 Channel Operations
     
-    /** 3.2.1 Join message */
-    void JOIN(String[] channels) throws MessageHandlerException;
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    /** 3.2.1 Join message */
+//    void JOIN(String[] channels) throws MessageHandlerException;
+// --Commented out by Inspection STOP (04/05/2020 21:37)
 
     void JOIN(String[] channels, String[] keys) throws MessageHandlerException;
     
@@ -58,11 +64,13 @@ public interface MessageHandlerInterface {
     void LIST(String[] channels, String target) throws MessageHandlerException;
     
     /** 3.2.7 Invite message */
-    void INVITE(String nickname, String channel) throws MessageHandlerException;
-    
-    /** 3.2.8 Kick message */
-    void KICK(String[] channels, String[] nicks, String message) throws MessageHandlerException;
-    
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    void INVITE(String nickname, String channel) throws MessageHandlerException;
+//
+//    /** 3.2.8 Kick message */
+//    void KICK(String[] channels, String[] nicks, String message) throws MessageHandlerException;
+// --Commented out by Inspection STOP (04/05/2020 21:37)
+
 
     // 3.3 Sending messages
 
@@ -127,11 +135,13 @@ public interface MessageHandlerInterface {
     void WHOWAS(String[] nick, String count, String target) throws MessageHandlerException;
     
     
-    // 3.7 Miscellaneous messages
+// --Commented out by Inspection START (04/05/2020 21:37):
+//    // 3.7 Miscellaneous messages
+//
+//    /** 3.7.1 Kill message */
+//    void KILL(String nick, String comment) throws MessageHandlerException;
+// --Commented out by Inspection STOP (04/05/2020 21:37)
 
-    /** 3.7.1 Kill message */
-    void KILL(String nick, String comment) throws MessageHandlerException;
-    
     /** 3.7.2 Ping message */
     void PING(String server_1, String server_2) throws MessageHandlerException;
     
