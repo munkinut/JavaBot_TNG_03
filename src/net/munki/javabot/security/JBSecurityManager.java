@@ -75,7 +75,7 @@ public class JBSecurityManager extends SecurityManager {
     }
     
     public void checkConnect(String str, int param) {
-        if (!isConnectAllowed(str, param)) throw new SecurityException(StringTool.cat(new String[] {
+        if (isConnectAllowed(str, param)) throw new SecurityException(StringTool.cat(new String[] {
             "Access denied for connection to ",
             str,
             " on port ",
@@ -85,7 +85,7 @@ public class JBSecurityManager extends SecurityManager {
     }
     
     public void checkConnect(String str, int param, Object obj) {
-        if (!isConnectAllowed(str, param)) throw new SecurityException(StringTool.cat(new String[] {
+        if (isConnectAllowed(str, param)) throw new SecurityException(StringTool.cat(new String[] {
             "Access denied for connection to ",
             str,
             " on port ",
@@ -630,7 +630,7 @@ public class JBSecurityManager extends SecurityManager {
                 }
             }
         }
-        return returnValue;
+        return !returnValue;
     }
 
     private boolean isAcceptAllowed(String client) {
