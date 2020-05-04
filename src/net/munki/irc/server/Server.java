@@ -16,10 +16,10 @@ public class Server {
     
     /** Name of server
      */    
-    private String host;
+    private final String host;
     /** Available server ports
      */    
-    private int[] ports;
+    private final int[] ports;
     
     /** Creates new Server
      * @param host Host name

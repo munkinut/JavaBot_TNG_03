@@ -11,7 +11,7 @@ public interface IRCScriptListener extends IRCListener {
 
     /** Dispatcher method responsible for handling IRC script events.
      * @param evt The IRC script event to handle
-     */    
-    public void dispatch(IRCScriptEvent evt);
+     */
+    void dispatch(IRCScriptEvent evt);
 }
 

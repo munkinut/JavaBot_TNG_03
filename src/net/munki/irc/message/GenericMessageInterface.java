@@ -6,11 +6,11 @@
 
 package net.munki.irc.message;
 
-public abstract interface GenericMessageInterface {
+public interface GenericMessageInterface {
 
     /**
      * @return
-     */    
-    public String getMessageType();
+     */
+    String getMessageType();
 }
 

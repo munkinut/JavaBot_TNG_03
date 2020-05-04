@@ -23,13 +23,13 @@ public class Connection extends Observable implements Runnable {
 
     /** Socket for connection to the server
      */    
-    private Socket socket;
+    private final Socket socket;
     /** Reader for the incoming data
      */    
-    private BufferedReader in;
+    private final BufferedReader in;
     /** Writer for the outgoing data
      */    
-    private BufferedWriter out;
+    private final BufferedWriter out;
     /** Thread for this object to run in
      */    
     private Thread connectionThread = null;

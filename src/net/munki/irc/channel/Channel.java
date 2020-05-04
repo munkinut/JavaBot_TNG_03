@@ -14,7 +14,7 @@ public class Channel {
     
     /** Channel name
      */    
-    private String name;
+    private final String name;
     /** Channel topic
      */    
     private String topic;
@@ -23,7 +23,7 @@ public class Channel {
     private String modes;
     /** Channel users
      */    
-    private List users;
+    private final List users;
     /** Channel joined flag
      */
     private boolean joined;

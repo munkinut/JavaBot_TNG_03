@@ -15,11 +15,11 @@ import java.util.List;
 public abstract class IRCEvent {
     
     /** The source of an event. */    
-    private Object source;
+    private final Object source;
     /** The action command associated with this event. */    
-    private Object actionCommand;
+    private final Object actionCommand;
     /** The list of parameters to this event. */    
-    private List parameters;
+    private final List parameters;
 
     /** Creates new Event.
      * @param source The source of the event

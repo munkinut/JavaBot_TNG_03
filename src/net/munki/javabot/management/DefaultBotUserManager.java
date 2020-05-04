@@ -33,7 +33,7 @@ public class DefaultBotUserManager implements BotUserManagerInterface {
     /** The configuration separator.  A ':' by default. */    
     public static final String CONF_SEPARATOR = ":";
     
-    private Logger logger;
+    private final Logger logger;
 
     private DefaultBotUserManager() {
         logger = Logger.getLogger(this.getClass().getName());

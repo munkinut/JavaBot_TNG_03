@@ -9,11 +9,11 @@ import net.munki.irc.protocol.rfc2812.MessageNames;
 
 public class JoinMessage implements CommandMessageInterface {
 
-    private String nick;
-    private String modifier;
-    private String user;
-    private String host;
-    private String channel;
+    private final String nick;
+    private final String modifier;
+    private final String user;
+    private final String host;
+    private final String channel;
 
     /** Creates new JoinMessage
      * @param nick

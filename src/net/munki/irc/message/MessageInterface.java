@@ -9,80 +9,80 @@ public interface MessageInterface {
     
     /**
      * @return
-     */    
-    public String getMessageType();
+     */
+    String getMessageType();
     /**
      * @return
-     */    
-    public String getNick();
+     */
+    String getNick();
     /**
      * @return
-     */    
-    public String getHostmask();
+     */
+    String getHostmask();
     /**
      * @return
-     */    
-    public String getChannel();
+     */
+    String getChannel();
     /**
      * @return
-     */    
-    public String getCmd();
+     */
+    String getCmd();
     /**
      * @return
-     */    
-    public String getParams();
+     */
+    String getParams();
     /**
      * @return
-     */    
-    public String getMsgTo();
+     */
+    String getMsgTo();
     /**
      * @return
-     */    
-    public String getChannelType();
+     */
+    String getChannelType();
     /**
      * @return
-     */    
-    public String getServer();
+     */
+    String getServer();
     /**
      * @return
-     */    
-    public String getNames();
+     */
+    String getNames();
 
     /**
      * @param nick
-     */    
-    public void setNick(String nick);
+     */
+    void setNick(String nick);
     /**
      * @param hostmask
-     */    
-    public void setHostmask(String hostmask);
+     */
+    void setHostmask(String hostmask);
     /**
      * @param channel
-     */    
-    public void setChannel(String channel);
+     */
+    void setChannel(String channel);
     /**
      * @param cmd
-     */    
-    public void setCmd(String cmd);
+     */
+    void setCmd(String cmd);
     /**
      * @param params
-     */    
-    public void setParams(String params);
+     */
+    void setParams(String params);
     /**
      * @param msgTo
-     */    
-    public void setMsgTo(String msgTo);
+     */
+    void setMsgTo(String msgTo);
     /**
      * @param channelType
-     */    
-    public void setChannelType(String channelType);
+     */
+    void setChannelType(String channelType);
     /**
      * @param server
-     */    
-    public void setServer(String server);
+     */
+    void setServer(String server);
     /**
      * @param names
-     */    
-    public void setNames(String names);
+     */
+    void setNames(String names);
 }
 

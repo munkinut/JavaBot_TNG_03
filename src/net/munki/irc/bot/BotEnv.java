@@ -24,19 +24,19 @@ import java.util.logging.Logger;
 public class BotEnv {
     
     /** The list of nicks the bot can use. */    
-    private String[] nicks;
+    private final String[] nicks;
     /** The index of the nick in use. */    
     private int nickIndex;
     /** The list of channels the bot can join. */    
-    private List channels;
+    private final List channels;
     /** The list of message listeners. */    
-    private List messageListeners;
+    private final List messageListeners;
     /** The list of reply listeners. */    
-    private List replyListeners;
+    private final List replyListeners;
     /** The list of command listeners. */    
-    private List commandListeners;
+    private final List commandListeners;
     /** The list of script listeners. */    
-    private List scriptListeners;
+    private final List scriptListeners;
     /** The output stream to which output should be sent. */    
     private PrintStream output;
     /** The logger to which log message from this class are sent. */    

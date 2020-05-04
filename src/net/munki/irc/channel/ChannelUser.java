@@ -18,13 +18,13 @@ public class ChannelUser {
      * the connection.  E.g. "-" for a restricted connection or
      * "~" for an unverified ident.
      */    
-    private String modifier;
+    private final String modifier;
     /** Channel user ident
      */    
-    private String ident;
+    private final String ident;
     /** Channel user host
      */    
-    private String host;
+    private final String host;
     /** Channel user flags
      */    
     private int flags;

@@ -10,8 +10,8 @@ import net.munki.irc.protocol.rfc2812.ReplyNames;
 
 public class WelcomeMessage implements ReplyMessageInterface {
 
-    private String message;
-    private String mask;
+    private final String message;
+    private final String mask;
     
     /** Creates new NicknameInUseMessage
      * @param message

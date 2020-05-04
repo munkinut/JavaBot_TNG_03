@@ -251,7 +251,7 @@ public class MessageFactory {
         }
         else {
             // no user or host but a nickname or servername
-            from = prefix.substring(0);
+            from = prefix;
         }
         
         // Separate out our user and modifier if there is one

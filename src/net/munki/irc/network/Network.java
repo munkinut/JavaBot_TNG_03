@@ -21,7 +21,7 @@ public class Network {
     // private String name;
     /** Servers in the network
      */    
-    private List servers;
+    private final List servers;
 
     /** Creates new Network
      * @param name Name of the network

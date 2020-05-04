@@ -8,7 +8,7 @@ package net.munki.irc.event;
 
 /** Interface describing the requirements of a listener of IRC events.
  */
-public abstract interface IRCListener {
+public interface IRCListener {
 
 }
 

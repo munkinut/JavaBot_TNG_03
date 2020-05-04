@@ -10,13 +10,13 @@ import net.munki.irc.protocol.rfc2812.MessageNames;
 
 public class ChannelModeMessage implements CommandMessageInterface {
     
-    private String nick;
-    private String modifier;
-    private String user;
-    private String host;
-    private String channel;
-    private String modes;
-    private String params;
+    private final String nick;
+    private final String modifier;
+    private final String user;
+    private final String host;
+    private final String channel;
+    private final String modes;
+    private final String params;
 
     /** Creates new ChannelModeMessage
      * @param from

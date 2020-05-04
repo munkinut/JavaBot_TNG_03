@@ -15,7 +15,7 @@ public interface IRCCommandListener extends IRCListener {
     /** Dispatcher method for handling IRCCommandEvents.
      * @param evt The event to handle
      * @throws MessageHandlerException Thrown if an error occurs during dispatching
-     */    
-    public void dispatch(IRCCommandEvent evt) throws MessageHandlerException;
+     */
+    void dispatch(IRCCommandEvent evt) throws MessageHandlerException;
 }
 

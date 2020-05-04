@@ -9,12 +9,12 @@ import net.munki.irc.protocol.rfc2812.MessageNames;
 
 public class PartMessage implements CommandMessageInterface {
 
-    private String nick;
-    private String modifier;
-    private String user;
-    private String host;
-    private String channel;
-    private String partMessage;
+    private final String nick;
+    private final String modifier;
+    private final String user;
+    private final String host;
+    private final String channel;
+    private final String partMessage;
 
     /** Creates new PartMessage
      * @param nick

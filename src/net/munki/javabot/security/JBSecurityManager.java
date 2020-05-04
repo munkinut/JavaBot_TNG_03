@@ -51,7 +51,7 @@ public class JBSecurityManager extends SecurityManager {
         "listeners.allow"
     });
 
-    private Logger logger;
+    private final Logger logger;
     /** Creates a new instance of JBSecurityManager */
     public JBSecurityManager() {
         logger = Logger.getLogger(this.getClass().getName());

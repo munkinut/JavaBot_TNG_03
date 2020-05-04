@@ -18,21 +18,21 @@ import java.util.logging.Logger;
 public class IRCScriptResource {
     
     /** The bot environment. */    
-    private BotEnv env;
+    private final BotEnv env;
     /** The invokers's nickname. */    
-    private String nick;
+    private final String nick;
     /** The invokers's hostmask. */    
-    private String mask;
+    private final String mask;
     /** Where the command was sent.  Could be to the bot or to the channel.
      * A script command starting with "!" can be privmsg'd or can be a
      * public command.
      */    
-    private String addressee;
+    private final String addressee;
     /** Arguments passed to the script. */    
-    private String[] arguments;
+    private final String[] arguments;
     
     /** The logger to which all log data should be sent. */    
-    private Logger logger;
+    private final Logger logger;
 
     /** Creates new IRCScriptResource
      * @param env The bot environment.

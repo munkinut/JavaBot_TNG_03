@@ -15,7 +15,7 @@ public interface IRCMessageListener extends IRCListener {
     /** Dispatcher method responsible for handling IRC message events.
      * @param evt The IRC message event to handle
      * @throws MessageHandlerException Thrown when message could not be dispatched.
-     */    
-    public void dispatch(IRCMessageEvent evt) throws MessageHandlerException;
+     */
+    void dispatch(IRCMessageEvent evt) throws MessageHandlerException;
 }
 

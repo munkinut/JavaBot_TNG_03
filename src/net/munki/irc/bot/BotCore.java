@@ -59,11 +59,11 @@ public class BotCore implements Observer, ServiceListenerInterface {
     private BotEnv env;
     
     /** The user name that the bot will run under. */    
-    private String user;
+    private final String user;
     /** The real name the bot will run under. */    
-    private String real;
+    private final String real;
     /** The server the bot will connect to. */    
-    private Server server;
+    private final Server server;
     /** The connection the bot will use to talk to the server. */    
     private Connection connection;
     

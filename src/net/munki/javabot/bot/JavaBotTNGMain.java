@@ -22,7 +22,7 @@ public class JavaBotTNGMain {
      * then passes it to the bot.
      * @param args the command line arguments
      */
-    public static void main (String args[]) {
+    public static void main (String[] args) {
         
         Properties config = null;
         boolean securityManager = false;

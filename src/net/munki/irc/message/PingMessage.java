@@ -9,7 +9,7 @@ import net.munki.irc.protocol.rfc2812.MessageNames;
 
 public class PingMessage implements CommandMessageInterface {
     
-    private String parameters;
+    private final String parameters;
 
     /**
      * @param parameters

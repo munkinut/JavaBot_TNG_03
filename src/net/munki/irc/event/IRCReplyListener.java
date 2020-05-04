@@ -15,7 +15,7 @@ public interface IRCReplyListener extends IRCListener {
     /** Dispatcher method responsible for handling IRC reply events.
      * @param evt The IRC reply event to handle
      * @throws ReplyHandlerException Thrown when a reply event could not be dispatched.
-     */    
-    public void dispatch(IRCReplyEvent evt) throws ReplyHandlerException;
+     */
+    void dispatch(IRCReplyEvent evt) throws ReplyHandlerException;
 }
 

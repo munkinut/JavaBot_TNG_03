@@ -26,7 +26,7 @@ public class IRCMessageHandler extends IRCMessageAdapter {
     /** The bot environment. */    
     private BotEnv env;
     /** The logger to which all log data should be sent for this class. */    
-    private Logger logger;
+    private final Logger logger;
     
     /** Creates a new IRCMessage handler object. */    
     public IRCMessageHandler() {

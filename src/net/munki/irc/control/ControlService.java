@@ -28,7 +28,7 @@ public class ControlService implements ServiceInterface {
     /** A list of listeners that need to be informed of messages
      * on the socket.  In this case it will be a BotCore object.
      */    
-    private List serviceListeners;
+    private final List serviceListeners;
     /** The logger to which log data is sent for this class. */    
     private Logger logger;
 

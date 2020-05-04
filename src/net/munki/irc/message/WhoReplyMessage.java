@@ -14,16 +14,16 @@ import net.munki.irc.protocol.rfc2812.ReplyNames;
  */
 public class WhoReplyMessage implements ReplyMessageInterface {
     
-    private String channel;
-    private String user;
-    private String host;
-    private String server;
-    private String nick;
-    private String HG;
-    private String asterisk;
-    private String userStatus;
-    private String hopCount;
-    private String realName;
+    private final String channel;
+    private final String user;
+    private final String host;
+    private final String server;
+    private final String nick;
+    private final String HG;
+    private final String asterisk;
+    private final String userStatus;
+    private final String hopCount;
+    private final String realName;
     
     public WhoReplyMessage(String channel, String user, String host,
                            String server, String nick, String HG, String asterisk, String userStatus,

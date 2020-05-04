@@ -29,7 +29,7 @@ public class IRCReplyHandler extends IRCReplyAdapter {
     /** The bot environment. */    
     private BotEnv env;
     /** The logger to which all log data for this class is sent. */    
-    private Logger logger;
+    private final Logger logger;
     
     /** Creates a new IRCReplyHandler. */    
     public IRCReplyHandler() {

@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class IRCCommandHandler extends IRCCommandAdapter {
     
     /** The logger to which all log data for this class should be sent. */    
-    private Logger logger;
+    private final Logger logger;
     /** Initialises a new IRCCommandHandler.
      */    
     public IRCCommandHandler() {

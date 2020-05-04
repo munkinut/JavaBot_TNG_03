@@ -10,8 +10,8 @@ public interface ReplyMessageInterface extends GenericMessageInterface {
 
     /**
      * @return
-     */    
-    public String getMessageType();
+     */
+    String getMessageType();
     
 }
 

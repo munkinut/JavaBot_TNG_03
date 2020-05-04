@@ -11,10 +11,10 @@ import net.munki.irc.protocol.rfc2812.ReplyNames;
 
 public class NamesReplyMessage implements ReplyMessageInterface {
     
-    private String server;
-    private String channelType;
-    private String channel;
-    private String[] names;
+    private final String server;
+    private final String channelType;
+    private final String channel;
+    private final String[] names;
 
     /**
      * @param server

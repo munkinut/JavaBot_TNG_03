@@ -12,7 +12,7 @@ public class MessageHandlerException extends Exception {
 	 * 
 	 */
 	private static final long serialVersionUID = 3123767628172119342L;
-	private Throwable cause;
+	private final Throwable cause;
     /**
      * Creates new <code>CommandHandlerException</code> without detail message.
      */

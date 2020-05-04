@@ -12,7 +12,7 @@ public class ReplyHandlerException extends Exception {
 	 * 
 	 */
 	private static final long serialVersionUID = -5926630868659448254L;
-	private Throwable cause;
+	private final Throwable cause;
     /**
      * Creates new <code>CommandHandlerException</code> without detail message.
      */

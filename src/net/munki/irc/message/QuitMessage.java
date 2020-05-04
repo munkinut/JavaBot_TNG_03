@@ -9,11 +9,11 @@ import net.munki.irc.protocol.rfc2812.MessageNames;
 
 public class QuitMessage implements CommandMessageInterface {
 
-    private String nick;
-    private String modifier;
-    private String user;
-    private String host;
-    private String message;
+    private final String nick;
+    private final String modifier;
+    private final String user;
+    private final String host;
+    private final String message;
 
     /**
      * @param nick

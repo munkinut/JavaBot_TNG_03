@@ -19,11 +19,9 @@ import java.util.logging.Logger;
 
 /** Handles script messages. */
 public class JythonScriptHandler extends JythonScriptAdapter {
-    
-    /** The bot environment. */    
-    private BotEnv env;
-    /** The logger to which all log data for this class should be sent. */    
-    private Logger logger;
+
+    /** The logger to which all log data for this class should be sent. */
+    private final Logger logger;
     
     /** A script handler. */    
     public JythonScriptHandler() {
@@ -39,7 +37,8 @@ public class JythonScriptHandler extends JythonScriptAdapter {
         // make sure the source is valid and the trigger is part of a Privmsg
         if ((evt.getSource() instanceof BotEnv) && (evt.getActionCommand() instanceof PrivmsgMessage)) {
             logger.fine("Script Event valid; dispatching ...");
-            env = (BotEnv)evt.getSource();
+            /** The bot environment. */
+            BotEnv env = (BotEnv) evt.getSource();
             PrivmsgMessage pmm = (PrivmsgMessage)evt.getActionCommand();
             String nick = pmm.getNick();            // their nick
             String modifier = pmm.getModifier();    // any modifier like "~" or "-"
@@ -115,7 +114,6 @@ public class JythonScriptHandler extends JythonScriptAdapter {
     
     private boolean isItPython(String script) {
         File file = new File(script);
-        if (file.exists()) return true;
-        else return false;
+        return file.exists();
     }
 }

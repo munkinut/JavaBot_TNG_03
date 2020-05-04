@@ -10,9 +10,9 @@ import net.munki.irc.protocol.rfc2812.ReplyNames;
 
 public class NicknameInUseMessage implements ReplyMessageInterface {
 
-    private String server;
-    private String nick;
-    private String message;
+    private final String server;
+    private final String nick;
+    private final String message;
     
     /** Creates new NicknameInUseMessage */
     public NicknameInUseMessage(String server, String nick, String message) {
