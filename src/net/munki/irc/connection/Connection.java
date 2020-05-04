@@ -21,9 +21,6 @@ public class Connection extends Observable implements Runnable {
      */    
     private static final String LINE_TERMINATOR = "\r\n";
 
-    /** Socket for connection to the server
-     */    
-    private final Socket socket;
     /** Reader for the incoming data
      */    
     private final BufferedReader in;
@@ -47,7 +44,9 @@ public class Connection extends Observable implements Runnable {
     public Connection(String host, int port) throws ConnectionException {
         initLogger();
         try {
-            this.socket = new Socket(host, port);
+            /** Socket for connection to the server
+             */
+            Socket socket = new Socket(host, port);
             this.in = new BufferedReader(
                         new InputStreamReader(
                           socket.getInputStream()
