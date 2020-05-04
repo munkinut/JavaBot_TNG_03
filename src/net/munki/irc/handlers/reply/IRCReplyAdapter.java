@@ -744,10 +744,9 @@ public abstract class IRCReplyAdapter implements IRCReplyInterface, IRCReplyList
     }
     
     /**
-     * @param reply
      * @throws ReplyHandlerException
      */    
-    public void ERR_NICKNAMEINUSE(String reply) throws ReplyHandlerException {
+    public void ERR_NICKNAMEINUSE() throws ReplyHandlerException {
     }
     
     /**
@@ -889,10 +888,9 @@ public abstract class IRCReplyAdapter implements IRCReplyInterface, IRCReplyList
     }
     
     /**
-     * @param reply
      * @throws ReplyHandlerException
      */    
-    public void RPL_WELCOME(String reply) throws ReplyHandlerException {
+    public void RPL_WELCOME() throws ReplyHandlerException {
     }
     
     /**

@@ -15,8 +15,8 @@ import java.util.List;
 /** Represents an IRC Network
  */
 public class Network {
-    
-    /** Network name
+
+    /* Network name
      */    
     // private String name;
     /** Servers in the network
@@ -24,9 +24,8 @@ public class Network {
     private final List servers;
 
     /** Creates new Network
-     * @param name Name of the network
      */
-    public Network(String name) {
+    public Network() {
         // this.name = name;
         this.servers = Collections.synchronizedList(new ArrayList());
     }

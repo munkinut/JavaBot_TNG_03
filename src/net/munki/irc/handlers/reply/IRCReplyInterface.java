@@ -199,10 +199,9 @@ public interface IRCReplyInterface extends ReplyHandlerInterface {
     void RPL_INFO(String reply) throws ReplyHandlerException;
     
     /**
-     * @param reply
      * @throws ReplyHandlerException
      */
-    void RPL_WELCOME(String reply) throws ReplyHandlerException;
+    void RPL_WELCOME() throws ReplyHandlerException;
     
     /**
      * @param reply
@@ -637,10 +636,9 @@ public interface IRCReplyInterface extends ReplyHandlerInterface {
     void RPL_CLOSING(String reply) throws ReplyHandlerException;
     
     /**
-     * @param reply
      * @throws ReplyHandlerException
      */
-    void ERR_NICKNAMEINUSE(String reply) throws ReplyHandlerException;
+    void ERR_NICKNAMEINUSE() throws ReplyHandlerException;
     
     /**
      * @param reply

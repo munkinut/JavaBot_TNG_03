@@ -61,75 +61,76 @@ public class IRCCommandHandler extends IRCCommandAdapter {
         // BotEnv env = (BotEnv)evt.getSource();
         String message = (String)evt.getActionCommand();
 
-        if (message.equals(MessageNames.NICK)) {
-            logger.fine("Command Handler received a NICK command ...");
-            String nickname = "";
-            Object[] parameters = (evt.getParameters()).toArray();
-            if (parameters.length == 1) {
-                nickname = (String)parameters[0];
+        switch (message) {
+            case MessageNames.NICK -> {
+                logger.fine("Command Handler received a NICK command ...");
+                String nickname = "";
+                Object[] parameters = (evt.getParameters()).toArray();
+                if (parameters.length == 1) {
+                    nickname = (String) parameters[0];
+                }
+                logger.fine(StringTool.cat(new String[]{"Dispatching NICK command for ", nickname, " ..."}));
+                this.NICK(nickname);
+                break;
             }
-            logger.fine(StringTool.cat(new String[] {"Dispatching NICK command for ", nickname, " ..." }));
-            this.NICK(nickname);
+            case MessageNames.USER -> {
+                logger.fine("Command Handler received a USER command ...");
+                String username = "";
+                String modes = "";
+                String unused = "";
+                String real = "";
+                Object[] parameters = (evt.getParameters()).toArray();
+                if (parameters.length == 4) {
+                    username = (String) parameters[0];
+                    modes = (String) parameters[1];
+                    unused = (String) parameters[2];
+                    real = (String) parameters[3];
+                }
+                logger.fine(StringTool.cat(new String[]{"Dispatching USER command for ", username, " ..."}));
+                this.USER(username, modes, unused, real);
+                break;
+            }
+            case MessageNames.JOIN -> {
+                logger.fine("Command Handler received a JOIN command ...");
+                Object[] parameters = (evt.getParameters()).toArray();
+                String[] channels;
+                if (parameters.length == 1) {
+                    channels = (String[]) parameters[0];
+                } else {
+                    channels = new String[]{""};
+                }
+                logger.fine("Dispatching JOIN command ...");
+                this.JOIN(channels);
+                break;
+            }
+            case MessageNames.PONG -> {
+                logger.fine("Command Handler received a PONG command ...");
+                Object[] parameters = (evt.getParameters()).toArray();
+                String reply = "";
+                if (parameters.length == 1) {
+                    reply = (String) parameters[0];
+                }
+                logger.fine(StringTool.cat(new String[]{"Dispatching PONG command : ", reply, "..."}));
+                this.PONG(reply);
+                break;
+            }
+            case MessageNames.PRIVMSG -> {
+                logger.fine("Command Handler received a PRIVMSG command ...");
+                Object[] parameters = (evt.getParameters()).toArray();
+                String recipient = "";
+                String msg = "";
+                if (parameters.length == 2) {
+                    recipient = (String) parameters[0];
+                    msg = (String) parameters[1];
+                    logger.finer(StringTool.cat(new String[]{"Command handler reports recipient is ", recipient}));
+                    logger.finer(StringTool.cat(new String[]{"Command handler reports message is ", msg}));
+                }
+                logger.fine(StringTool.cat(new String[]{"Dispatching PRIVMSG command to ", recipient, " ..."}));
+                this.PRIVMSG(recipient, msg);
+                break;
+            }
+            default -> logger.finer("Command is not handled by this handler ...");
         }
-        
-        else if (message.equals(MessageNames.USER)) {
-            logger.fine("Command Handler received a USER command ...");
-            String username = "";
-            String modes = "";
-            String unused = "";
-            String real = "";
-            Object[] parameters = (evt.getParameters()).toArray();
-            if (parameters.length == 4) {
-                username = (String)parameters[0];
-                modes = (String)parameters[1];
-                unused = (String)parameters[2];
-                real = (String)parameters[3];
-            }
-            logger.fine(StringTool.cat(new String[] {"Dispatching USER command for ", username, " ..."}));
-            this.USER(username, modes, unused, real);
-        }
-        
-        else if (message.equals(MessageNames.JOIN)) {
-            logger.fine("Command Handler received a JOIN command ...");
-            Object[] parameters = (evt.getParameters()).toArray();
-            String[] channels;
-            if (parameters.length == 1) {
-                channels  = (String[])parameters[0];
-            }
-            else {
-                channels = new String[] { "" };
-            }
-            logger.fine("Dispatching JOIN command ...");
-            this.JOIN(channels);
-        }
-        
-        else if (message.equals(MessageNames.PONG)) {
-            logger.fine("Command Handler received a PONG command ...");
-            Object[] parameters = (evt.getParameters()).toArray();
-            String reply = "";
-            if (parameters.length == 1) {
-                reply  = (String)parameters[0];
-            }
-            logger.fine(StringTool.cat(new String[] {"Dispatching PONG command : ", reply, "..."}));
-            this.PONG(reply);
-        }
-        
-        else if (message.equals(MessageNames.PRIVMSG)) {
-            logger.fine("Command Handler received a PRIVMSG command ...");
-            Object[] parameters = (evt.getParameters()).toArray();
-            String recipient = "";
-            String msg = "";
-            if (parameters.length == 2) {
-                recipient = (String)parameters[0];
-                msg = (String)parameters[1];
-                logger.finer(StringTool.cat(new String[] {"Command handler reports recipient is ", recipient}));
-                logger.finer(StringTool.cat(new String[] {"Command handler reports message is ", msg}));
-            }
-            logger.fine(StringTool.cat(new String[] {"Dispatching PRIVMSG command to ", recipient, " ..."}));
-            this.PRIVMSG(recipient, msg);
-        }
-        
-        else logger.finer("Command is not handled by this handler ...");
         
         // env = null;
     }

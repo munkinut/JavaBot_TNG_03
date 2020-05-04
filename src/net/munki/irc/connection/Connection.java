@@ -44,7 +44,7 @@ public class Connection extends Observable implements Runnable {
     public Connection(String host, int port) throws ConnectionException {
         initLogger();
         try {
-            /** Socket for connection to the server
+            /* Socket for connection to the server
              */
             Socket socket = new Socket(host, port);
             this.in = new BufferedReader(

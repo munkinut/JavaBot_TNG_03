@@ -108,9 +108,7 @@ public class BotCore implements Observer, ServiceListenerInterface {
         List scriptListeners = Collections.synchronizedList(new ArrayList());
         int nickIndex = -1;
         String[] nicks = new String[nicknames.length + 1];
-        for (int i = 0; i < nicknames.length; i++) {
-            nicks[i] = nicknames[i];
-        }
+        System.arraycopy(nicknames, 0, nicks, 0, nicknames.length);
         nicks[nicknames.length] = BotCore.DEFAULT_NICK;
         List channels = Collections.synchronizedList(new ArrayList());
         for (int i = 0; i < chans.length; i++) {

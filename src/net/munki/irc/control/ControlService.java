@@ -22,8 +22,8 @@ import java.util.logging.Logger;
  * @author Warren Milburn
  */
 public class ControlService implements ServiceInterface {
-    
-    /** The output stream to use for output messages. */    
+
+    /* The output stream to use for output messages. */
     // private PrintStream out;
     /** A list of listeners that need to be informed of messages
      * on the socket.  In this case it will be a BotCore object.

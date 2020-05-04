@@ -105,7 +105,7 @@ public abstract class ReplyHandlerAdapter implements ReplyHandlerInterface {
     public void RPL_INFO(String reply) throws ReplyHandlerException {
     }
     
-    public void RPL_WELCOME(String reply) {
+    public void RPL_WELCOME() {
     }
     
     public void RPL_ENDOFUSERS(String reply) throws ReplyHandlerException {
@@ -324,7 +324,7 @@ public abstract class ReplyHandlerAdapter implements ReplyHandlerInterface {
     public void RPL_CLOSING(String reply) throws ReplyHandlerException {
     }
     
-    public void ERR_NICKNAMEINUSE(String reply) {
+    public void ERR_NICKNAMEINUSE() {
     }
     
     public void RPL_TOPIC(String reply) throws ReplyHandlerException {

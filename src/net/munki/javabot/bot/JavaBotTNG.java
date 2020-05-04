@@ -105,10 +105,10 @@ public class JavaBotTNG {
             if ((port < 1) || (port > 65535)) {
                 throw new JBInvalidPortException("Port number is out of range ...");
             }
-            enableSecurityManager = new Boolean(config.getProperty(JBData.PROP_SECURITY_MANAGER, JBData.DEFAULT_SECURITY_MANAGER)).booleanValue();
-            enableBeanshell = new Boolean(config.getProperty(JBData.PROP_BEANSHELL, JBData.DEFAULT_BEANSHELL)).booleanValue();
-            enableJython = new Boolean(config.getProperty(JBData.PROP_JYTHON, JBData.DEFAULT_JYTHON)).booleanValue();
-            enableJacl = new Boolean(config.getProperty(JBData.PROP_JACL, JBData.DEFAULT_JACL)).booleanValue();
+            enableSecurityManager = Boolean.valueOf(config.getProperty(JBData.PROP_SECURITY_MANAGER, JBData.DEFAULT_SECURITY_MANAGER)).booleanValue();
+            enableBeanshell = Boolean.valueOf(config.getProperty(JBData.PROP_BEANSHELL, JBData.DEFAULT_BEANSHELL)).booleanValue();
+            enableJython = Boolean.valueOf(config.getProperty(JBData.PROP_JYTHON, JBData.DEFAULT_JYTHON)).booleanValue();
+            enableJacl = Boolean.valueOf(config.getProperty(JBData.PROP_JACL, JBData.DEFAULT_JACL)).booleanValue();
         }
         catch (NumberFormatException nfe) {
             throw new JBConfigurationException("Configuration invalid ...", nfe);

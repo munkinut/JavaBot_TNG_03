@@ -98,127 +98,130 @@ public class MessageFactory {
     private static ReplyMessageInterface createReplyMessage(String prefix, String command, String arguments) {
         
         ReplyMessageInterface rmi = null;
-        
-        if (command.equals(ReplyNames.RPL_NAMREPLY)) {
-            
-            // We are getting a name reply
-            // The first char identifies the channel type
-            String channelModifier = arguments.substring(0, 1);
-            // Then comes the channel name
-            String channel = arguments.substring(arguments.indexOf(" ")+1, arguments.indexOf(" :"));
-            // Then the list of nicknames
-            String nickList = arguments.substring(arguments.indexOf(" :")+2);
 
-            String channelType = "";
-            
-            // Set the channel type string according to our first char
-            if (channelModifier.equals("=")) channelType = MessageFactory.PUBLIC;
-            else if (channelModifier.equals("*")) channelType = MessageFactory.PRIVATE;
-            else if (channelModifier.equals("@")) channelType = MessageFactory.SECRET;
-            else channelType = MessageFactory.UNKNOWN;
-            
-            // Build a list of names from the string of names
-            StringTokenizer st = new StringTokenizer(nickList);
-            String[] names = new String[st.countTokens()];
-            int count = 0;
-            while (st.hasMoreTokens()) {
-                String modifiedNick = st.nextToken();
-                String nick;
-                if (modifiedNick.startsWith("@") || modifiedNick.startsWith("+")) {
-                    nick = modifiedNick.substring(1);
-                }
-                else {
-                    nick = modifiedNick;
-                }
-                names[count] = nick;
-                count++;
-            }
+        switch (command) {
+            case ReplyNames.RPL_NAMREPLY -> {
 
-            // prefix = server
-            rmi = new NamesReplyMessage(prefix, channelType, channel, names);
-        }
-        
-        else if (command.equals(ReplyNames.RPL_WHOREPLY)) {
-            
-            // this is a response to a /who command
-            String hopAndReal = arguments.substring(arguments.indexOf(":")+1);
-            String hop = hopAndReal.substring(0, hopAndReal.indexOf(" "));
-            String real = hopAndReal.substring(hopAndReal.indexOf(" ")+1);
-            
-            String upToColon = arguments.substring(0, arguments.indexOf(":"));
-            String asterisk = "";
-            String userStatus = "";
-            if (upToColon.indexOf('*') > 0) asterisk = "*";
-            if (upToColon.indexOf('@') > 0) userStatus = "@";
-            else if (upToColon.indexOf('+') > 0) userStatus = "+";
-            
-            StringTokenizer st = new StringTokenizer(upToColon);
-            String[] tokens = new String[st.countTokens()];
-            int tokenCount = 0;
-            while (st.hasMoreTokens()) {
-                tokens[tokenCount] = st.nextToken();
-                tokenCount++;
-            }
-            // String rplTo = "";
-            String channel = "";
-            String user = "";
-            String host = "";
-            String server = "";
-            String nick = "";
-            String HGToken = "";
-            if (tokens.length >= 7) {
-                // rplTo = tokens[0];
-                channel = tokens[1];
-                user = tokens[2];
-                host = tokens[3];
-                server = tokens[4];
-                nick = tokens[5];
-                HGToken = tokens[6];
-            }
-            String HG = "";
-            if (HGToken.startsWith("H")) HG = "H";
-            else if (HGToken.startsWith("G")) HG = "G";
-            
-            rmi = new WhoReplyMessage(channel, user, host, server, nick, HG, asterisk, userStatus, hop, real);
-        }
-        
-        else if (command.equals(ReplyNames.ERR_NICKNAMEINUSE)) {
-            
-            // We are getting an error because our chosen nickname
-            // is already taken by someone else
-            
-            // The first argument is the nickname causing the problem
-            String nick = arguments.substring(0,arguments.indexOf(" :"));
-            // The next bit is the server message
-            String message = arguments.substring(arguments.indexOf(" :")+2);
-            
-            rmi =  new NicknameInUseMessage(prefix, nick, message);
-        }
-        
-        else if (command.equals(ReplyNames.RPL_WELCOME)) {
-            
-            // We are getting a welcome message
-            
-            // Break up the message
-            StringTokenizer st = new StringTokenizer(arguments);
-            List list = new ArrayList();
-            while (st.hasMoreTokens()) {
-                list.add(st.nextToken());
-            }
-            
-            // Get the <nick>!<user>@<host> mask at the end
-            String mask = "";
-            StringBuffer message = new StringBuffer();
-            Object[] tokens = list.toArray();
-            if (tokens.length > 2) {
-                mask = (String)tokens[tokens.length-1];
-                for (int i = 0; i < tokens.length-1; i++) {
-                    message.append((String)tokens[i]);
-                    if (i != tokens.length-2) message.append(" ");
-                }
-            }
+                // We are getting a name reply
+                // The first char identifies the channel type
+                String channelModifier = arguments.substring(0, 1);
+                // Then comes the channel name
+                String channel = arguments.substring(arguments.indexOf(" ") + 1, arguments.indexOf(" :"));
+                // Then the list of nicknames
+                String nickList = arguments.substring(arguments.indexOf(" :") + 2);
 
-            rmi = new WelcomeMessage(message.toString(), mask);
+                String channelType = switch (channelModifier) {
+                    case "=" -> MessageFactory.PUBLIC;
+                    case "*" -> MessageFactory.PRIVATE;
+                    case "@" -> MessageFactory.SECRET;
+                    default -> MessageFactory.UNKNOWN;
+                };
+
+                // Set the channel type string according to our first char
+
+                // Build a list of names from the string of names
+                StringTokenizer st = new StringTokenizer(nickList);
+                String[] names = new String[st.countTokens()];
+                int count = 0;
+                while (st.hasMoreTokens()) {
+                    String modifiedNick = st.nextToken();
+                    String nick;
+                    if (modifiedNick.startsWith("@") || modifiedNick.startsWith("+")) {
+                        nick = modifiedNick.substring(1);
+                    } else {
+                        nick = modifiedNick;
+                    }
+                    names[count] = nick;
+                    count++;
+                }
+
+                // prefix = server
+                rmi = new NamesReplyMessage(prefix, channelType, channel, names);
+                break;
+            }
+            case ReplyNames.RPL_WHOREPLY -> {
+
+                // this is a response to a /who command
+                String hopAndReal = arguments.substring(arguments.indexOf(":") + 1);
+                String hop = hopAndReal.substring(0, hopAndReal.indexOf(" "));
+                String real = hopAndReal.substring(hopAndReal.indexOf(" ") + 1);
+
+                String upToColon = arguments.substring(0, arguments.indexOf(":"));
+                String asterisk = "";
+                String userStatus = "";
+                if (upToColon.indexOf('*') > 0) asterisk = "*";
+                if (upToColon.indexOf('@') > 0) userStatus = "@";
+                else if (upToColon.indexOf('+') > 0) userStatus = "+";
+
+                StringTokenizer st = new StringTokenizer(upToColon);
+                String[] tokens = new String[st.countTokens()];
+                int tokenCount = 0;
+                while (st.hasMoreTokens()) {
+                    tokens[tokenCount] = st.nextToken();
+                    tokenCount++;
+                }
+                // String rplTo = "";
+                String channel = "";
+                String user = "";
+                String host = "";
+                String server = "";
+                String nick = "";
+                String HGToken = "";
+                if (tokens.length >= 7) {
+                    // rplTo = tokens[0];
+                    channel = tokens[1];
+                    user = tokens[2];
+                    host = tokens[3];
+                    server = tokens[4];
+                    nick = tokens[5];
+                    HGToken = tokens[6];
+                }
+                String HG = "";
+                if (HGToken.startsWith("H")) HG = "H";
+                else if (HGToken.startsWith("G")) HG = "G";
+
+                rmi = new WhoReplyMessage(channel, user, host, server, nick, HG, asterisk, userStatus, hop, real);
+                break;
+            }
+            case ReplyNames.ERR_NICKNAMEINUSE -> {
+
+                // We are getting an error because our chosen nickname
+                // is already taken by someone else
+
+                // The first argument is the nickname causing the problem
+                String nick = arguments.substring(0, arguments.indexOf(" :"));
+                // The next bit is the server message
+                String message = arguments.substring(arguments.indexOf(" :") + 2);
+
+                rmi = new NicknameInUseMessage(prefix, nick, message);
+                break;
+            }
+            case ReplyNames.RPL_WELCOME -> {
+
+                // We are getting a welcome message
+
+                // Break up the message
+                StringTokenizer st = new StringTokenizer(arguments);
+                List list = new ArrayList();
+                while (st.hasMoreTokens()) {
+                    list.add(st.nextToken());
+                }
+
+                // Get the <nick>!<user>@<host> mask at the end
+                String mask = "";
+                StringBuffer message = new StringBuffer();
+                Object[] tokens = list.toArray();
+                if (tokens.length > 2) {
+                    mask = (String) tokens[tokens.length - 1];
+                    for (int i = 0; i < tokens.length - 1; i++) {
+                        message.append((String) tokens[i]);
+                        if (i != tokens.length - 2) message.append(" ");
+                    }
+                }
+
+                rmi = new WelcomeMessage(message.toString(), mask);
+                break;
+            }
         }
 
         return rmi;
@@ -261,69 +264,67 @@ public class MessageFactory {
         else user = usermod;
         
         // Check what command we have been sent
-        
-        if (command.equals(MessageNames.JOIN)) {
-            String channel = arguments.substring(arguments.indexOf(":")+1);
-            cmi = new JoinMessage(from, modifier, user, host, channel);
-        }
-        
-        else if (command.equals(MessageNames.PART)) {
-            String channel = "";
-            String partMessage = "";
-            if (arguments.indexOf(" :") > -1) {
-                channel = arguments.substring(0, arguments.indexOf(" :"));
-                partMessage  = arguments.substring(arguments.indexOf(":")+1);
-            }
-            else {
-                channel = arguments;
-            }
-            cmi = new PartMessage(from, modifier, user, host, channel, partMessage);
-        }
-        
-        else if (command.equals(MessageNames.KICK)) {
-            String channel = arguments.substring(0, arguments.indexOf(" "));
-            String nickToKick = arguments.substring(arguments.indexOf(" ")+1);
-            cmi = new KickMessage(from, modifier, user, host, channel, nickToKick);
-        }
 
-        else if (command.equals(MessageNames.QUIT)) {
-            String message = arguments.substring(arguments.indexOf(":")+1);
-            cmi = new QuitMessage(from, modifier, user, host, message);
-        }
-
-        else if (command.equals(MessageNames.PRIVMSG)) {
-            String addressee = arguments.substring(0, arguments.indexOf(" :"));
-            String message = arguments.substring(arguments.indexOf(":")+1);
-            cmi = new PrivmsgMessage(from, modifier, user, host, addressee, message);
-        }
-        
-        else if (command.equals(MessageNames.CHANNEL_MODE)) {
-            
-            // is it really a channel mode?
-            // parse the arguments to find out
-            // if it is, construct a channel mode message
-            // if not, then its a user mode message
-            // which we will need to handle here too
-            // since there is no distinction between the two
-            // command names in the protocol
-            String target = arguments.substring(0,arguments.indexOf(" "));
-            if (target.startsWith("#") || target.startsWith("+") ||
-                target.startsWith("!") || target.startsWith("&")) {
-                    
-                // we have a channel
-                String modesAndParams = arguments.substring(arguments.indexOf(" ")+1);
-                
-                // separate the modes from the mode params and pass separately
-                
-                String modes = modesAndParams.substring(0, modesAndParams.indexOf(" "));
-                String params = modesAndParams.substring(modesAndParams.indexOf(" ")+1);
-                
-                cmi = new ChannelModeMessage(from, modifier, user, host, target, modes, params);
+        // is it really a channel mode?
+        // parse the arguments to find out
+        // if it is, construct a channel mode message
+        // if not, then its a user mode message
+        // which we will need to handle here too
+        // since there is no distinction between the two
+        // command names in the protocol
+        switch (command) {
+            case MessageNames.JOIN -> {
+                String channel = arguments.substring(arguments.indexOf(":") + 1);
+                cmi = new JoinMessage(from, modifier, user, host, channel);
+                break;
             }
-            
-            else {
-                
-                // we have a user
+            case MessageNames.PART -> {
+                String channel = "";
+                String partMessage = "";
+                if (arguments.indexOf(" :") > -1) {
+                    channel = arguments.substring(0, arguments.indexOf(" :"));
+                    partMessage = arguments.substring(arguments.indexOf(":") + 1);
+                } else {
+                    channel = arguments;
+                }
+                cmi = new PartMessage(from, modifier, user, host, channel, partMessage);
+                break;
+            }
+            case MessageNames.KICK -> {
+                String channel = arguments.substring(0, arguments.indexOf(" "));
+                String nickToKick = arguments.substring(arguments.indexOf(" ") + 1);
+                cmi = new KickMessage(from, modifier, user, host, channel, nickToKick);
+                break;
+            }
+            case MessageNames.QUIT -> {
+                String message = arguments.substring(arguments.indexOf(":") + 1);
+                cmi = new QuitMessage(from, modifier, user, host, message);
+                break;
+            }
+            case MessageNames.PRIVMSG -> {
+                String addressee = arguments.substring(0, arguments.indexOf(" :"));
+                String message = arguments.substring(arguments.indexOf(":") + 1);
+                cmi = new PrivmsgMessage(from, modifier, user, host, addressee, message);
+                break;
+            }
+            case MessageNames.CHANNEL_MODE -> {
+                String target = arguments.substring(0, arguments.indexOf(" "));
+                if (target.startsWith("#") || target.startsWith("+") ||
+                        target.startsWith("!") || target.startsWith("&")) {
+
+                    // we have a channel
+                    String modesAndParams = arguments.substring(arguments.indexOf(" ") + 1);
+
+                    // separate the modes from the mode params and pass separately
+
+                    String modes = modesAndParams.substring(0, modesAndParams.indexOf(" "));
+                    String params = modesAndParams.substring(modesAndParams.indexOf(" ") + 1);
+
+                    cmi = new ChannelModeMessage(from, modifier, user, host, target, modes, params);
+                } else {
+
+                    // we have a user
+                }
             }
         }
 

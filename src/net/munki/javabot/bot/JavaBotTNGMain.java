@@ -55,13 +55,7 @@ public class JavaBotTNGMain {
         
         String configValue = (String)parser.getOptionValue(configOpt);
         if (configValue == null) {
-            try {
-                config = JBConfig.read();
-            }
-            catch (JBConfigurationException ioe) {
-                error(ioe.getMessage());
-                System.exit(1);
-            }
+            config = JBConfig.read();
         }
         else {
             try {

@@ -63,13 +63,13 @@ public class IRCReplyHandler extends IRCReplyAdapter {
         if (type.equals(ReplyNames.ERR_NICKNAMEINUSE)) {
             logger.fine("Reply Handler received a ERR_NICKNAMEINUSE message ...");
             NicknameInUseMessage nium = (NicknameInUseMessage)message;
-            if (nium != null) this.ERR_NICKNAMEINUSE(nium.getMessage());
+            if (nium != null) this.ERR_NICKNAMEINUSE();
         }
         
         else if (type.equals(ReplyNames.RPL_WELCOME)) {
             logger.fine("Reply Handler received a RPL_WELCOME message ...");
             WelcomeMessage wm = (WelcomeMessage)message;
-            if (wm != null) this.RPL_WELCOME(wm.getMessage());
+            if (wm != null) this.RPL_WELCOME();
         }
         
         else logger.fine("Message not handled by this reply handler ...");
@@ -78,10 +78,9 @@ public class IRCReplyHandler extends IRCReplyAdapter {
     /** Implementation of ERR_NICKNAMEINUSE handler method.
      * Asks the environment for another nickname and dispatches
      * a NICK command accordingly.
-     * @param reply The reply.
      * @throws ReplyHandlerException Thrown if any handler fails to handle the message.
      */    
-    public void ERR_NICKNAMEINUSE(String reply) throws ReplyHandlerException {
+    public void ERR_NICKNAMEINUSE() throws ReplyHandlerException {
         if (env != null) {
             logger.fine("Handling ERR_NICKNAMEINUSE ...");
             String alt = env.nextNick();
@@ -98,10 +97,9 @@ public class IRCReplyHandler extends IRCReplyAdapter {
     /** Implementation of the handler for RPL_WELCOME.
      * The server can now accept commands, so a JOIN command
      * is dispatched.
-     * @param reply The reply.
      * @throws ReplyHandlerException Thrown if any handler fails to handle the message.
      */    
-    public void RPL_WELCOME(String reply) throws ReplyHandlerException {
+    public void RPL_WELCOME() throws ReplyHandlerException {
         if (env != null) {
             logger.fine("Handling RPL_WELCOME ...");
             try {

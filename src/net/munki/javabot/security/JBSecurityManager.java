@@ -180,7 +180,7 @@ public class JBSecurityManager extends SecurityManager {
     public void checkSystemClipboardAccess() {
     }
 
-    public boolean checkTopLevelWindow(Object obj) {
+    public boolean checkTopLevelWindow() {
         // return super.checkTopLevelWindow(obj);
     	// TODO: above is deprecated, see advice.
     	return true;
@@ -263,25 +263,28 @@ public class JBSecurityManager extends SecurityManager {
     }
 
     private void handleAWTPermission(Permission perm) {
-        if (perm.getName().equals("accessClipboard")) {
-            //
+        switch (perm.getName()) {
+            case "accessClipboard":
+                //
+                break;
+            case "accessEventQueue":
+                //
+                break;
+            case "createRobots":
+                //
+                break;
+            case "listenToAllAWTEvents":
+                //
+                break;
+            case "readDisplayPixels":
+                //
+                break;
+            case "showWindowWithoutWarningBanner":
+                //
+                break;
+            default:
+                throw new SecurityException("Unrecognised Permission requested.");
         }
-        else if (perm.getName().equals("accessEventQueue")) {
-            //
-        }
-        else if (perm.getName().equals("createRobots")) {
-            //
-        }
-        else if (perm.getName().equals("listenToAllAWTEvents")) {
-            //
-        }
-        else if (perm.getName().equals("readDisplayPixels")) {
-            //
-        }
-        else if (perm.getName().equals("showWindowWithoutWarningBanner")) {
-            //
-        }
-        else throw new SecurityException("Unrecognised Permission requested.");
     }
 
     private void handleFilePermission(Permission perm) {
@@ -375,16 +378,19 @@ public class JBSecurityManager extends SecurityManager {
     }
 
     private void handleNetPermission(Permission perm) {
-        if (perm.getName().equals("setDefaultAuthenticator")) {
-            //
+        switch (perm.getName()) {
+            case "setDefaultAuthenticator":
+                //
+                break;
+            case "requestPasswordAuthentication":
+                //
+                break;
+            case "specifyStreamHandler":
+                //
+                break;
+            default:
+                throw new SecurityException("Unrecognised Permission requested.");
         }
-        else if (perm.getName().equals("requestPasswordAuthentication")) {
-            //
-        }
-        else if (perm.getName().equals("specifyStreamHandler")) {
-            //
-        }
-        else throw new SecurityException("Unrecognised Permission requested.");
     }
 
     private void handleSocketPermission(Permission perm) {

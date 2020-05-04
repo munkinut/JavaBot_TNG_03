@@ -36,7 +36,7 @@ public class BeanshellScriptHandler extends BeanshellScriptAdapter {
         // make sure the source is valid and the trigger is part of a Privmsg
         if ((evt.getSource() instanceof BotEnv) && (evt.getActionCommand() instanceof PrivmsgMessage)) {
             logger.fine("Script Event valid; dispatching ...");
-            /** The bot environment. */
+            /* The bot environment. */
             BotEnv env = (BotEnv) evt.getSource();
             PrivmsgMessage pmm = (PrivmsgMessage)evt.getActionCommand();
             String nick = pmm.getNick();            // their nick
