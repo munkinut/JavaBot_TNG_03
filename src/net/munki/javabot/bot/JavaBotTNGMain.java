@@ -48,10 +48,11 @@ public class JavaBotTNGMain {
         }
 
         Boolean helpValue = (Boolean)parser.getOptionValue(helpOpt);
-        if ((helpValue != null) && (helpValue.booleanValue())) {
-            usage();
-            System.exit(0);
-        }
+        if (helpValue != null)
+            if (helpValue) {
+                usage();
+                System.exit(0);
+            }
         
         String configValue = (String)parser.getOptionValue(configOpt);
         if (configValue == null) {
@@ -69,22 +70,22 @@ public class JavaBotTNGMain {
         
         Boolean noSecurityValue = (Boolean)parser.getOptionValue(noSecurityOpt);
         if (noSecurityValue != null) {
-            securityManager = !noSecurityValue.booleanValue();
+            securityManager = !noSecurityValue;
         }
         
         Boolean noBeanshellValue = (Boolean)parser.getOptionValue(noBeanshellOpt);
         if (noBeanshellValue != null) {
-            beanshell = !noBeanshellValue.booleanValue();
+            beanshell = !noBeanshellValue;
         }
         
         Boolean noPythonValue = (Boolean)parser.getOptionValue(noPythonOpt);
         if (noPythonValue != null) {
-            python = !noPythonValue.booleanValue();
+            python = !noPythonValue;
         }
         
         Boolean noTclValue = (Boolean)parser.getOptionValue(noTclOpt);
         if (noTclValue != null) {
-            tcl = !noTclValue.booleanValue();
+            tcl = !noTclValue;
         }
         
         try {

@@ -1,5 +1,5 @@
 /*
- * MessageInterface.java - defines all methods for an irc message object
+ * MessageInterface.java - deinfos all methods for an irc message object
  *
  */
 

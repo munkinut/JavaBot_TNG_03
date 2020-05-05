@@ -23,7 +23,7 @@ public class ControlService implements ServiceInterface {
 
     /* The output stream to use for output messages. */
     // private PrintStream out;
-    /** A list of listeners that need to be informed of messages
+    /** A list of listeners that need to be infomed of messages
      * on the socket.  In this case it will be a BotCore object.
      */    
     private final ArrayList<ServiceListenerInterface> serviceListeners;
@@ -108,7 +108,7 @@ public class ControlService implements ServiceInterface {
      * of messages on the socket.
      */    
     public void addServiceListener(ServiceListenerInterface serviceListenerInterface) {
-        logger.fine("Adding service listener ...");
+        logger.info("Adding service listener ...");
         serviceListeners.add(serviceListenerInterface);
     }
     
@@ -116,7 +116,7 @@ public class ControlService implements ServiceInterface {
      * the socket or of commands they need to perform.
      */    
     private void notifyServiceListeners(String message) {
-        logger.fine("Notifying listeners ...");
+        logger.info("Notifying listeners ...");
         Object[] slis = serviceListeners.toArray();
         for (Object o : slis) {
             if (o instanceof ServiceListenerInterface) {

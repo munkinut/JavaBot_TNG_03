@@ -43,7 +43,7 @@ public class IRCReplyHandler extends IRCReplyAdapter {
      */    
     public void dispatch(IRCReplyEvent evt) throws ReplyHandlerException {
         if ((evt.getSource() instanceof BotEnv) && (evt.getActionCommand() instanceof ReplyMessageInterface)) {
-            logger.fine("Reply Event valid; dispatching ...");
+            logger.info("Reply Event valid; dispatching ...");
             env = (BotEnv)evt.getSource();
             ReplyMessageInterface message = (ReplyMessageInterface)evt.getActionCommand();
             this.handleMessage(message);
@@ -61,18 +61,18 @@ public class IRCReplyHandler extends IRCReplyAdapter {
         String type = message.getMessageType();
         
         if (type.equals(ReplyNames.ERR_NICKNAMEINUSE)) {
-            logger.fine("Reply Handler received a ERR_NICKNAMEINUSE message ...");
+            logger.info("Reply Handler received a ERR_NICKNAMEINUSE message ...");
             NicknameInUseMessage nium = (NicknameInUseMessage)message;
             this.ERR_NICKNAMEINUSE();
         }
         
         else if (type.equals(ReplyNames.RPL_WELCOME)) {
-            logger.fine("Reply Handler received a RPL_WELCOME message ...");
+            logger.info("Reply Handler received a RPL_WELCOME message ...");
             WelcomeMessage wm = (WelcomeMessage)message;
             this.RPL_WELCOME();
         }
         
-        else logger.fine("Message not handled by this reply handler ...");
+        else logger.info("Message not handled by this reply handler ...");
     }
     
     /** Implementation of ERR_NICKNAMEINUSE handler method.
@@ -82,7 +82,7 @@ public class IRCReplyHandler extends IRCReplyAdapter {
      */    
     public void ERR_NICKNAMEINUSE() throws ReplyHandlerException {
         if (env != null) {
-            logger.fine("Handling ERR_NICKNAMEINUSE ...");
+            logger.info("Handling ERR_NICKNAMEINUSE ...");
             String alt = env.nextNick();
             try {
                 this.nick(alt);
@@ -101,7 +101,7 @@ public class IRCReplyHandler extends IRCReplyAdapter {
      */    
     public void RPL_WELCOME() throws ReplyHandlerException {
         if (env != null) {
-            logger.fine("Handling RPL_WELCOME ...");
+            logger.info("Handling RPL_WELCOME ...");
             try {
                 this.join(this.getChannelsToJoin());
             }
@@ -117,7 +117,7 @@ public class IRCReplyHandler extends IRCReplyAdapter {
      * @throws MessageHandlerException Thrown if a handler fails to handle the dispatched message.
      */    
     private void nick(String nick) throws MessageHandlerException {
-        logger.fine("Firing NICK command event ...");
+        logger.info("Firing NICK command event ...");
         IRCCommandEvent evt = new IRCCommandEvent(env, MessageNames.NICK);
         evt.addParameter(nick);
         env.fireIRCCommandEvent(evt);
@@ -128,9 +128,11 @@ public class IRCReplyHandler extends IRCReplyAdapter {
      * @throws MessageHandlerException Thrown if a handler fails to handle the dispatched message.
      */    
     private void join(String[] channels) throws MessageHandlerException {
-        logger.fine("Firing JOIN command event ...");
+        logger.info("Firing JOIN command event ...");
         IRCCommandEvent evt = new IRCCommandEvent(env, MessageNames.JOIN);
-        evt.addParameter(channels);
+        for (String channel : channels) {
+            evt.addParameter(channel);
+        }
         env.fireIRCCommandEvent(evt);
     }
     
@@ -144,7 +146,7 @@ public class IRCReplyHandler extends IRCReplyAdapter {
             if (chans[i] instanceof Channel) {
                 String chanName = ((Channel)chans[i]).getName();
                 chanNames[i] = chanName;
-                logger.finer(StringTool.cat(new String[] {"Added ", chanName, " to list of channels to join ..."}));
+                logger.info(StringTool.cat(new String[] {"Added ", chanName, " to list of channels to join ..."}));
             }
         }
         return chanNames;

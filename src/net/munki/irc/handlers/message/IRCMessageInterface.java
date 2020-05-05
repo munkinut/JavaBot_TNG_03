@@ -9,7 +9,9 @@ package net.munki.irc.handlers.message;
 import net.munki.irc.protocol.rfc2812.MessageHandlerException;
 import net.munki.irc.protocol.rfc2812.MessageHandlerInterface;
 
-/** Defines IRC message types. */
+import java.util.ArrayList;
+
+/** Deinfos IRC message types. */
 public interface IRCMessageInterface extends MessageHandlerInterface {
 
     /** 3.5.2 Squery
@@ -66,7 +68,7 @@ public interface IRCMessageInterface extends MessageHandlerInterface {
      * @param channels
      * @param keys
      */
-    void JOIN(String[] channels, String[] keys);
+    void JOIN(ArrayList<String> channels, ArrayList<String> keys);
     
     /** 3.2.6 List message
      * @param channels
@@ -149,7 +151,7 @@ public interface IRCMessageInterface extends MessageHandlerInterface {
     /** 3.2.1 Join message
      * @param channels
      */
-    void JOIN(String[] channels);
+    void JOIN(ArrayList<String> channels);
     
     /**
      * @param server_1

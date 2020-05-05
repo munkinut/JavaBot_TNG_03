@@ -125,9 +125,9 @@ public class JavaBotTNG {
         BotCore bot = new BotCore(server, port, nicks, username, realname,
             channels, enableBeanshell, enableJython, enableJacl);
         if (bot.connect()) {
-            logger.fine("Connection established ...");
+            logger.info("Connection established ...");
             if (bot.signOn()) {
-                logger.fine("Sign on completed ...");
+                logger.info("Sign on completed ...");
             }
             else {
                 logger.warning("Sign on failed ...");

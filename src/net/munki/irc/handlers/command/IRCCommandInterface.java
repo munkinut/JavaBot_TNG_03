@@ -11,6 +11,7 @@ import net.munki.irc.protocol.rfc2812.MessageHandlerException;
 import net.munki.irc.protocol.rfc2812.MessageHandlerInterface;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /** Extends the CommandHandlerInterface adding connection handling capabilities.
  */
@@ -188,7 +189,7 @@ public interface IRCCommandInterface extends MessageHandlerInterface {
      * @param channels
      * @param keys
      */
-    void JOIN(String[] channels, String[] keys);
+    void JOIN(ArrayList<String> channels, ArrayList<String> keys);
     
     /** 3.3.1 Private messages
      * @param target
@@ -306,7 +307,7 @@ public interface IRCCommandInterface extends MessageHandlerInterface {
      * @param channels
      * @throws MessageHandlerException
      */
-    void JOIN(String[] channels) throws MessageHandlerException;
+    void JOIN(ArrayList<String> channels) throws MessageHandlerException;
     
 }
 

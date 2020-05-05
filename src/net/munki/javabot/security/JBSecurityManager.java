@@ -349,7 +349,7 @@ public class JBSecurityManager extends SecurityManager {
         else if (perm.getName().startsWith("accessClassInPackage")) {
             //
         }
-        else if (perm.getName().startsWith("defineClassInPackage")) {
+        else if (perm.getName().startsWith("deinfoClassInPackage")) {
             //
         }
         else if (perm.getName().equals("accessDeclaredMembers")) {
@@ -476,7 +476,7 @@ public class JBSecurityManager extends SecurityManager {
           || (file.indexOf("packages") > -1)
           || (file.endsWith(".idx"))
           || (file.endsWith(".pkc"))) {
-            logger.finer(StringTool.cat(new String[] {
+            logger.info(StringTool.cat(new String[] {
                 "Write allowed for ",
                 file,
                 " ..."
@@ -506,7 +506,7 @@ public class JBSecurityManager extends SecurityManager {
                 portMatcher = portPattern.matcher(input);
                 if (portMatcher.find()) {
                     returnValue = true;
-                    logger.finer(StringTool.cat(new String[] {
+                    logger.info(StringTool.cat(new String[] {
                         "Port found in ",
                         LISTENERS_ALLOW,
                         " at line ",
@@ -515,7 +515,7 @@ public class JBSecurityManager extends SecurityManager {
                     }));
                 }
                 else {
-                    logger.finer(StringTool.cat(new String[] {
+                    logger.info(StringTool.cat(new String[] {
                         "Port not found in ",
                         LISTENERS_ALLOW,
                         " ..."
@@ -567,7 +567,7 @@ public class JBSecurityManager extends SecurityManager {
                         Matcher portMatcher = portPattern.matcher(input);
                         if ((port == -1) || (portMatcher.find())) {
                             returnValue = true;
-                            logger.finer(StringTool.cat(new String[] {
+                            logger.info(StringTool.cat(new String[] {
                                 "Port found in ",
                                 SERVERS_ALLOW,
                                 " at line ",
@@ -576,13 +576,13 @@ public class JBSecurityManager extends SecurityManager {
                             }));
                         }
                         else {
-                            logger.finer(StringTool.cat(new String[] {
+                            logger.info(StringTool.cat(new String[] {
                                 "Port not found in ",
                                 SERVERS_ALLOW,
                                 " ..."
                             }));
                         }
-                        logger.finer(StringTool.cat(new String[] {
+                        logger.info(StringTool.cat(new String[] {
                             "Server found in ",
                             SERVERS_ALLOW,
                             " at line ",
@@ -591,7 +591,7 @@ public class JBSecurityManager extends SecurityManager {
                         }));
                     }
                     else {
-                        logger.finer(StringTool.cat(new String[] {
+                        logger.info(StringTool.cat(new String[] {
                             "Server not found in ",
                             SERVERS_ALLOW,
                             " ..."
@@ -641,7 +641,7 @@ public class JBSecurityManager extends SecurityManager {
                     hostMatcher = hostPattern.matcher(input);
                     if (hostMatcher.find()) {
                         returnValue = true;
-                        logger.finer(StringTool.cat(new String[] {
+                        logger.info(StringTool.cat(new String[] {
                             "Host found in ",
                             HOSTS_ALLOW,
                             " at line ",
@@ -650,7 +650,7 @@ public class JBSecurityManager extends SecurityManager {
                         }));
                     }
                     else {
-                        logger.finer(StringTool.cat(new String[] {
+                        logger.info(StringTool.cat(new String[] {
                             "Host not found in ",
                             HOSTS_ALLOW,
                             " ..."

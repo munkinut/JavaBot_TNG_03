@@ -7,7 +7,7 @@
 package net.munki.irc.bot;
 
 import net.munki.irc.channel.Channel;
-import net.munki.irc.channel.ChannelUser;
+//import net.munki.irc.channel.ChannelUser;
 import net.munki.irc.connection.Connection;
 import net.munki.irc.connection.ConnectionException;
 import net.munki.irc.connection.ConnectionFactory;
@@ -34,19 +34,19 @@ import net.munki.jServer.ServiceListenerInterface;
 import net.munki.javabot.handlers.JBCommandHandler;
 import net.munki.javabot.handlers.JBMessageHandler;
 import net.munki.javabot.handlers.JBReplyHandler;
-import net.munki.util.classloader.VanillaClassLoader;
+//import net.munki.util.classloader.VanillaClassLoader;
 import net.munki.util.string.StringTool;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.PrintStream;
-import java.lang.reflect.InvocationTargetException;
+//import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Objects;
+//import java.util.Objects;
 import java.util.logging.Logger;
 
-import static java.io.File.*;
+//import static java.io.File.*;
 
 /** A bot core providing basic minimal functionality for connecting to an IRC server.
  */
@@ -107,7 +107,7 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
         this.initEnvironment(nicknames, chans);
         this.initControl();
         this.initDefaultHandlers(beanshell, jython, jacl);
-        this.initPlugins();
+        //this.initPlugins();
     }
 
     @Override
@@ -115,11 +115,11 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
         this.setMessage((String) evt.getNewValue());
     }
 
-    private void setMessage(String newValue) {
+    public void setMessage(String newValue) {
         this.message = newValue;
     }
 
-    private String getMessage() {
+    public String getMessage() {
         return this.message;
     }
 
@@ -128,7 +128,7 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
      * @param chans The list of channels the bot can join.
      */    
     private void initEnvironment(String[] nicknames, String[] chans) {
-        logger.fine("Initialising environment ...");
+        logger.info("Initialising environment ...");
         ArrayList<IRCMessageListener> messageListeners = new ArrayList<>();
         ArrayList<IRCCommandListener> commandListeners = new ArrayList<>();
         ArrayList<IRCReplyListener> replyListeners = new ArrayList<>();
@@ -140,7 +140,7 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
         ArrayList<Channel> channels = new ArrayList<>();
         for (String chan : chans) {
             if (Validator.validChannelName(chan)) {
-                Channel channel = new Channel(chan, "", "", new ArrayList<ChannelUser>());
+                Channel channel = new Channel(chan, "", "", new ArrayList<>());
                 channels.add(channel);
             }
         }
@@ -150,7 +150,7 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
     
     /** Initialises the control service. */    
     private void initControl() {
-        logger.fine("Initialising control thread ...");
+        logger.info("Initialising control thread ...");
         controlListener = new ListenerManager();
         try {
             controlListener.addListener(DEFAULT_CONTROL_PORT, CONTROL_SERVICE, this, null);
@@ -172,7 +172,7 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
     
     /** Initialises the default handlers. */    
     private void initDefaultHandlers(boolean beanshell, boolean jython, boolean jacl) {
-        logger.fine("Initialising default handlers ...");
+        logger.info("Initialising default handlers ...");
         registerMessageHandler(new IRCMessageHandler());
         registerReplyHandler(new IRCReplyHandler());
         registerCommandHandler(new IRCCommandHandler());
@@ -185,23 +185,23 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
     }
     
     /** Initialises the plugins. */    
-    private void initPlugins() {
 /*
-        logger.fine("Initialising plugins ...");
+    private void initPlugins() {
+        logger.info("Initialising plugins ...");
         ClassLoader classLoader = new VanillaClassLoader(BotCore.class.getClassLoader(), PLUGINS_DIR);
-        logger.fine("Acquiring plugin list ...");
+        logger.info("Acquiring plugin list ...");
         ArrayList<String> classesToLoad = getPluginList(PLUGINS_DIR);
         for (String s : classesToLoad) {
             try {
                 Class myClass = classLoader.loadClass(s);
-                logger.fine(StringTool.cat(new String[]{
+                logger.info(StringTool.cat(new String[]{
                         "Plugin ",
                         myClass.getName(),
                         " found ..."
                 }));
                 if (IRCCommandListener.class.isAssignableFrom(myClass)) {
                     IRCCommandListener icl = (IRCCommandListener) myClass.getDeclaredConstructor().newInstance();
-                    logger.fine(StringTool.cat(new String[]{
+                    logger.info(StringTool.cat(new String[]{
                             "Plugin ",
                             myClass.getName(),
                             " initialised ..."
@@ -209,7 +209,7 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
                     registerCommandHandler(icl);
                 } else if (IRCMessageListener.class.isAssignableFrom(myClass)) {
                     IRCMessageListener iml = (IRCMessageListener) myClass.getDeclaredConstructor().newInstance();
-                    logger.fine(StringTool.cat(new String[]{
+                    logger.info(StringTool.cat(new String[]{
                             "Plugin ",
                             myClass.getName(),
                             " initialised ..."
@@ -217,7 +217,7 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
                     registerMessageHandler(iml);
                 } else if (IRCReplyListener.class.isAssignableFrom(myClass)) {
                     IRCReplyListener irl = (IRCReplyListener) myClass.getDeclaredConstructor().newInstance();
-                    logger.fine(StringTool.cat(new String[]{
+                    logger.info(StringTool.cat(new String[]{
                             "Plugin ",
                             myClass.getName(),
                             " initialised ..."
@@ -255,9 +255,9 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
                 e.printStackTrace();
             }
         }
-*/
     }
-    
+*/
+
 /*
     private static ArrayList<String> getPluginList(String location) {
         File dir = new File(location);
@@ -368,7 +368,7 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
                 success = true;
             }
             catch (ConnectionException ioe) {
-                logger.severe(StringTool.cat(new String[] {
+                logger.info(StringTool.cat(new String[] {
                     "Could not connect to host ",
                     server.toString(),
                     ". Message was ",
@@ -379,26 +379,26 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
             }
         }
         else {
-            logger.severe("Server has not been specified ...");
+            logger.info("Server has not been specified ...");
             connection = null;
             success = false;
         }
         return success;
     }
     
-    /** Sends registration information to the server.
+    /** Sends registration infomation to the server.
      * @return True if registration succeeded, false if not
      */    
     public boolean signOn() {
         String nick = this.nextNick();
-        logger.fine(StringTool.cat(new String[] {"Selected nick is ", nick, " ..."}));
+        logger.info(StringTool.cat(new String[] {"Selected nick is ", nick, " ..."}));
         boolean success = false;
         if (this.nick(nick) && this.user(user, real)) {
-            logger.fine("Sign-on information sent ...");
+            logger.info("Sign-on infomation sent ...");
             success = true;
         }
         else {
-            logger.severe("Sign-on failed ...");
+            logger.info("Sign-on failed ...");
         }
         return success;
     }
@@ -415,7 +415,7 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
      */    
     public void update(String message) {
         this.message = message;
-        logger.fine("Valid message received ...");
+        logger.info("Valid message received ...");
         report(message);
         this.handleMessage(message);
     }
@@ -438,7 +438,7 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
             IRCCommandEvent evt = new IRCCommandEvent(env, MessageNames.NICK);
             evt.addParameter(nick);
             try {
-                logger.fine("Firing NICK command event ...");
+                logger.info("Firing NICK command event ...");
                 env.fireIRCCommandEvent(evt);
                 success = true;
             }
@@ -470,7 +470,7 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
             evt.addParameter("*");
             evt.addParameter(real);
             try {
-                logger.fine("Firing USER command event ...");
+                logger.info("Firing USER command event ...");
                 env.fireIRCCommandEvent(evt);
                 success = true;
             }
@@ -496,7 +496,7 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
         if (message != null) {
             if (message instanceof ReplyMessageInterface) {
                 IRCReplyEvent evt = new IRCReplyEvent(env, message);
-                logger.fine("Firing reply event ...");
+                logger.info("Firing reply event ...");
                 try {
                     env.fireIRCReplyEvent(evt);
                 }
@@ -506,7 +506,7 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
             }
             else if (message instanceof CommandMessageInterface) {
                 IRCMessageEvent evt = new IRCMessageEvent(env, message);
-                logger.fine("Firing message event ...");
+                logger.info("Firing message event ...");
                 try {
                     env.fireIRCMessageEvent(evt);
                 }
@@ -515,11 +515,11 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
                 }
             }
             else{
-                logger.fine("Message type was not recognised, ignoring ...");
+                logger.info("Message type was not recognised, ignoring ...");
             }
         }
         else {
-            logger.fine("Message was not understood, ignoring ...");
+            logger.info("Message was not understood, ignoring ...");
         }
     }
     
@@ -533,7 +533,7 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
     /** Stops the connection and the control listener.
      */    
     public void kill() {
-        logger.fine("Kill called ...");
+        logger.info("Kill called ...");
         report("\nKill requested, please wait ...\n");
         if (connection != null) connection.stop();
         else logger.warning("Kill requested but connection was already null ...");
@@ -550,7 +550,7 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
      */    
     public void notify(Object source, Object message) {
         if (source instanceof ServiceInterface) {
-            logger.fine("Received command from valid control source ...");
+            logger.info("Received command from valid control source ...");
             if (message instanceof String) {
                 String msg = (String)message;
                 logger.info(msg + " control command received, please wait ...");

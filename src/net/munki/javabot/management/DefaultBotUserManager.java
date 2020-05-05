@@ -101,7 +101,7 @@ public class DefaultBotUserManager implements BotUserManagerInterface {
             "@",
             channelUser.getHost()
         });
-        logger.finer(StringTool.cat(new String[] {"Checking ", hostmask, " has ",
+        logger.info(StringTool.cat(new String[] {"Checking ", hostmask, " has ",
             flag, " flag ..."}));
             File userFile = null;
         try {
@@ -115,7 +115,7 @@ public class DefaultBotUserManager implements BotUserManagerInterface {
                 line++;
                 hostMatcher = hostPattern.matcher(input);
                 if (hostMatcher.find()) {
-                    logger.finer(StringTool.cat(new String[] {
+                    logger.info(StringTool.cat(new String[] {
                         "Host found in config at line ",
                         Integer.toString(line),
                         " ..."}));
@@ -125,14 +125,14 @@ public class DefaultBotUserManager implements BotUserManagerInterface {
                         Pattern flagPattern = Pattern.compile(flag);
                         Matcher flagMatcher = flagPattern.matcher(flags);
                         if (flagMatcher.find()) {
-                            logger.finer(StringTool.cat(new String[] {
+                            logger.info(StringTool.cat(new String[] {
                                 "Flag ",
                                 flag,
                                 " found ..."}));
                             returnValue = true;
                         }
                         else {
-                            logger.finer(StringTool.cat(new String[] {
+                            logger.info(StringTool.cat(new String[] {
                             "Flag ",
                             flag,
                             " not found ..."}));
@@ -145,7 +145,7 @@ public class DefaultBotUserManager implements BotUserManagerInterface {
                     break;
                 }
                 else {
-                    logger.finer("Host not found in config ...");
+                    logger.info("Host not found in config ...");
                 }
             }
             br.close();

@@ -85,7 +85,7 @@ public class BotEnv {
         for (int i = 0; i < handlers.length; i++) {
             if (handlers[i] instanceof IRCCommandInterface) {
                 IRCCommandInterface ica = (IRCCommandInterface)handlers[i];
-                logger.fine(StringTool.cat(new String[] {"Initialising command handler ", Integer.valueOf(i).toString(), " ..."}));
+                logger.info(StringTool.cat(new String[] {"Initialising command handler ", Integer.valueOf(i).toString(), " ..."}));
                 ica.setConnection(connection);
             }
         }
@@ -95,7 +95,7 @@ public class BotEnv {
      * @param messageHandler The message handler to register.
      */    
     protected void registerMessageHandler(IRCMessageListener messageHandler) {
-        logger.fine("Registering message handler ...");
+        logger.info("Registering message handler ...");
         messageListeners.add(messageHandler);
     }
     
@@ -103,7 +103,7 @@ public class BotEnv {
      * @param messageHandler The message handler to unregister.
      */    
     protected void unregisterMessageHandler(IRCMessageListener messageHandler) {
-        logger.fine("Unregistering message handler ...");
+        logger.info("Unregistering message handler ...");
         messageListeners.remove(messageHandler);
     }
     
@@ -111,7 +111,7 @@ public class BotEnv {
      * @param replyHandler The reply handler to register.
      */    
     protected void registerReplyHandler(IRCReplyListener replyHandler) {
-        logger.fine("Registering reply handler ...");
+        logger.info("Registering reply handler ...");
         replyListeners.add(replyHandler);
     }
     
@@ -119,7 +119,7 @@ public class BotEnv {
      * @param replyHandler The reply handler to unregister.
      */    
     protected void unregisterReplyHandler(IRCReplyListener replyHandler) {
-        logger.fine("Unregistering reply handler ...");
+        logger.info("Unregistering reply handler ...");
         replyListeners.remove(replyHandler);
     }
     
@@ -127,7 +127,7 @@ public class BotEnv {
      * @param commandHandler The command handler to register.
      */    
     protected void registerCommandHandler(IRCCommandListener commandHandler) {
-        logger.fine("Registering command handler ...");
+        logger.info("Registering command handler ...");
         commandListeners.add(commandHandler);
     }
     
@@ -135,7 +135,7 @@ public class BotEnv {
      * @param commandHandler The command handler to unregister.
      */    
     protected void unregisterCommandHandler(IRCCommandListener commandHandler) {
-        logger.fine("Unregistering command handler ...");
+        logger.info("Unregistering command handler ...");
         commandListeners.remove(commandHandler);
     }
     
@@ -143,7 +143,7 @@ public class BotEnv {
      * @param scriptHandler Script handler to register
      */    
     protected void registerScriptHandler(IRCScriptListener scriptHandler) {
-        logger.fine("Registering script handler ...");
+        logger.info("Registering script handler ...");
         scriptListeners.add(scriptHandler);
     }
     
@@ -151,7 +151,7 @@ public class BotEnv {
      * @param scriptHandler Script handler to unregister
      */    
     protected void unregisterScriptHandler(IRCScriptListener scriptHandler) {
-        logger.fine("Unregistering script handler ...");
+        logger.info("Unregistering script handler ...");
         scriptListeners.remove(scriptHandler);
     }
     

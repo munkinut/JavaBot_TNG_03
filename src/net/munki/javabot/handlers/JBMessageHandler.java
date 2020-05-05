@@ -59,7 +59,7 @@ public class JBMessageHandler extends IRCMessageAdapter {
     public void dispatch(IRCMessageEvent evt) throws MessageHandlerException {
 
         if ((evt.getSource() instanceof BotEnv) && (evt.getActionCommand() instanceof CommandMessageInterface)) {
-            logger.fine("Message event valid; dispatching ...");
+            logger.info("Message event valid; dispatching ...");
             env = (BotEnv)evt.getSource();
             CommandMessageInterface message = (CommandMessageInterface)evt.getActionCommand();
             handleMessage(message);
@@ -89,11 +89,11 @@ public class JBMessageHandler extends IRCMessageAdapter {
             handlePrivmsg(message);
         }
                 
-        else logger.fine("Message not handled by this message handler ...");
+        else logger.info("Message not handled by this message handler ...");
     }
     
     private void handleJoin(CommandMessageInterface message) throws MessageHandlerException {
-        logger.fine("Message was a JOIN ...");
+        logger.info("Message was a JOIN ...");
         JoinMessage jm = (JoinMessage)message;
 
         // parse the message data
@@ -102,7 +102,7 @@ public class JBMessageHandler extends IRCMessageAdapter {
         String user = jm.getUser();
         String host = jm.getHost();
         String channelName = jm.getChannel();
-        logger.finer(StringTool.cat(new String[] {
+        logger.info(StringTool.cat(new String[] {
             "Joiner was ",
             nickname,
             " on channel ",
@@ -117,7 +117,7 @@ public class JBMessageHandler extends IRCMessageAdapter {
     }
     
     private void handlePart(CommandMessageInterface message) {
-        logger.fine("Message was a PART ...");
+        logger.info("Message was a PART ...");
         PartMessage jm = (PartMessage)message;
 
         // parse the message data
@@ -126,7 +126,7 @@ public class JBMessageHandler extends IRCMessageAdapter {
         String user = jm.getUser();
         String host = jm.getHost();
         String channelName = jm.getChannel();
-        logger.finer(StringTool.cat(new String[] {
+        logger.info(StringTool.cat(new String[] {
             "Parter was ",
             nickname,
             " from channel ",
@@ -138,7 +138,7 @@ public class JBMessageHandler extends IRCMessageAdapter {
     }
     
     private void handleQuit(CommandMessageInterface message) {
-        logger.fine("Message was a QUIT ...");
+        logger.info("Message was a QUIT ...");
         QuitMessage jm = (QuitMessage)message;
 
         // parse the message data
@@ -464,7 +464,12 @@ public class JBMessageHandler extends IRCMessageAdapter {
         }
         else logger.warning("Bot environment was null ...");
     }
-    
+
+    @Override
+    public void JOIN(ArrayList<String> channels, ArrayList<String> keys) {
+
+    }
+
     public void WHO(String mask, String operator) throws MessageHandlerException {
         if (env != null) {
             logger.fine("Handling WHO message ...");
@@ -475,5 +480,10 @@ public class JBMessageHandler extends IRCMessageAdapter {
             env.fireIRCCommandEvent(evt);
         }
         else logger.warning("Bot environment was null ...");
+    }
+
+    @Override
+    public void JOIN(ArrayList<String> channels) {
+
     }
 }

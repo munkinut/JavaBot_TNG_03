@@ -18,6 +18,7 @@ import net.munki.irc.message.PrivmsgMessage;
 import net.munki.irc.protocol.rfc2812.MessageHandlerException;
 import net.munki.irc.protocol.rfc2812.MessageNames;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 /** Provides handler implementations for several common IRC messages. */
@@ -40,7 +41,7 @@ public class IRCMessageHandler extends IRCMessageAdapter {
      */    
     public void dispatch(IRCMessageEvent evt) throws MessageHandlerException {
         if ((evt.getSource() instanceof BotEnv) && (evt.getActionCommand() instanceof CommandMessageInterface)) {
-            logger.fine("Message Event valid; dispatching ...");
+            logger.info("Message Event valid; dispatching ...");
             env = (BotEnv)evt.getSource();
             CommandMessageInterface message = (CommandMessageInterface)evt.getActionCommand();
             this.handleMessage(message);
@@ -58,38 +59,48 @@ public class IRCMessageHandler extends IRCMessageAdapter {
         String type = message.getMessageType();
         
         if (type.equals(MessageNames.PING)) {
-            logger.fine("Message Handler received a PING message ...");
+            logger.info("Message Handler received a PING message ...");
             PingMessage pm = (PingMessage)message;
             this.PONG(pm.getParameters());
         }
         
         else if (type.equals(MessageNames.PRIVMSG)) {
-            logger.fine("Message Handler received a PRIVMSG message ...");
+            logger.info("Message Handler received a PRIVMSG message ...");
             PrivmsgMessage pm = (PrivmsgMessage)message;
 
             // if it is a script command (starts with '!') pass it to a script handler
             if (pm.getMessage().startsWith("!")) {
-                logger.fine("PRIVMSG is a script command ...");
+                logger.info("PRIVMSG is a script command ...");
                 IRCScriptEvent ice = new IRCScriptEvent(env, pm);
                 env.fireIRCScriptEvent(ice);
             }
         }
                 
-        else logger.fine("Message not handled by this message handler ...");
+        else logger.info("Message not handled by this message handler ...");
     }
-    
+
+    @Override
+    public void JOIN(ArrayList<String> channels, ArrayList<String> keys) {
+
+    }
+
     /** 3.7.3 Pong message - implementation
      * @param server_1 The server to which to respond.
      * @throws MessageHandlerException Thrown if a handler fails to handle the dispatched message.
      */
     public void PONG(String server_1) throws MessageHandlerException {
         if (env != null) {
-            logger.fine("Handling Ping, dispatching PONG command event ...");
+            logger.info("Handling Ping, dispatching PONG command event ...");
             IRCCommandEvent evt = new IRCCommandEvent(env, MessageNames.PONG);
             evt.addParameter(server_1);
             env.fireIRCCommandEvent(evt);
         }
         else logger.warning("Bot environment has not been initialised ...");
     }
-    
+
+    @Override
+    public void JOIN(ArrayList<String> channels) {
+
+    }
+
 }

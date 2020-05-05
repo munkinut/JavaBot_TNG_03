@@ -12,6 +12,7 @@ import net.munki.irc.event.IRCCommandListener;
 import net.munki.irc.protocol.rfc2812.MessageHandlerException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /** Convenience adapter implementing the methods of IRCCommandInterface and IRCCommandListener.
  */
@@ -47,6 +48,10 @@ public abstract class IRCCommandAdapter implements IRCCommandInterface, IRCComma
         if (connection != null) {
             connection.writeLine(msg);
         }
+        else {
+            System.out.println("ERROR CONNECTION NULL");
+        }
+
     }
 
     /** Dispatches command event objects, by examining them and passing them to an appropriate handler method.
@@ -119,7 +124,7 @@ public abstract class IRCCommandAdapter implements IRCCommandInterface, IRCComma
      * @param channels
      * @param keys
      */    
-    public void JOIN(String[] channels, String[] keys) {
+    public void JOIN(ArrayList<String> channels, ArrayList<String> keys) {
     }
     
     /** 3.2.6 List message
@@ -218,7 +223,7 @@ public abstract class IRCCommandAdapter implements IRCCommandInterface, IRCComma
      * @param channels
      * @throws MessageHandlerException
      */
-    public void JOIN(String[] channels) throws MessageHandlerException {
+    public void JOIN(ArrayList<String> channels) throws MessageHandlerException {
     }
     
     /** PONG messsage.

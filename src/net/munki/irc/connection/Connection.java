@@ -140,6 +140,7 @@ public class Connection implements Runnable {
             if (out != null) {
                 out.write(StringTool.cat(new String[] {outbound, LINE_TERMINATOR}));
                 out.flush();
+                logger.info("WROTE OUTBOUND STRING TO SERVER");
             }
             else logger.warning("Output stream was null ...");
         }

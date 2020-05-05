@@ -17,7 +17,7 @@ public abstract class IRCEvent {
     /** The action command associated with this event. */    
     private final Object actionCommand;
     /** The list of parameters to this event. */    
-    private final ArrayList<Object> parameters;
+    private final ArrayList<String> parameters;
 
     /** Creates new Event.
      * @param source The source of the event
@@ -46,14 +46,14 @@ public abstract class IRCEvent {
     /** Add a parameter to the event.
      * @param parameter Parameter to add
      */    
-    public void addParameter(Object parameter) {
+    public void addParameter(String parameter) {
         parameters.add(parameter);
     }
 
     /** Get a list of parameters.
      * @return A list of parameters
      */    
-    public ArrayList<Object> getParameters() {
+    public ArrayList<String> getParameters() {
         return parameters;
     }
 }

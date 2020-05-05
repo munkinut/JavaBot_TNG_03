@@ -39,7 +39,7 @@ public class JBReplyHandler extends IRCReplyAdapter {
     public void dispatch(IRCReplyEvent evt) throws ReplyHandlerException {
         
         if ((evt.getSource() instanceof BotEnv) && (evt.getActionCommand() instanceof ReplyMessageInterface)) {
-            logger.fine("Reply event valid; dispatching ...");
+            logger.info("Reply event valid; dispatching ...");
             env = (BotEnv)evt.getSource();
             ReplyMessageInterface message = (ReplyMessageInterface)evt.getActionCommand();
             this.handleMessage(message);
@@ -52,7 +52,7 @@ public class JBReplyHandler extends IRCReplyAdapter {
         
         String type = message.getMessageType();
         if (type.equals(ReplyNames.RPL_WHOREPLY)) {
-            logger.fine("Handling who reply message ...");
+            logger.info("Handling who reply message ...");
             WhoReplyMessage wrm = (WhoReplyMessage)message;
             String channelName = wrm.getChannel();
             String userName = wrm.getUser();
@@ -64,7 +64,7 @@ public class JBReplyHandler extends IRCReplyAdapter {
             String userStatus = wrm.getUserStatus();
             String hopCount = wrm.getHopCount();
             String realName = wrm.getRealName();
-            logger.finer(StringTool.cat(new String[] {
+            logger.info(StringTool.cat(new String[] {
                 "channelName = ", channelName, "\n",
                 "userName = ", userName, "\n",
                 "host = ", host, "\n",
@@ -79,9 +79,9 @@ public class JBReplyHandler extends IRCReplyAdapter {
             for (int i = 0; i < channels.size(); i++) {
                 Channel channel = channels.get(i);
                 if ((channel.getName()).equals(channelName)) {
-                    logger.finer("This is one of our channels ...");
+                    logger.info("This is one of our channels ...");
                     ArrayList<ChannelUser> channelUsers = channel.getUsers();
-                    logger.finer(StringTool.cat(new String[] {"Adding ", nick, " ..."}));
+                    logger.info(StringTool.cat(new String[] {"Adding ", nick, " ..."}));
                     ChannelUser channelUser = new ChannelUser(nick, "", userName, host);
                     if (userStatus.equals("@")) channelUser.op();
                     else if (userStatus.equals("+")) channelUser.voice();
@@ -90,7 +90,7 @@ public class JBReplyHandler extends IRCReplyAdapter {
             }
         }
         
-        else logger.fine("Message not handled by this reply handler ...");
+        else logger.info("Message not handled by this reply handler ...");
         
     }
     

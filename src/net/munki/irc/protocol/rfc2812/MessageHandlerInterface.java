@@ -6,6 +6,8 @@
 
 package net.munki.irc.protocol.rfc2812;
 
+import java.util.ArrayList;
+
 public interface MessageHandlerInterface {
 
     // 3.1 Connection Registration
@@ -38,9 +40,9 @@ public interface MessageHandlerInterface {
     // 3.2 Channel Operations
     
     /** 3.2.1 Join message */
-    void JOIN(String[] channels) throws MessageHandlerException;
+    void JOIN(ArrayList<String> channels) throws MessageHandlerException;
 
-    void JOIN(String[] channels, String[] keys);
+    void JOIN(ArrayList<String> channels, ArrayList<String> keys);
     
     /** 3.2.2 Part message */
     void PART(String[] channels, String message);

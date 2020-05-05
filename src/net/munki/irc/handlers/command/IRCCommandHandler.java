@@ -16,6 +16,7 @@ import net.munki.irc.protocol.rfc2812.MessageNames;
 import net.munki.util.string.StringTool;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 /** Extends the IRCCommandAdapter to provide handling of commands.
@@ -46,7 +47,7 @@ public class IRCCommandHandler extends IRCCommandAdapter {
      */    
     public void dispatch(IRCCommandEvent evt) throws MessageHandlerException {
         if ((evt.getSource() instanceof BotEnv) && (evt.getActionCommand() instanceof String)) {
-            logger.fine("Command Event valid; handling ...");
+            logger.info("Command Event valid; handling ...");
             this.handleMessage(evt);
         }
         else logger.warning("Invalid Command Event ...");
@@ -63,17 +64,15 @@ public class IRCCommandHandler extends IRCCommandAdapter {
 
         switch (message) {
             case MessageNames.NICK -> {
-                logger.fine("Command Handler received a NICK command ...");
+                logger.info("Command Handler received a NICK command ...");
                 String nickname = "";
                 Object[] parameters = (evt.getParameters()).toArray();
-                if (parameters.length == 1) {
-                    nickname = (String) parameters[0];
-                }
-                logger.fine(StringTool.cat(new String[]{"Dispatching NICK command for ", nickname, " ..."}));
+                if (parameters.length == 1) nickname = (String) parameters[0];
+                logger.info(StringTool.cat(new String[]{"Dispatching NICK command for ", nickname, " ..."}));
                 this.NICK(nickname);
             }
             case MessageNames.USER -> {
-                logger.fine("Command Handler received a USER command ...");
+                logger.info("Command Handler received a USER command ...");
                 String username = "";
                 String modes = "";
                 String unused = "";
@@ -85,46 +84,46 @@ public class IRCCommandHandler extends IRCCommandAdapter {
                     unused = (String) parameters[2];
                     real = (String) parameters[3];
                 }
-                logger.fine(StringTool.cat(new String[]{"Dispatching USER command for ", username, " ..."}));
+                logger.info(StringTool.cat(new String[]{"Dispatching USER command for ", username, " ..."}));
                 this.USER(username, modes, unused, real);
             }
             case MessageNames.JOIN -> {
-                logger.fine("Command Handler received a JOIN command ...");
-                Object[] parameters = (evt.getParameters()).toArray();
-                String[] channels;
-                if (parameters.length == 1) {
-                    channels = (String[]) parameters[0];
+                logger.info("Command Handler received a JOIN command ...");
+                ArrayList<String> parameters = (evt.getParameters());
+                ArrayList<String> channels = new ArrayList<>();
+                if (parameters.size() == 1) {
+                    channels.add(parameters.get(0));
+                    logger.info("Dispatching JOIN command ...");
+                    this.JOIN(channels);
                 } else {
-                    channels = new String[]{""};
+                    logger.warning("ONLY 1 CHANNEL AT PRESENT. NOT JOINING.");
                 }
-                logger.fine("Dispatching JOIN command ...");
-                this.JOIN(channels);
             }
             case MessageNames.PONG -> {
-                logger.fine("Command Handler received a PONG command ...");
+                logger.info("Command Handler received a PONG command ...");
                 Object[] parameters = (evt.getParameters()).toArray();
                 String reply = "";
                 if (parameters.length == 1) {
                     reply = (String) parameters[0];
                 }
-                logger.fine(StringTool.cat(new String[]{"Dispatching PONG command : ", reply, "..."}));
+                logger.info(StringTool.cat(new String[]{"Dispatching PONG command : ", reply, "..."}));
                 this.PONG(reply);
             }
             case MessageNames.PRIVMSG -> {
-                logger.fine("Command Handler received a PRIVMSG command ...");
+                logger.info("Command Handler received a PRIVMSG command ...");
                 Object[] parameters = (evt.getParameters()).toArray();
                 String recipient = "";
                 String msg = "";
                 if (parameters.length == 2) {
                     recipient = (String) parameters[0];
                     msg = (String) parameters[1];
-                    logger.finer(StringTool.cat(new String[]{"Command handler reports recipient is ", recipient}));
-                    logger.finer(StringTool.cat(new String[]{"Command handler reports message is ", msg}));
+                    logger.info(StringTool.cat(new String[]{"Command handler reports recipient is ", recipient}));
+                    logger.info(StringTool.cat(new String[]{"Command handler reports message is ", msg}));
                 }
-                logger.fine(StringTool.cat(new String[]{"Dispatching PRIVMSG command to ", recipient, " ..."}));
+                logger.info(StringTool.cat(new String[]{"Dispatching PRIVMSG command to ", recipient, " ..."}));
                 this.PRIVMSG(recipient, msg);
             }
-            default -> logger.finer("Command is not handled by this handler ...");
+            default -> logger.info("Command is not handled by this handler ...");
         }
         
         // env = null;
@@ -136,7 +135,7 @@ public class IRCCommandHandler extends IRCCommandAdapter {
      */
     public void NICK(String nick) throws MessageHandlerException {
         try {
-            logger.fine("Writing NICK command ...");
+            logger.info("Writing NICK command ...");
             super.write(StringTool.cat(new String[] {"NICK ", nick}));
         }
         catch (IOException ioe) {
@@ -154,11 +153,11 @@ public class IRCCommandHandler extends IRCCommandAdapter {
      */
     public void USER(String user, String mode, String unused, String real) throws MessageHandlerException {
         try {
-            logger.fine("Writing USER command ...");
+            logger.info("Writing USER command ...");
             super.write(StringTool.cat(new String[] {"USER ", user, " ", mode, " ", unused, " :", real}));
         }
         catch (IOException ioe) {
-            logger.warning("Failed to dispatch USER command ...");
+            logger.warning("Failed to write USER command ...");
             throw new MessageHandlerException(ioe);
         }
     }
@@ -167,14 +166,14 @@ public class IRCCommandHandler extends IRCCommandAdapter {
      * @param channels
      * @throws MessageHandlerException
      */
-    public void JOIN(String[] channels) throws MessageHandlerException {
+    public void JOIN(ArrayList<String> channels) throws MessageHandlerException {
         String chans = "";
-        for (int i = 0; i < channels.length; i++) {
-            if (i == channels.length - 1) chans = StringTool.cat(new String[] {chans, channels[i]});
-            else chans = StringTool.cat(new String[] {chans, channels[i], ","});
+        for(String channel : channels) {
+            if (channels.size() == 1) chans = StringTool.cat(new String[] {chans, channel});
+            else chans = StringTool.cat(new String[] {chans, channel, ","});
         }
         try {
-            logger.fine(StringTool.cat(new String[] {"Writing JOIN command for ", chans}));
+            logger.info(StringTool.cat(new String[] {"Writing JOIN command for ", chans}));
             super.write(StringTool.cat(new String[] {"JOIN ", chans}));
         }
         catch (IOException ioe) {
@@ -190,7 +189,7 @@ public class IRCCommandHandler extends IRCCommandAdapter {
      */
     public void PRIVMSG(String target, String text) throws MessageHandlerException {
         try {
-            logger.fine("Writing PRIVMSG command ...");
+            logger.info("Writing PRIVMSG command ...");
             super.write(StringTool.cat(new String[] {"PRIVMSG ", target, " :", text}));
         }
         catch (IOException ioe) {
@@ -205,7 +204,7 @@ public class IRCCommandHandler extends IRCCommandAdapter {
      */
     public void PONG(String server_1) throws MessageHandlerException {
         try {
-            logger.fine("Writing PONG command ...");
+            logger.info("Writing PONG command ...");
             super.write(StringTool.cat(new String[] {"PONG ", server_1}));
         }
         catch (IOException ioe) {
