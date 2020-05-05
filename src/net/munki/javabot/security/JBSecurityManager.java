@@ -265,21 +265,11 @@ public class JBSecurityManager extends SecurityManager {
     private void handleAWTPermission(Permission perm) {
         switch (perm.getName()) {
             case "accessClipboard":
-                //
-                break;
-            case "accessEventQueue":
-                //
-                break;
-            case "createRobots":
-                //
-                break;
-            case "listenToAllAWTEvents":
-                //
-                break;
-            case "readDisplayPixels":
-                //
-                break;
             case "showWindowWithoutWarningBanner":
+            case "readDisplayPixels":
+            case "listenToAllAWTEvents":
+            case "createRobots":
+            case "accessEventQueue":
                 //
                 break;
             default:
@@ -380,12 +370,8 @@ public class JBSecurityManager extends SecurityManager {
     private void handleNetPermission(Permission perm) {
         switch (perm.getName()) {
             case "setDefaultAuthenticator":
-                //
-                break;
-            case "requestPasswordAuthentication":
-                //
-                break;
             case "specifyStreamHandler":
+            case "requestPasswordAuthentication":
                 //
                 break;
             default:

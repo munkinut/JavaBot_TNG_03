@@ -46,7 +46,7 @@ public interface MessageHandlerInterface {
     void PART(String[] channels, String message);
     
     /** 3.2.3 Mode message */
-    void MODE(String channel, String modes, String params);
+    void MODE(String channel, String modes, String params) throws MessageHandlerException;
     
     /** 3.2.4 Topic message */
     void TOPIC(String channel, String topic);
@@ -118,7 +118,7 @@ public interface MessageHandlerInterface {
     // 3.6 User based Queries
 
     /** 3.6.1 Who query */
-    void WHO(String mask, String operator);
+    void WHO(String mask, String operator) throws MessageHandlerException;
     
     /** 3.6.2 Whois query */
     void WHOIS(String target, String[] mask);

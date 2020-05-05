@@ -31,6 +31,9 @@ import net.munki.jServer.ListenerManager;
 import net.munki.jServer.ListenerManagerException;
 import net.munki.jServer.ServiceInterface;
 import net.munki.jServer.ServiceListenerInterface;
+import net.munki.javabot.handlers.JBCommandHandler;
+import net.munki.javabot.handlers.JBMessageHandler;
+import net.munki.javabot.handlers.JBReplyHandler;
 import net.munki.util.classloader.VanillaClassLoader;
 import net.munki.util.string.StringTool;
 
@@ -43,6 +46,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import static java.io.File.*;
+
 /** A bot core providing basic minimal functionality for connecting to an IRC server.
  */
 public class BotCore implements PropertyChangeListener, ServiceListenerInterface {
@@ -54,9 +59,8 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
     /** The package path to the control service class. */    
     private static final String CONTROL_SERVICE = "net.munki.irc.control.ControlService";
     /** The path to the plugins directory. */
-    private static final String PLUGINS_DIR = "plugins";
     /** The file separator. */
-    private static final String FILE_SEPARATOR = File.separator;
+    //private static final String FILE_SEPARATOR = File.separator;
 
 //    private void setNews(String newValue) {
 //    }
@@ -172,6 +176,9 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
         registerMessageHandler(new IRCMessageHandler());
         registerReplyHandler(new IRCReplyHandler());
         registerCommandHandler(new IRCCommandHandler());
+        registerMessageHandler(new JBMessageHandler());
+        registerReplyHandler(new JBReplyHandler());
+        registerCommandHandler(new JBCommandHandler());
         if (beanshell) registerScriptHandler(new BeanshellScriptHandler());
         if (jython) registerScriptHandler(new JythonScriptHandler());
         if (jacl) registerScriptHandler(new JaclScriptHandler());
@@ -179,6 +186,7 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
     
     /** Initialises the plugins. */    
     private void initPlugins() {
+/*
         logger.fine("Initialising plugins ...");
         ClassLoader classLoader = new VanillaClassLoader(BotCore.class.getClassLoader(), PLUGINS_DIR);
         logger.fine("Acquiring plugin list ...");
@@ -217,26 +225,26 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
                     registerReplyHandler(irl);
                 } else logger.warning(StringTool.cat(new String[]{
                         "The plugin ",
-                        (String) s,
+                        s,
                         " was not valid.  Please ensure it extends one of the ",
                         " handler classes and that it ends with a .mod extension."
                 }));
             } catch (ClassNotFoundException cnfe) {
                 logger.warning(StringTool.cat(new String[]{
                         "The class ",
-                        (String) s,
+                        s,
                         " could not be found."
                 }));
             } catch (InstantiationException ie) {
                 logger.warning(StringTool.cat(new String[]{
                         "The class ",
-                        (String) s,
+                        s,
                         " could not be instantiated."
                 }));
             } catch (IllegalAccessException iae) {
                 logger.warning(StringTool.cat(new String[]{
                         "The class ",
-                        (String) s,
+                        s,
                         " could not be accessed.",
                         " Please check you security manager settings",
                         " and file permissions."
@@ -247,8 +255,10 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
                 e.printStackTrace();
             }
         }
+*/
     }
     
+/*
     private static ArrayList<String> getPluginList(String location) {
         File dir = new File(location);
         ArrayList<String> outList = new ArrayList<>();
@@ -263,8 +273,12 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
                 String replaceClass = ".mod";
                 String replacePlugins = StringTool.cat(new String[]{PLUGINS_DIR, "."});
                 String empty = "";
-                if (FILE_SEPARATOR.equals("\\")) replaceSlash = "\\" + FILE_SEPARATOR;
-                else replaceSlash = FILE_SEPARATOR;
+//                if (FILE_SEPARATOR.equals("\\")) replaceSlash = ("\\" + FILE_SEPARATOR);
+//                else replaceSlash = FILE_SEPARATOR;
+                if (separator.equals("\\")) {
+                    replaceSlash = (new String("\\") + separator);
+                } else replaceSlash = separator;
+
                 String unslashedFile = fileStr.replaceAll(replaceSlash, replacement);
                 String outFileWithPlugins = unslashedFile.replaceAll(replaceClass, empty);
                 String outFile = outFileWithPlugins.replaceAll(replacePlugins, empty);
@@ -273,7 +287,8 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
         }
         return outList;
     }
-    
+*/
+
     /** Sets the output stream.
      * @param out Output stream to use
      */    
@@ -346,17 +361,11 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
             report(StringTool.cat(new String[] {"Requesting a connection to ", server.toString(), " ..."}));
             try {
                 connection = ConnectionFactory.getConnection(server);
-                if (connection != null) {
-                    logger.info("Initialising connection ...");
-                    this.activateCommandHandlers();
-                    connection.addPropertyChangeListener(this);
-                    connection.start();
-                    success = true;
-                }
-                else {
-                    logger.severe("Connection was dead ...");
-                    success = false;
-                }
+                logger.info("Initialising connection ...");
+                this.activateCommandHandlers();
+                connection.addPropertyChangeListener(this);
+                connection.start();
+                success = true;
             }
             catch (ConnectionException ioe) {
                 logger.severe(StringTool.cat(new String[] {

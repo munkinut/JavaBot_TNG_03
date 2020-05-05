@@ -58,7 +58,6 @@ public class Validator {
                          if (valid) success = true;
             }
         }
-        else success = false;
         return success;
     }
 

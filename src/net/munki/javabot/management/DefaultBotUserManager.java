@@ -6,6 +6,7 @@
 
 package net.munki.javabot.management;
 
+import net.munki.irc.channel.Channel;
 import net.munki.irc.channel.ChannelUser;
 import net.munki.util.string.StringTool;
 
@@ -69,12 +70,27 @@ public class DefaultBotUserManager implements BotUserManagerInterface {
     public boolean canVoice(ChannelUser channelUser) {
         return userHasFlag("v", channelUser);
     }
-    
+
+    @Override
+    public boolean canOp(ChannelUser channelUser, Channel myChannel) {
+        return false;
+    }
+
+    @Override
+    public boolean canDeop(ChannelUser channelUser, Channel myChannel) {
+        return false;
+    }
+
+    @Override
+    public boolean canVoice(ChannelUser channelUser, Channel myChannel) {
+        return false;
+    }
+
     /** Determines whether or not the given user is allowed to devoice.
      * @param channelUser The user trying to devoice someone through the bot.
      * @return True if devoice is allowed, otherwise false.
      */    
-    public boolean canDevoice(ChannelUser channelUser) {
+    public boolean canDevoice(ChannelUser channelUser, Channel channel) {
         return userHasFlag("V", channelUser);
     }
     

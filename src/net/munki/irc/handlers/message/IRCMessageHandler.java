@@ -60,7 +60,7 @@ public class IRCMessageHandler extends IRCMessageAdapter {
         if (type.equals(MessageNames.PING)) {
             logger.fine("Message Handler received a PING message ...");
             PingMessage pm = (PingMessage)message;
-            if (pm != null) this.PONG(pm.getParameters());
+            this.PONG(pm.getParameters());
         }
         
         else if (type.equals(MessageNames.PRIVMSG)) {
@@ -68,7 +68,7 @@ public class IRCMessageHandler extends IRCMessageAdapter {
             PrivmsgMessage pm = (PrivmsgMessage)message;
 
             // if it is a script command (starts with '!') pass it to a script handler
-            if ((pm != null) && (pm.getMessage().startsWith("!"))) {
+            if (pm.getMessage().startsWith("!")) {
                 logger.fine("PRIVMSG is a script command ...");
                 IRCScriptEvent ice = new IRCScriptEvent(env, pm);
                 env.fireIRCScriptEvent(ice);

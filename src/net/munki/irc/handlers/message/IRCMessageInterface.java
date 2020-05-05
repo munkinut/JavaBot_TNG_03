@@ -104,7 +104,7 @@ public interface IRCMessageInterface extends MessageHandlerInterface {
      * @param mask
      * @param operator
      */
-    void WHO(String mask, String operator);
+    void WHO(String mask, String operator) throws MessageHandlerException;
     
     /** 3.7.3 Pong message
      * @param server_1
@@ -233,7 +233,7 @@ public interface IRCMessageInterface extends MessageHandlerInterface {
      * @param modes
      * @param params
      */
-    void MODE(String channel, String modes, String params);
+    void MODE(String channel, String modes, String params) throws MessageHandlerException;
     
     /** 3.1.5 Mode Message
      * @param nick

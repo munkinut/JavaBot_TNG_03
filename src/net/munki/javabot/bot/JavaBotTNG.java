@@ -95,9 +95,6 @@ public class JavaBotTNG {
                 throw new JBInvalidRealnameException("Realname was invalid ...");
             }
             channels = StringTool.uncat(config.getProperty(JBData.PROP_CHANNELS, JBData.DEFAULT_CHANNELS));
-            if ((channels == null) || (channels.equals(""))) {
-                throw new JBInvalidChannelException("Channels were invalid ...");
-            }
             port = Integer.parseInt(config.getProperty(JBData.PROP_PORT, JBData.DEFAULT_PORT));
             if ((port < 1) || (port > 65535)) {
                 throw new JBInvalidPortException("Port number is out of range ...");
@@ -120,9 +117,6 @@ public class JavaBotTNG {
         }
         catch (JBInvalidUsernameException jbue) {
             throw new JBConfigurationException("Configuration invalid ...", jbue);
-        }
-        catch (JBInvalidChannelException jbce) {
-            throw new JBConfigurationException("Configuration invalid ...", jbce);
         }
     }
     

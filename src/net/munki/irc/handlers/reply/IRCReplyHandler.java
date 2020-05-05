@@ -63,13 +63,13 @@ public class IRCReplyHandler extends IRCReplyAdapter {
         if (type.equals(ReplyNames.ERR_NICKNAMEINUSE)) {
             logger.fine("Reply Handler received a ERR_NICKNAMEINUSE message ...");
             NicknameInUseMessage nium = (NicknameInUseMessage)message;
-            if (nium != null) this.ERR_NICKNAMEINUSE();
+            this.ERR_NICKNAMEINUSE();
         }
         
         else if (type.equals(ReplyNames.RPL_WELCOME)) {
             logger.fine("Reply Handler received a RPL_WELCOME message ...");
             WelcomeMessage wm = (WelcomeMessage)message;
-            if (wm != null) this.RPL_WELCOME();
+            this.RPL_WELCOME();
         }
         
         else logger.fine("Message not handled by this reply handler ...");

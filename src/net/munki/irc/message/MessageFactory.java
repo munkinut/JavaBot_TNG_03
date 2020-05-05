@@ -342,10 +342,8 @@ public class MessageFactory {
             }
         }
         catch (ClassNotFoundException cnfe) {
-            success = false;
         }
         catch (IllegalAccessException iae) {
-            success = false;
         }
         return success;
     }
@@ -371,10 +369,8 @@ public class MessageFactory {
             }
         }
         catch (ClassNotFoundException cnfe) {
-            success = false;
         }
         catch (IllegalAccessException iae) {
-            success = false;
         }
         return success;
     }

@@ -133,7 +133,7 @@ public abstract class IRCMessageAdapter implements IRCMessageInterface, IRCMessa
      * @param mask
      * @param operator
      */
-    public void WHO(String mask, String operator) {
+    public void WHO(String mask, String operator) throws MessageHandlerException {
     }
     
     /** 3.7.3 Pong message
@@ -284,7 +284,7 @@ public abstract class IRCMessageAdapter implements IRCMessageInterface, IRCMessa
      * @param modes
      * @param params
      */
-    public void MODE(String channel, String modes, String params) {
+    public void MODE(String channel, String modes, String params) throws MessageHandlerException {
     }
     
     /** 3.1.5 Mode Message
