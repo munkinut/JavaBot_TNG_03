@@ -36,7 +36,7 @@ public class JythonScriptHandler extends JythonScriptAdapter {
         
         // make sure the source is valid and the trigger is part of a Privmsg
         if ((evt.getSource() instanceof BotEnv) && (evt.getActionCommand() instanceof PrivmsgMessage)) {
-            logger.fine("Script Event valid; dispatching ...");
+            logger.info("Script Event valid; dispatching ...");
             /* The bot environment. */
             BotEnv env = (BotEnv) evt.getSource();
             PrivmsgMessage pmm = (PrivmsgMessage)evt.getActionCommand();
@@ -56,11 +56,11 @@ public class JythonScriptHandler extends JythonScriptAdapter {
             // parse the message into a scriptname and some parameters
             // message length must be > 1 (inc trigger character and command)
             if ((message != null) && (message.length() > 1)) {
-                logger.finer("Valid script message ...");
+                logger.info("Valid script message ...");
                 // message command must have at least a trigger
                 // and a command, therefore no spaces within 2 characters
                 if (message.indexOf(" ") > 1) {
-                    logger.finer("Script message has arguments ...");
+                    logger.info("Script message has arguments ...");
                     // we have a command plus arguments
                     // strip the trigger character
                     // command is the first argument up to a <space>
@@ -69,7 +69,7 @@ public class JythonScriptHandler extends JythonScriptAdapter {
                     arguments = StringTool.uncat(args);
                 }
                 else {
-                    logger.finer("Script message has no arguments ...");
+                    logger.info("Script message has no arguments ...");
                     // we just have a command, strip the trigger and 
                     // make arguments empty
                     command = message.substring(1);
@@ -82,7 +82,7 @@ public class JythonScriptHandler extends JythonScriptAdapter {
             // create a script resource and pass it to the interpreter
             // interpret the script
             if (command != null) {
-                logger.fine("Valid script command; dispatching to interpreter ...");
+                logger.info("Valid script command; dispatching to interpreter ...");
                 String script = ScriptTool.pathToJythonScript(command);
                 if (isItPython(script)) {
                     IRCScriptResource isr = new IRCScriptResource(env, nick, mask, addressee, arguments);

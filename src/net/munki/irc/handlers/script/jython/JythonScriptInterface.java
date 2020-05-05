@@ -6,7 +6,7 @@
 
 package net.munki.irc.handlers.script.jython;
 
-/** Defines methods of a script handler. */
+/** Deinfos methods of a script handler. */
 public interface JythonScriptInterface {
 
 }
