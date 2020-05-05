@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="JavaBot_TNG_03:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/JavaBot_TNG_03_jar</output-path>
+    <root id="root">
+      <element id="archive" name="JavaBot_TNG_03.jar">
+        <element id="module-output" name="JavaBot_TNG_03" />
+      </element>
+      <element id="library" level="project" name="munkiTree" />
+      <element id="library" level="project" name="jython-standalone-2.7.2" />
+      <element id="library" level="project" name="bsh-1.3.0" />
+      <element id="library" level="project" name="jServer" />
+      <element id="library" level="project" name="tcljava" />
+      <element id="library" level="project" name="jacl" />
+      <element id="library" level="project" name="jargs" />
+    </root>
+  </artifact>
+</component>
