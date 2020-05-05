@@ -37,9 +37,9 @@ public class JBData {
     public static final String PROP_SECURITY_MANAGER = "security-manager";
     public static final String DEFAULT_SERVER = "eu.ircnet.org";
     public static final String DEFAULT_PORT = "6668";
-    public static final String DEFAULT_NICKNAMES = "sdfghsfg";
-    public static final String DEFAULT_USERNAME = "sdfghsfg";
-    public static final String DEFAULT_REALNAME = "sdfghsfg";
+    public static final String DEFAULT_NICKNAMES = "uidftydf";
+    public static final String DEFAULT_USERNAME = "uidftydf";
+    public static final String DEFAULT_REALNAME = "uidftydf";
     public static final String DEFAULT_CHANNELS = "#lkdjfghlkj";
     public static final String DEFAULT_BEANSHELL = "true";
     public static final String DEFAULT_JYTHON = "true";
