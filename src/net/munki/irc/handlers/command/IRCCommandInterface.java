@@ -31,30 +31,26 @@ public interface IRCCommandInterface extends MessageHandlerInterface {
      * @param target
      * @param port
      * @param remote
-     * @throws MessageHandlerException
      */
-    void CONNECT(String target, String port, String remote) throws MessageHandlerException;
+    void CONNECT(String target, String port, String remote);
     
     /** 3.4.5 Links message
      * @param remote
      * @param mask
-     * @throws MessageHandlerException
      */
-    void LINKS(String remote, String mask) throws MessageHandlerException;
+    void LINKS(String remote, String mask);
     
     /** 3.5.1 Servlist message
      * @param mask
      * @param type
-     * @throws MessageHandlerException
      */
-    void SERVLIST(String mask, String type) throws MessageHandlerException;
+    void SERVLIST(String mask, String type);
     
     /** 3.5.2 Squery
      * @param service
      * @param text
-     * @throws MessageHandlerException
      */
-    void SQUERY(String service, String text) throws MessageHandlerException;
+    void SQUERY(String service, String text);
     
     /** 3.1.6 Service Message
      * @param nick
@@ -63,160 +59,136 @@ public interface IRCCommandInterface extends MessageHandlerInterface {
      * @param type
      * @param reserved_2
      * @param info
-     * @throws MessageHandlerException
      */
-    void SERVICE(String nick, String reserved_1, String distribution, String type, String reserved_2, String info) throws MessageHandlerException;
+    void SERVICE(String nick, String reserved_1, String distribution, String type, String reserved_2, String info);
     
     /** 3.1.7 Quit
      * @param message
-     * @throws MessageHandlerException
      */
-    void QUIT(String message) throws MessageHandlerException;
+    void QUIT(String message);
     
     /** 3.7.1 Kill message
      * @param nick
      * @param comment
-     * @throws MessageHandlerException
      */
-    void KILL(String nick, String comment) throws MessageHandlerException;
+    void KILL(String nick, String comment);
     
     /** 4.5 Summon message
      * @param user
      * @param target
      * @param channel
-     * @throws MessageHandlerException
      */
-    void SUMMON(String user, String target, String channel) throws MessageHandlerException;
+    void SUMMON(String user, String target, String channel);
     
     /** 3.6.3 Whowas
      * @param nick
      * @param count
      * @param target
-     * @throws MessageHandlerException
      */
-    void WHOWAS(String[] nick, String count, String target) throws MessageHandlerException;
+    void WHOWAS(String[] nick, String count, String target);
     
     /** 4.7 Operwall message
      * @param message
-     * @throws MessageHandlerException
      */
-    void WALLOPS(String message) throws MessageHandlerException;
+    void WALLOPS(String message);
     
     /** 3.7.4 Error
      * @param message
-     * @throws MessageHandlerException
      */
-    void ERROR(String message) throws MessageHandlerException;
+    void ERROR(String message);
     
     /** 3.4.9 Admin Command
      * @param target
-     * @throws MessageHandlerException
      */
-    void ADMIN(String target) throws MessageHandlerException;
+    void ADMIN(String target);
     
     /** 4.2 Rehash message
-     * @throws MessageHandlerException
      */
-    void REHASH() throws MessageHandlerException;
+    void REHASH();
     
     /** 3.4.2 Lusers message
      * @param mask
      * @param target
-     * @throws MessageHandlerException
      */
-    void LUSERS(String mask, String target) throws MessageHandlerException;
+    void LUSERS(String mask, String target);
     
     /** 3.6.2 Whois query
      * @param target
      * @param mask
-     * @throws MessageHandlerException
      */
-    void WHOIS(String target, String[] mask) throws MessageHandlerException;
+    void WHOIS(String target, String[] mask);
     
     /** 3.4.4 Stats message
      * @param query
      * @param target
-     * @throws MessageHandlerException
      */
-    void STATS(String query, String target) throws MessageHandlerException;
+    void STATS(String query, String target);
     
     /** 3.2.6 List message
      * @param channels
      * @param target
-     * @throws MessageHandlerException
      */
-    void LIST(String[] channels, String target) throws MessageHandlerException;
+    void LIST(String[] channels, String target);
     
     /** 3.1.4 Oper Message
      * @param name
      * @param pass
-     * @throws MessageHandlerException
      */
-    void OPER(String name, String pass) throws MessageHandlerException;
+    void OPER(String name, String pass);
     
     /**
      * @param server_1
      * @param server_2
-     * @throws MessageHandlerException
      */
-    void PONG(String server_1, String server_2) throws MessageHandlerException;
+    void PONG(String server_1, String server_2);
     
     /** 4.6 Users
      * @param target
-     * @throws MessageHandlerException
      */
-    void USERS(String target) throws MessageHandlerException;
+    void USERS(String target);
     
     /** 3.4.8 Trace message
      * @param target
-     * @throws MessageHandlerException
      */
-    void TRACE(String target) throws MessageHandlerException;
+    void TRACE(String target);
     
     /** 4.4 Restart message
-     * @throws MessageHandlerException
      */
-    void RESTART() throws MessageHandlerException;
+    void RESTART();
     
     /** 3.4.10 Info Command
      * @param target
-     * @throws MessageHandlerException
      */
-    void INFO(String target) throws MessageHandlerException;
+    void INFO(String target);
     
     /** 3.2.8 Kick message
      * @param channels
      * @param nicks
      * @param message
-     * @throws MessageHandlerException
      */
-    void KICK(String[] channels, String[] nicks, String message) throws MessageHandlerException;
+    void KICK(String[] channels, String[] nicks, String message);
     
     /** 3.4.1 Motd message
      * @param target
-     * @throws MessageHandlerException
      */
-    void MOTD(String target) throws MessageHandlerException;
+    void MOTD(String target);
     
     /** 3.1.1 Password Message
      * @param pass
-     * @throws MessageHandlerException
      */
-    void PASS(String pass) throws MessageHandlerException;
+    void PASS(String pass);
     
     /** 3.3.2 Notice
      * @param target
      * @param text
-     * @throws MessageHandlerException
      */
-    void NOTICE(String target, String text) throws MessageHandlerException;
+    void NOTICE(String target, String text);
     
     /**
      * @param channels
      * @param keys
-     * @throws MessageHandlerException
      */
-    void JOIN(String[] channels, String[] keys) throws MessageHandlerException;
+    void JOIN(String[] channels, String[] keys);
     
     /** 3.3.1 Private messages
      * @param target
@@ -228,37 +200,32 @@ public interface IRCCommandInterface extends MessageHandlerInterface {
     /** 3.2.5 Names message
      * @param channel
      * @param target
-     * @throws MessageHandlerException
      */
-    void NAMES(String[] channel, String target) throws MessageHandlerException;
+    void NAMES(String[] channel, String target);
     
     /** 3.4.6 Time message
      * @param target
-     * @throws MessageHandlerException
      */
-    void TIME(String target) throws MessageHandlerException;
+    void TIME(String target);
     
     /** 3.2.2 Part message
      * @param channels
      * @param message
-     * @throws MessageHandlerException
      */
-    void PART(String[] channels, String message) throws MessageHandlerException;
+    void PART(String[] channels, String message);
     
     /** 3.1.5 Mode Message
      * @param nick
      * @param modes
-     * @throws MessageHandlerException
      */
-    void MODE(String nick, String modes) throws MessageHandlerException;
+    void MODE(String nick, String modes);
     
     /** 3.2.3 Mode message
      * @param channel
      * @param modes
      * @param params
-     * @throws MessageHandlerException
      */
-    void MODE(String channel, String modes, String params) throws MessageHandlerException;
+    void MODE(String channel, String modes, String params);
     
     /** 3.7.3 Pong message
      * @param server_1
@@ -269,16 +236,14 @@ public interface IRCCommandInterface extends MessageHandlerInterface {
     /** 3.2.4 Topic message
      * @param channel
      * @param topic
-     * @throws MessageHandlerException
      */
-    void TOPIC(String channel, String topic) throws MessageHandlerException;
+    void TOPIC(String channel, String topic);
     
     /** 3.7.2 Ping message
      * @param server_1
      * @param server_2
-     * @throws MessageHandlerException
      */
-    void PING(String server_1, String server_2) throws MessageHandlerException;
+    void PING(String server_1, String server_2);
     
     /** 3.1.3 User Message
      * @param user
@@ -291,22 +256,19 @@ public interface IRCCommandInterface extends MessageHandlerInterface {
     
     /** 4.1 Away
      * @param text
-     * @throws MessageHandlerException
      */
-    void AWAY(String text) throws MessageHandlerException;
+    void AWAY(String text);
     
     /** 3.2.7 Invite message
      * @param nickname
      * @param channel
-     * @throws MessageHandlerException
      */
-    void INVITE(String nickname, String channel) throws MessageHandlerException;
+    void INVITE(String nickname, String channel);
     
     /** 4.8 Userhost message
      * @param nicks
-     * @throws MessageHandlerException
      */
-    void USERHOST(String[] nicks) throws MessageHandlerException;
+    void USERHOST(String[] nicks);
     
     /** 3.1.2 Nick Message
      * @param nick
@@ -315,35 +277,30 @@ public interface IRCCommandInterface extends MessageHandlerInterface {
     void NICK(String nick) throws MessageHandlerException;
     
     /** 4.3 Die message
-     * @throws MessageHandlerException
      */
-    void DIE() throws MessageHandlerException;
+    void DIE();
     
     /** 3.4.3 Version message
      * @param target
-     * @throws MessageHandlerException
      */
-    void VERSION(String target) throws MessageHandlerException;
+    void VERSION(String target);
     
     /** 4.9 Ison message
      * @param nicks
-     * @throws MessageHandlerException
      */
-    void ISON(String[] nicks) throws MessageHandlerException;
+    void ISON(String[] nicks);
     
     /** 3.1.8 SQuit
      * @param server
      * @param comment
-     * @throws MessageHandlerException
      */
-    void SQUIT(String server, String comment) throws MessageHandlerException;
+    void SQUIT(String server, String comment);
     
     /** 3.6.1 Who query
      * @param mask
      * @param operator
-     * @throws MessageHandlerException
      */
-    void WHO(String mask, String operator) throws MessageHandlerException;
+    void WHO(String mask, String operator);
     
     /** 3.2.1 Join message
      * @param channels

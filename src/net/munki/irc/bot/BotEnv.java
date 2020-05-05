@@ -6,6 +6,7 @@
 
 package net.munki.irc.bot;
 
+import net.munki.irc.channel.Channel;
 import net.munki.irc.connection.Connection;
 import net.munki.irc.event.*;
 import net.munki.irc.handlers.command.IRCCommandInterface;
@@ -14,7 +15,7 @@ import net.munki.irc.protocol.rfc2812.ReplyHandlerException;
 import net.munki.util.string.StringTool;
 
 import java.io.PrintStream;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 /** The public environment for the bot.
@@ -28,15 +29,15 @@ public class BotEnv {
     /** The index of the nick in use. */    
     private int nickIndex;
     /** The list of channels the bot can join. */    
-    private final List channels;
+    private final ArrayList<Channel> channels;
     /** The list of message listeners. */    
-    private final List messageListeners;
+    private final ArrayList<IRCMessageListener> messageListeners;
     /** The list of reply listeners. */    
-    private final List replyListeners;
+    private final ArrayList<IRCReplyListener> replyListeners;
     /** The list of command listeners. */    
-    private final List commandListeners;
+    private final ArrayList<IRCCommandListener> commandListeners;
     /** The list of script listeners. */    
-    private final List scriptListeners;
+    private final ArrayList<IRCScriptListener> scriptListeners;
     /** The output stream to which output should be sent. */    
     private PrintStream output;
     /** The logger to which log message from this class are sent. */    
@@ -52,7 +53,7 @@ public class BotEnv {
      * @param commandListeners A list of command handlers
      * @param output The output stream
      */
-    public BotEnv(String[] nicks, int nickIndex, List channels, List messageListeners, List commandListeners, List replyListeners, List scriptListeners, PrintStream output) {
+    public BotEnv(String[] nicks, int nickIndex, ArrayList<Channel> channels, ArrayList<IRCMessageListener> messageListeners, ArrayList<IRCCommandListener> commandListeners, ArrayList<IRCReplyListener> replyListeners, ArrayList<IRCScriptListener> scriptListeners, PrintStream output) {
         this.nicks = nicks;
         this.nickIndex = nickIndex;
         this.channels = channels;
@@ -182,7 +183,7 @@ public class BotEnv {
     /** Returns the list of channels.
      * @return The list of channels
      */    
-    public List getChannels() {
+    public ArrayList<Channel> getChannels() {
         return channels;
     }
     
@@ -215,11 +216,11 @@ public class BotEnv {
      */    
     public void fireIRCCommandEvent(IRCCommandEvent evt) throws MessageHandlerException {
         Object[] handlers = commandListeners.toArray();
-        for (int i = 0; i < handlers.length; i++) {
-            if (handlers[i] instanceof IRCCommandListener) {
-                IRCCommandListener ica = (IRCCommandListener)handlers[i];
+        for (Object handler : handlers) {
+            if (handler instanceof IRCCommandListener) {
+                IRCCommandListener ica = (IRCCommandListener) handler;
                 String name = ica.getClass().getName();
-                logger.fine(StringTool.cat(new String[] {"Command handler ", name, " handling ..."}));
+                logger.fine(StringTool.cat(new String[]{"Command handler ", name, " handling ..."}));
                 ica.dispatch(evt);
             }
         }
@@ -231,11 +232,11 @@ public class BotEnv {
      */    
     public void fireIRCReplyEvent(IRCReplyEvent evt) throws ReplyHandlerException {
         Object[] handlers = replyListeners.toArray();
-        for (int i = 0; i < handlers.length; i++) {
-            if (handlers[i] instanceof IRCReplyListener) {
-                IRCReplyListener ira = (IRCReplyListener)handlers[i];
+        for (Object handler : handlers) {
+            if (handler instanceof IRCReplyListener) {
+                IRCReplyListener ira = (IRCReplyListener) handler;
                 String name = ira.getClass().getName();
-                logger.fine(StringTool.cat(new String[] {"Reply handler ", name, " handling ..."}));
+                logger.fine(StringTool.cat(new String[]{"Reply handler ", name, " handling ..."}));
                 ira.dispatch(evt);
             }
         }
@@ -246,11 +247,11 @@ public class BotEnv {
      */    
     public void fireIRCScriptEvent(IRCScriptEvent evt) {
         Object[] handlers = scriptListeners.toArray();
-        for (int i = 0; i < handlers.length; i++) {
-            if (handlers[i] instanceof IRCScriptListener) {
-                IRCScriptListener ira = (IRCScriptListener)handlers[i];
+        for (Object handler : handlers) {
+            if (handler instanceof IRCScriptListener) {
+                IRCScriptListener ira = (IRCScriptListener) handler;
                 String name = ira.getClass().getName();
-                logger.fine(StringTool.cat(new String[] {"Script handler ", name, " handling ..."}));
+                logger.fine(StringTool.cat(new String[]{"Script handler ", name, " handling ..."}));
                 ira.dispatch(evt);
             }
         }

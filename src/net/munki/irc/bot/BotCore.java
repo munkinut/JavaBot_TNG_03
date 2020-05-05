@@ -7,6 +7,7 @@
 package net.munki.irc.bot;
 
 import net.munki.irc.channel.Channel;
+import net.munki.irc.channel.ChannelUser;
 import net.munki.irc.connection.Connection;
 import net.munki.irc.connection.ConnectionException;
 import net.munki.irc.connection.ConnectionFactory;
@@ -38,8 +39,8 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 /** A bot core providing basic minimal functionality for connecting to an IRC server.
@@ -124,18 +125,18 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
      */    
     private void initEnvironment(String[] nicknames, String[] chans) {
         logger.fine("Initialising environment ...");
-        ArrayList messageListeners = new ArrayList();
-        ArrayList commandListeners = new ArrayList();
-        ArrayList replyListeners = new ArrayList();
-        ArrayList scriptListeners = new ArrayList();
+        ArrayList<IRCMessageListener> messageListeners = new ArrayList<>();
+        ArrayList<IRCCommandListener> commandListeners = new ArrayList<>();
+        ArrayList<IRCReplyListener> replyListeners = new ArrayList<>();
+        ArrayList<IRCScriptListener> scriptListeners = new ArrayList<>();
         int nickIndex = -1;
         String[] nicks = new String[nicknames.length + 1];
         System.arraycopy(nicknames, 0, nicks, 0, nicknames.length);
         nicks[nicknames.length] = BotCore.DEFAULT_NICK;
         ArrayList<Channel> channels = new ArrayList<>();
-        for (int i = 0; i < chans.length; i++) {
-            if (Validator.validChannelName(chans[i])) {
-                Channel channel = new Channel(chans[i], "", "", new ArrayList());
+        for (String chan : chans) {
+            if (Validator.validChannelName(chan)) {
+                Channel channel = new Channel(chan, "", "", new ArrayList<ChannelUser>());
                 channels.add(channel);
             }
         }
@@ -181,71 +182,64 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
         logger.fine("Initialising plugins ...");
         ClassLoader classLoader = new VanillaClassLoader(BotCore.class.getClassLoader(), PLUGINS_DIR);
         logger.fine("Acquiring plugin list ...");
-        List classesToLoad = getPluginList(PLUGINS_DIR);
-        for (int i = 0; i < classesToLoad.size(); i++) {
-            String classToLoad = (String)classesToLoad.get(i);
+        ArrayList<String> classesToLoad = getPluginList(PLUGINS_DIR);
+        for (String s : classesToLoad) {
             try {
-                Class myClass = classLoader.loadClass(classToLoad);
-                logger.fine(StringTool.cat(new String[] {
-                    "Plugin ",
-                    myClass.getName(), 
-                    " found ..."
+                Class myClass = classLoader.loadClass(s);
+                logger.fine(StringTool.cat(new String[]{
+                        "Plugin ",
+                        myClass.getName(),
+                        " found ..."
                 }));
                 if (IRCCommandListener.class.isAssignableFrom(myClass)) {
-                    IRCCommandListener icl = (IRCCommandListener)myClass.getDeclaredConstructor().newInstance();
-                    logger.fine(StringTool.cat(new String[] {
-                        "Plugin ",
-                        myClass.getName(),
-                        " initialised ..."
+                    IRCCommandListener icl = (IRCCommandListener) myClass.getDeclaredConstructor().newInstance();
+                    logger.fine(StringTool.cat(new String[]{
+                            "Plugin ",
+                            myClass.getName(),
+                            " initialised ..."
                     }));
                     registerCommandHandler(icl);
-                }
-                else if (IRCMessageListener.class.isAssignableFrom(myClass)) {
-                    IRCMessageListener iml = (IRCMessageListener)myClass.getDeclaredConstructor().newInstance();
-                    logger.fine(StringTool.cat(new String[] {
-                        "Plugin ",
-                        myClass.getName(),
-                        " initialised ..."
+                } else if (IRCMessageListener.class.isAssignableFrom(myClass)) {
+                    IRCMessageListener iml = (IRCMessageListener) myClass.getDeclaredConstructor().newInstance();
+                    logger.fine(StringTool.cat(new String[]{
+                            "Plugin ",
+                            myClass.getName(),
+                            " initialised ..."
                     }));
                     registerMessageHandler(iml);
-                }
-                else if (IRCReplyListener.class.isAssignableFrom(myClass)) {
-                    IRCReplyListener irl = (IRCReplyListener)myClass.getDeclaredConstructor().newInstance();
-                    logger.fine(StringTool.cat(new String[] {
-                        "Plugin ",
-                        myClass.getName(),
-                        " initialised ..."
+                } else if (IRCReplyListener.class.isAssignableFrom(myClass)) {
+                    IRCReplyListener irl = (IRCReplyListener) myClass.getDeclaredConstructor().newInstance();
+                    logger.fine(StringTool.cat(new String[]{
+                            "Plugin ",
+                            myClass.getName(),
+                            " initialised ..."
                     }));
                     registerReplyHandler(irl);
-                }
-                else logger.warning(StringTool.cat(new String[] {
-                    "The plugin ",
-                    classToLoad,
-                    " was not valid.  Please ensure it extends one of the ",
-                    " handler classes and that it ends with a .mod extension."
+                } else logger.warning(StringTool.cat(new String[]{
+                        "The plugin ",
+                        (String) s,
+                        " was not valid.  Please ensure it extends one of the ",
+                        " handler classes and that it ends with a .mod extension."
                 }));
-            }
-            catch (ClassNotFoundException cnfe) {
-                logger.warning(StringTool.cat(new String[] {
-                    "The class ",
-                    classToLoad,
-                    " could not be found."
+            } catch (ClassNotFoundException cnfe) {
+                logger.warning(StringTool.cat(new String[]{
+                        "The class ",
+                        (String) s,
+                        " could not be found."
                 }));
-            }
-            catch (InstantiationException ie) {
-                logger.warning(StringTool.cat(new String[] {
-                    "The class ",
-                    classToLoad,
-                    " could not be instantiated."
+            } catch (InstantiationException ie) {
+                logger.warning(StringTool.cat(new String[]{
+                        "The class ",
+                        (String) s,
+                        " could not be instantiated."
                 }));
-            }
-            catch (IllegalAccessException iae) {
-                logger.warning(StringTool.cat(new String[] {
-                    "The class ",
-                    classToLoad,
-                    " could not be accessed.",
-                    " Please check you security manager settings",
-                    " and file permissions."
+            } catch (IllegalAccessException iae) {
+                logger.warning(StringTool.cat(new String[]{
+                        "The class ",
+                        (String) s,
+                        " could not be accessed.",
+                        " Please check you security manager settings",
+                        " and file permissions."
                 }));
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
@@ -255,20 +249,19 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
         }
     }
     
-    private static ArrayList getPluginList(String location) {
+    private static ArrayList<String> getPluginList(String location) {
         File dir = new File(location);
-        ArrayList outList = new ArrayList();
+        ArrayList<String> outList = new ArrayList<>();
         if (!dir.exists()) return outList;
         File[] filesList = dir.listFiles();
-        for (int i = 0; i < filesList.length; i++) {
-            File file = filesList[i];
+        for (File file : Objects.requireNonNull(filesList)) {
             String fileStr = file.toString();
             if (file.isDirectory()) outList.addAll(getPluginList(fileStr));
             else { // it's a file
                 String replaceSlash;
                 String replacement = ".";
                 String replaceClass = ".mod";
-                String replacePlugins = StringTool.cat(new String[] {PLUGINS_DIR, "."});
+                String replacePlugins = StringTool.cat(new String[]{PLUGINS_DIR, "."});
                 String empty = "";
                 if (FILE_SEPARATOR.equals("\\")) replaceSlash = "\\" + FILE_SEPARATOR;
                 else replaceSlash = FILE_SEPARATOR;
@@ -412,8 +405,8 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
      * @param message A message string
      */    
     public void update(String message) {
+        this.message = message;
         logger.fine("Valid message received ...");
-        String msg = (String)message;
         report(message);
         this.handleMessage(message);
     }

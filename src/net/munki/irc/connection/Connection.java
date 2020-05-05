@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class Connection implements Runnable {
 
-    private PropertyChangeSupport support;
+    private final PropertyChangeSupport support;
     
     /** Line terminator string
      */    

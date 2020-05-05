@@ -71,7 +71,6 @@ public class IRCCommandHandler extends IRCCommandAdapter {
                 }
                 logger.fine(StringTool.cat(new String[]{"Dispatching NICK command for ", nickname, " ..."}));
                 this.NICK(nickname);
-                break;
             }
             case MessageNames.USER -> {
                 logger.fine("Command Handler received a USER command ...");
@@ -88,7 +87,6 @@ public class IRCCommandHandler extends IRCCommandAdapter {
                 }
                 logger.fine(StringTool.cat(new String[]{"Dispatching USER command for ", username, " ..."}));
                 this.USER(username, modes, unused, real);
-                break;
             }
             case MessageNames.JOIN -> {
                 logger.fine("Command Handler received a JOIN command ...");
@@ -101,7 +99,6 @@ public class IRCCommandHandler extends IRCCommandAdapter {
                 }
                 logger.fine("Dispatching JOIN command ...");
                 this.JOIN(channels);
-                break;
             }
             case MessageNames.PONG -> {
                 logger.fine("Command Handler received a PONG command ...");
@@ -112,7 +109,6 @@ public class IRCCommandHandler extends IRCCommandAdapter {
                 }
                 logger.fine(StringTool.cat(new String[]{"Dispatching PONG command : ", reply, "..."}));
                 this.PONG(reply);
-                break;
             }
             case MessageNames.PRIVMSG -> {
                 logger.fine("Command Handler received a PRIVMSG command ...");
@@ -127,7 +123,6 @@ public class IRCCommandHandler extends IRCCommandAdapter {
                 }
                 logger.fine(StringTool.cat(new String[]{"Dispatching PRIVMSG command to ", recipient, " ..."}));
                 this.PRIVMSG(recipient, msg);
-                break;
             }
             default -> logger.finer("Command is not handled by this handler ...");
         }

@@ -6,7 +6,7 @@
 
 package net.munki.irc.channel;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /** Represents an IRC channel
  */
@@ -23,7 +23,7 @@ public class Channel {
     private String modes;
     /** Channel users
      */    
-    private final List users;
+    private final ArrayList<ChannelUser> users;
     /** Channel joined flag
      */
     private boolean joined;
@@ -34,7 +34,7 @@ public class Channel {
      * @param modes Channel modes
      * @param users Channel users
      */
-    public Channel(String name, String topic, String modes, List users) {
+    public Channel(String name, String topic, String modes, ArrayList<ChannelUser> users) {
         this.name = name;
         this.topic = topic;
         this.modes = modes;
@@ -110,7 +110,7 @@ public class Channel {
     /** Get channel users
      * @return Channel users
      */    
-    public List getUsers() {
+    public ArrayList<ChannelUser> getUsers() {
         return this.users;
     }
     

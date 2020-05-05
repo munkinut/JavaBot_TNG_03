@@ -155,9 +155,8 @@ public abstract class IRCMessageAdapter implements IRCMessageInterface, IRCMessa
      * @param mode
      * @param unused
      * @param real
-     * @throws MessageHandlerException
      */
-    public void USER(String user, String mode, String unused, String real) throws MessageHandlerException {
+    public void USER(String user, String mode, String unused, String real) {
     }
     
     /** 3.2.8 Kick message
@@ -185,9 +184,8 @@ public abstract class IRCMessageAdapter implements IRCMessageInterface, IRCMessa
     
     /** 3.2.1 Join message
      * @param channels
-     * @throws MessageHandlerException
      */
-    public void JOIN(String[] channels) throws MessageHandlerException {
+    public void JOIN(String[] channels) {
     }
     
     /**
@@ -257,9 +255,8 @@ public abstract class IRCMessageAdapter implements IRCMessageInterface, IRCMessa
     
      /** 3.1.2 Nick Message
       * @param nick
-      * @throws MessageHandlerException
       */
-    public void NICK(String nick) throws MessageHandlerException {
+    public void NICK(String nick) {
     }
     
     /** 3.1.7 Quit
@@ -333,9 +330,8 @@ public abstract class IRCMessageAdapter implements IRCMessageInterface, IRCMessa
     /** 3.3.1 Private messages
      * @param target
      * @param text
-     * @throws MessageHandlerException
      */
-    public void PRIVMSG(String target, String text) throws MessageHandlerException {
+    public void PRIVMSG(String target, String text) {
     }
     
     /** 4.4 Restart message

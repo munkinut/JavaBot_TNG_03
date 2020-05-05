@@ -7,8 +7,6 @@
 package net.munki.irc.event;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /** An abstract representation of an IRC event.
  */
@@ -19,7 +17,7 @@ public abstract class IRCEvent {
     /** The action command associated with this event. */    
     private final Object actionCommand;
     /** The list of parameters to this event. */    
-    private final List parameters;
+    private final ArrayList<Object> parameters;
 
     /** Creates new Event.
      * @param source The source of the event
@@ -28,7 +26,7 @@ public abstract class IRCEvent {
     public IRCEvent(Object source, Object actionCommand) {
         this.source = source;
         this.actionCommand = actionCommand;
-        this.parameters = Collections.synchronizedList(new ArrayList());
+        this.parameters = new ArrayList<>();
     }
     
     /** Get the source of the event.
@@ -55,7 +53,7 @@ public abstract class IRCEvent {
     /** Get a list of parameters.
      * @return A list of parameters
      */    
-    public List getParameters() {
+    public ArrayList<Object> getParameters() {
         return parameters;
     }
 }

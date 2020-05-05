@@ -11,7 +11,6 @@ import net.munki.irc.protocol.rfc2812.ReplyNames;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.StringTokenizer;
 
 public class MessageFactory {
@@ -97,7 +96,7 @@ public class MessageFactory {
     
     private static ReplyMessageInterface createReplyMessage(String prefix, String command, String arguments) {
         
-        ReplyMessageInterface rmi = null;
+        ReplyMessageInterface rmi;
 
         switch (command) {
             case ReplyNames.RPL_NAMREPLY -> {
@@ -137,7 +136,6 @@ public class MessageFactory {
 
                 // prefix = server
                 rmi = new NamesReplyMessage(prefix, channelType, channel, names);
-                break;
             }
             case ReplyNames.RPL_WHOREPLY -> {
 
@@ -181,7 +179,6 @@ public class MessageFactory {
                 else if (HGToken.startsWith("G")) HG = "G";
 
                 rmi = new WhoReplyMessage(channel, user, host, server, nick, HG, asterisk, userStatus, hop, real);
-                break;
             }
             case ReplyNames.ERR_NICKNAMEINUSE -> {
 
@@ -194,7 +191,6 @@ public class MessageFactory {
                 String message = arguments.substring(arguments.indexOf(" :") + 2);
 
                 rmi = new NicknameInUseMessage(prefix, nick, message);
-                break;
             }
             case ReplyNames.RPL_WELCOME -> {
 
@@ -202,14 +198,14 @@ public class MessageFactory {
 
                 // Break up the message
                 StringTokenizer st = new StringTokenizer(arguments);
-                List list = new ArrayList();
+                ArrayList<Object> list = new ArrayList<>();
                 while (st.hasMoreTokens()) {
                     list.add(st.nextToken());
                 }
 
                 // Get the <nick>!<user>@<host> mask at the end
                 String mask = "";
-                StringBuffer message = new StringBuffer();
+                StringBuilder message = new StringBuilder();
                 Object[] tokens = list.toArray();
                 if (tokens.length > 2) {
                     mask = (String) tokens[tokens.length - 1];
@@ -220,8 +216,8 @@ public class MessageFactory {
                 }
 
                 rmi = new WelcomeMessage(message.toString(), mask);
-                break;
             }
+            default -> throw new IllegalStateException("Unexpected value: " + command);
         }
 
         return rmi;
@@ -238,10 +234,10 @@ public class MessageFactory {
         
         // If we have a user and host specified
         // get the user + modifier and the host name
-        if (prefix.indexOf("@") > -1) {
+        if (prefix.contains("@")) {
             // we have a host
             host = prefix.substring(prefix.indexOf("@")+1);
-            if (prefix.indexOf("!") > -1) {
+            if (prefix.contains("!")) {
                 // we have a user and therefore a nickname up to '!'
                 usermod = prefix.substring(prefix.indexOf("!")+1, prefix.indexOf("@"));
                 from = prefix.substring(0, prefix.indexOf("!"));
@@ -276,36 +272,31 @@ public class MessageFactory {
             case MessageNames.JOIN -> {
                 String channel = arguments.substring(arguments.indexOf(":") + 1);
                 cmi = new JoinMessage(from, modifier, user, host, channel);
-                break;
             }
             case MessageNames.PART -> {
                 String channel;
                 String partMessage = "";
-                if (arguments.indexOf(" :") > -1) {
+                if (arguments.contains(" :")) {
                     channel = arguments.substring(0, arguments.indexOf(" :"));
                     partMessage = arguments.substring(arguments.indexOf(":") + 1);
                 } else {
                     channel = arguments;
                 }
                 cmi = new PartMessage(from, modifier, user, host, channel, partMessage);
-                break;
             }
             case MessageNames.KICK -> {
                 String channel = arguments.substring(0, arguments.indexOf(" "));
                 String nickToKick = arguments.substring(arguments.indexOf(" ") + 1);
                 cmi = new KickMessage(from, modifier, user, host, channel, nickToKick);
-                break;
             }
             case MessageNames.QUIT -> {
                 String message = arguments.substring(arguments.indexOf(":") + 1);
                 cmi = new QuitMessage(from, modifier, user, host, message);
-                break;
             }
             case MessageNames.PRIVMSG -> {
                 String addressee = arguments.substring(0, arguments.indexOf(" :"));
                 String message = arguments.substring(arguments.indexOf(":") + 1);
                 cmi = new PrivmsgMessage(from, modifier, user, host, addressee, message);
-                break;
             }
             case MessageNames.CHANNEL_MODE -> {
                 String target = arguments.substring(0, arguments.indexOf(" "));
@@ -321,10 +312,8 @@ public class MessageFactory {
                     String params = modesAndParams.substring(modesAndParams.indexOf(" ") + 1);
 
                     cmi = new ChannelModeMessage(from, modifier, user, host, target, modes, params);
-                } else {
+                }  // we have a user
 
-                    // we have a user
-                }
             }
         }
 
@@ -344,8 +333,8 @@ public class MessageFactory {
         try {
             Class c = Class.forName("net.munki.irc.protocol.rfc2812.ReplyNames");
             Field[] fields = c.getDeclaredFields();
-            for (int i = 0; i < fields.length; i++) {
-                String value = (String)(fields[i].get(new Object()));
+            for (Field field : fields) {
+                String value = (String) (field.get(new Object()));
                 if (value.equals(command)) {
                     success = true;
                     break;
@@ -373,8 +362,8 @@ public class MessageFactory {
         try {
             Class c = Class.forName("net.munki.irc.protocol.rfc2812.MessageNames");
             Field[] fields = c.getDeclaredFields();
-            for (int i = 0; i < fields.length; i++) {
-                String value = (String)(fields[i].get(new Object()));
+            for (Field field : fields) {
+                String value = (String) (field.get(new Object()));
                 if (value.equals(command)) {
                     success = true;
                     break;

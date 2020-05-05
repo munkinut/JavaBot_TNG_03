@@ -9,8 +9,6 @@ package net.munki.irc.network;
 import net.munki.irc.server.Server;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /** Represents an IRC Network
  */
@@ -21,13 +19,13 @@ public class Network {
     // private String name;
     /** Servers in the network
      */    
-    private final List servers;
+    private final ArrayList<Server> servers;
 
     /** Creates new Network
      */
     public Network() {
         // this.name = name;
-        this.servers = Collections.synchronizedList(new ArrayList());
+        this.servers = new ArrayList<>();
     }
     
     /** Add a server to the network
@@ -49,9 +47,9 @@ public class Network {
     /** Remove all servers from the network
      */    
     public void removeAllServers() {
-        Object[] s = servers.toArray();
-        for (int i = 0; i < s.length; i++) {
-            servers.remove(s[i]);
+        Server[] s = (Server[]) servers.toArray();
+        for (Server o : s) {
+            servers.remove(o);
         }
     }
     
@@ -61,10 +59,9 @@ public class Network {
      */    
     public Server getServer(String name) {
         Server server = null;
-        for (int i = 0; i < servers.size(); i++) {
-            Server s = (Server)servers.get(i);
-            if (s.getHost().equals(name)) {
-                server = s;
+        for (Server value : servers) {
+            if (value.getHost().equals(name)) {
+                server = value;
                 break;
             }
         }

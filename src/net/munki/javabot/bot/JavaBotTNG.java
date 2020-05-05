@@ -86,9 +86,6 @@ public class JavaBotTNG {
             }
             nicks = StringTool.uncat(config.getProperty(JBData.PROP_NICKNAMES,
 		JBData.DEFAULT_NICKNAMES));
-            if ((nicks == null) || (nicks.equals(""))) {
-                throw new JBInvalidNicknameException("Nicknames were invalid ...");
-            }
             username = config.getProperty(JBData.PROP_USERNAME, JBData.DEFAULT_USERNAME);
             if ((username == null) || (username.equals(""))) {
                 throw new JBInvalidUsernameException("Username was invalid ...");
@@ -118,11 +115,7 @@ public class JavaBotTNG {
         }
         catch (JBInvalidServerException jbse) {
             throw new JBConfigurationException("Configuration invalid ...", jbse);
-        }
-        catch (JBInvalidNicknameException jbne) {
-            throw new JBConfigurationException("Configuration invalid ...", jbne);
-        }
-        catch (JBInvalidRealnameException jbre) {
+        } catch (JBInvalidRealnameException jbre) {
             throw new JBConfigurationException("Configuration invalid ...", jbre);
         }
         catch (JBInvalidUsernameException jbue) {

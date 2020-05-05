@@ -11,8 +11,6 @@ import net.munki.jServer.ServiceListenerInterface;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.logging.Logger;
 
 // import java.io.PrintStream;
@@ -28,7 +26,7 @@ public class ControlService implements ServiceInterface {
     /** A list of listeners that need to be informed of messages
      * on the socket.  In this case it will be a BotCore object.
      */    
-    private final List serviceListeners;
+    private final ArrayList<ServiceListenerInterface> serviceListeners;
     /** The logger to which log data is sent for this class. */    
     private Logger logger;
 
@@ -36,7 +34,7 @@ public class ControlService implements ServiceInterface {
     public ControlService() {
         initLogger();
         setOutput(System.out);
-        serviceListeners = Collections.synchronizedList(new ArrayList());
+        serviceListeners = new ArrayList<>();
     }
     
     /** Initialises the logger. */    
@@ -82,13 +80,9 @@ public class ControlService implements ServiceInterface {
             pw.flush();
             Thread.sleep(2000);
         }
-        catch (IOException ioe) {
+        catch (IOException | InterruptedException ioe) {
             logger.warning(ioe.getMessage());
-        }
-        catch (InterruptedException ie) {
-            logger.warning(ie.getMessage());
-        }
-        finally {
+        } finally {
             try {
                 if (pw != null) pw.close();
                 if (bw != null) bw.close();
@@ -124,9 +118,9 @@ public class ControlService implements ServiceInterface {
     private void notifyServiceListeners(String message) {
         logger.fine("Notifying listeners ...");
         Object[] slis = serviceListeners.toArray();
-        for (int i = 0; i < slis.length; i++) {
-            if (slis[i] instanceof ServiceListenerInterface) {
-                ServiceListenerInterface sli = (ServiceListenerInterface)slis[i];
+        for (Object o : slis) {
+            if (o instanceof ServiceListenerInterface) {
+                ServiceListenerInterface sli = (ServiceListenerInterface) o;
                 sli.notify(this, message);
             }
         }
