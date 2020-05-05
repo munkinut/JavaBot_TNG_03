@@ -1,7 +1,8 @@
 # JavaBot-TNG
-An IRC bot written in Java 1.4. Needs to be updated to Java 7,8,9.
+An IRC bot originally written in Java 1.4. Now updated to Java 14.
 
-I wrote this some years ago now in an older version of Java. I'd like it brought up to date with a more modern version of Java,
-and also to reflect changes in the way IRC has evolved.
+It runs on IRCNet but not on many other networks yet.
+It needs to be made to run on other networks and updated with changes to IRC since it was originally written.
+Also, the coding needs to be updated in places to take advantage of Java's new features.
 
 It needs some external JARs which may also need updating, but which I can supply if you are interested in helping out.
