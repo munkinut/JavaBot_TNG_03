@@ -1,4 +1,5 @@
-# JavaBot-TNG
+# JavaBot_TNG_03
+
 An IRC bot originally written in Java 1.4. Now updated to Java 14.
 
 It runs on IRCNet but not on many other networks yet.
