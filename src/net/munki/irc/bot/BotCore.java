@@ -33,14 +33,18 @@ import net.munki.jServer.ServiceListenerInterface;
 import net.munki.util.classloader.VanillaClassLoader;
 import net.munki.util.string.StringTool;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.PrintStream;
-import java.util.*;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 /** A bot core providing basic minimal functionality for connecting to an IRC server.
  */
-public class BotCore implements Observer, ServiceListenerInterface {
+public class BotCore implements PropertyChangeListener, ServiceListenerInterface {
     
     /** The default nickname to use if one is not supplied. */    
     private static final String DEFAULT_NICK = "JB_TNG";
@@ -52,7 +56,10 @@ public class BotCore implements Observer, ServiceListenerInterface {
     private static final String PLUGINS_DIR = "plugins";
     /** The file separator. */
     private static final String FILE_SEPARATOR = File.separator;
-    
+
+//    private void setNews(String newValue) {
+//    }
+
     /** The bot environment, a complimentary class which provides
      * an API to scripts and internal components.
      */
@@ -66,6 +73,8 @@ public class BotCore implements Observer, ServiceListenerInterface {
     private final Server server;
     /** The connection the bot will use to talk to the server. */    
     private Connection connection;
+
+    private String message;
     
     /** The listener manager that runs the control service. */    
     private ListenerManager controlListener;
@@ -95,25 +104,38 @@ public class BotCore implements Observer, ServiceListenerInterface {
         this.initDefaultHandlers(beanshell, jython, jacl);
         this.initPlugins();
     }
-    
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        this.setMessage((String) evt.getNewValue());
+    }
+
+    private void setMessage(String newValue) {
+        this.message = newValue;
+    }
+
+    private String getMessage() {
+        return this.message;
+    }
+
     /** Initialises the bot environment.
      * @param nicknames The list of nicknames the bot can use.
      * @param chans The list of channels the bot can join.
      */    
     private void initEnvironment(String[] nicknames, String[] chans) {
         logger.fine("Initialising environment ...");
-        List messageListeners = Collections.synchronizedList(new ArrayList());
-        List commandListeners = Collections.synchronizedList(new ArrayList());
-        List replyListeners = Collections.synchronizedList(new ArrayList());
-        List scriptListeners = Collections.synchronizedList(new ArrayList());
+        ArrayList messageListeners = new ArrayList();
+        ArrayList commandListeners = new ArrayList();
+        ArrayList replyListeners = new ArrayList();
+        ArrayList scriptListeners = new ArrayList();
         int nickIndex = -1;
         String[] nicks = new String[nicknames.length + 1];
         System.arraycopy(nicknames, 0, nicks, 0, nicknames.length);
         nicks[nicknames.length] = BotCore.DEFAULT_NICK;
-        List channels = Collections.synchronizedList(new ArrayList());
+        ArrayList<Channel> channels = new ArrayList<>();
         for (int i = 0; i < chans.length; i++) {
             if (Validator.validChannelName(chans[i])) {
-                Channel channel = new Channel(chans[i], "", "", Collections.synchronizedList(new ArrayList()));
+                Channel channel = new Channel(chans[i], "", "", new ArrayList());
                 channels.add(channel);
             }
         }
@@ -170,7 +192,7 @@ public class BotCore implements Observer, ServiceListenerInterface {
                     " found ..."
                 }));
                 if (IRCCommandListener.class.isAssignableFrom(myClass)) {
-                    IRCCommandListener icl = (IRCCommandListener)myClass.newInstance();
+                    IRCCommandListener icl = (IRCCommandListener)myClass.getDeclaredConstructor().newInstance();
                     logger.fine(StringTool.cat(new String[] {
                         "Plugin ",
                         myClass.getName(),
@@ -179,7 +201,7 @@ public class BotCore implements Observer, ServiceListenerInterface {
                     registerCommandHandler(icl);
                 }
                 else if (IRCMessageListener.class.isAssignableFrom(myClass)) {
-                    IRCMessageListener iml = (IRCMessageListener)myClass.newInstance();
+                    IRCMessageListener iml = (IRCMessageListener)myClass.getDeclaredConstructor().newInstance();
                     logger.fine(StringTool.cat(new String[] {
                         "Plugin ",
                         myClass.getName(),
@@ -188,7 +210,7 @@ public class BotCore implements Observer, ServiceListenerInterface {
                     registerMessageHandler(iml);
                 }
                 else if (IRCReplyListener.class.isAssignableFrom(myClass)) {
-                    IRCReplyListener irl = (IRCReplyListener)myClass.newInstance();
+                    IRCReplyListener irl = (IRCReplyListener)myClass.getDeclaredConstructor().newInstance();
                     logger.fine(StringTool.cat(new String[] {
                         "Plugin ",
                         myClass.getName(),
@@ -225,13 +247,17 @@ public class BotCore implements Observer, ServiceListenerInterface {
                     " Please check you security manager settings",
                     " and file permissions."
                 }));
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
             }
         }
     }
     
-    private static List getPluginList(String location) {
+    private static ArrayList getPluginList(String location) {
         File dir = new File(location);
-        List outList = Collections.synchronizedList(new ArrayList());
+        ArrayList outList = new ArrayList();
         if (!dir.exists()) return outList;
         File[] filesList = dir.listFiles();
         for (int i = 0; i < filesList.length; i++) {
@@ -330,7 +356,7 @@ public class BotCore implements Observer, ServiceListenerInterface {
                 if (connection != null) {
                     logger.info("Initialising connection ...");
                     this.activateCommandHandlers();
-                    connection.addObserver(this);
+                    connection.addPropertyChangeListener(this);
                     connection.start();
                     success = true;
                 }
@@ -383,24 +409,13 @@ public class BotCore implements Observer, ServiceListenerInterface {
     }
     
     /** Allows a connection to send message strings to the bot.
-     * @param observable A Connection object connected to the server
-     * @param obj A message string
+     * @param message A message string
      */    
-    public void update(Observable observable, Object obj) {
-        if (this.connection == observable) {
-            if (obj instanceof String) {
-                logger.fine("Valid message received ...");
-                String msg = (String)obj;
-                report(msg);
-                this.handleMessage(msg);
-            }
-            else {
-                logger.warning("Server message was not a String, ignoring ...");
-            }
-        }
-        else {
-            logger.warning("Invalid connection tried to pass a message, ignoring ...");
-        }
+    public void update(String message) {
+        logger.fine("Valid message received ...");
+        String msg = (String)message;
+        report(message);
+        this.handleMessage(message);
     }
     
     /** Tells the bot environment to listen for commands. */    
@@ -553,5 +568,5 @@ public class BotCore implements Observer, ServiceListenerInterface {
             logger.warning("Invalid control service sending command, ignoring ...");
         }
     }
-    
+
 }

@@ -8,18 +8,23 @@ package net.munki.irc.connection;
 
 import net.munki.util.string.StringTool;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.*;
 import java.net.Socket;
-import java.util.Observable;
 import java.util.logging.Logger;
 
 /** Represents a connection to an IRC server
  */
-public class Connection extends Observable implements Runnable {
+public class Connection implements Runnable {
+
+    private PropertyChangeSupport support;
     
     /** Line terminator string
      */    
     private static final String LINE_TERMINATOR = "\r\n";
+
+    String inbound;
 
     /** Reader for the incoming data
      */    
@@ -43,6 +48,7 @@ public class Connection extends Observable implements Runnable {
      */
     public Connection(String host, int port) throws ConnectionException {
         initLogger();
+        support = new PropertyChangeSupport(this);
         try {
             /* Socket for connection to the server
              */
@@ -73,7 +79,16 @@ public class Connection extends Observable implements Runnable {
     private void initLogger() {
         logger = Logger.getLogger(this.getClass().getName());
     }
-    
+
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        support.addPropertyChangeListener(pcl);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+        support.removePropertyChangeListener(pcl);
+    }
+
+
     /** Start using the connection
      */    
     public void start() {
@@ -109,11 +124,9 @@ public class Connection extends Observable implements Runnable {
      * @throws IOException Thrown if reading data fails
      */    
     private void readLine() throws IOException {
-        String inbound;
         if ((inbound = in.readLine()) != null) {
             logger.fine("Received inbound message, notifying observers ...");
-            this.setChanged();
-            this.notifyObservers(inbound);
+            support.firePropertyChange("inbound", this.inbound, inbound);
         }
         else this.stop();
     }
