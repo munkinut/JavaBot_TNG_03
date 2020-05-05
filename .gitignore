@@ -1,6 +1,7 @@
 /bin/
 /lib/
 /out/
+/logs/
 *.class
 .project
 .settings
