@@ -169,11 +169,11 @@ public class BotEnv {
         nickIndex++;
         String nick;
         if (nickIndex < nicks.length) {
-            logger.fine("Choosing next available nick ...");
+            logger.info("Choosing next available nick ...");
             nick = nicks[nickIndex];
         }
         else {
-            logger.fine("No more nicks to choose from.  Cycling ...");
+            logger.info("No more nicks to choose from.  Cycling ...");
             nickIndex = -1;
             nick = this.nextNick();
         }
@@ -204,7 +204,7 @@ public class BotEnv {
             if (handlers[i] instanceof IRCMessageListener) {
                 IRCMessageListener mh = (IRCMessageListener)handlers[i];
                 // String name = mh.getClass().getName();
-                logger.fine(StringTool.cat(new String[] {"Message handler ", Integer.valueOf(i).toString(), " handling ..."}));
+                logger.info(StringTool.cat(new String[] {"Message handler ", Integer.valueOf(i).toString(), " handling ..."}));
                 mh.dispatch(evt);
             }
         }
@@ -220,7 +220,7 @@ public class BotEnv {
             if (handler instanceof IRCCommandListener) {
                 IRCCommandListener ica = (IRCCommandListener) handler;
                 String name = ica.getClass().getName();
-                logger.fine(StringTool.cat(new String[]{"Command handler ", name, " handling ..."}));
+                logger.info(StringTool.cat(new String[]{"Command handler ", name, " handling ..."}));
                 ica.dispatch(evt);
             }
         }
@@ -236,7 +236,7 @@ public class BotEnv {
             if (handler instanceof IRCReplyListener) {
                 IRCReplyListener ira = (IRCReplyListener) handler;
                 String name = ira.getClass().getName();
-                logger.fine(StringTool.cat(new String[]{"Reply handler ", name, " handling ..."}));
+                logger.info(StringTool.cat(new String[]{"Reply handler ", name, " handling ..."}));
                 ira.dispatch(evt);
             }
         }
@@ -251,7 +251,7 @@ public class BotEnv {
             if (handler instanceof IRCScriptListener) {
                 IRCScriptListener ira = (IRCScriptListener) handler;
                 String name = ira.getClass().getName();
-                logger.fine(StringTool.cat(new String[]{"Script handler ", name, " handling ..."}));
+                logger.info(StringTool.cat(new String[]{"Script handler ", name, " handling ..."}));
                 ira.dispatch(evt);
             }
         }

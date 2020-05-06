@@ -156,7 +156,7 @@ public class JBMessageHandler extends IRCMessageAdapter {
     }
     
     private void handlePrivmsg(CommandMessageInterface message) throws MessageHandlerException {
-        logger.fine("Message was a PRIVMSG ...");
+        logger.info("Message was a PRIVMSG ...");
         PrivmsgMessage pm = (PrivmsgMessage)message;
         String nick = pm.getNick();
         String modifier = pm.getModifier();
@@ -247,12 +247,12 @@ public class JBMessageHandler extends IRCMessageAdapter {
                 BotUserManagerInterface botUserManager = DefaultBotUserManager.getInstance();
                 if (botUserManager.canOp(channelUser, myChannel))
                     this.MODE(channelName, "+o", nicks.toString());
-                else logger.fine(StringTool.cat(new String[] {
+                else logger.info(StringTool.cat(new String[] {
                     "PRIVMSG 'op' not allowed for ",
                     channelUser.getNick(), " on ",
                     channelName, " ..."}));
             }
-            else logger.fine(StringTool.cat(new String[] {
+            else logger.info(StringTool.cat(new String[] {
                     "PRIVMSG 'op' channel ",
                     channelName, " is not one of mine ..."}));
         }
@@ -286,12 +286,12 @@ public class JBMessageHandler extends IRCMessageAdapter {
                 BotUserManagerInterface botUserManager = DefaultBotUserManager.getInstance();
                 if (botUserManager.canDeop(channelUser, myChannel))
                     this.MODE(channelName, "-o", nicks.toString());
-                else logger.fine(StringTool.cat(new String[] {
+                else logger.info(StringTool.cat(new String[] {
                     "PRIVMSG 'deop' not allowed for ",
                     channelUser.getNick(), " on ",
                     channelName, " ..."}));
             }
-            else logger.fine(StringTool.cat(new String[] {
+            else logger.info(StringTool.cat(new String[] {
                     "PRIVMSG 'deop' channel ",
                     channelName, " is not one of mine ..."}));
         }
@@ -325,12 +325,12 @@ public class JBMessageHandler extends IRCMessageAdapter {
                 BotUserManagerInterface botUserManager = DefaultBotUserManager.getInstance();
                 if (botUserManager.canVoice(channelUser, myChannel))
                     this.MODE(channelName, "+v", nicks.toString());
-                else logger.fine(StringTool.cat(new String[] {
+                else logger.info(StringTool.cat(new String[] {
                     "PRIVMSG 'voice' not allowed for ",
                     channelUser.getNick(), " on ",
                     channelName, " ..."}));
             }
-            else logger.fine(StringTool.cat(new String[] {
+            else logger.info(StringTool.cat(new String[] {
                     "PRIVMSG 'voice' channel ",
                     channelName, " is not one of mine ..."}));
         }
@@ -364,12 +364,12 @@ public class JBMessageHandler extends IRCMessageAdapter {
                 BotUserManagerInterface botUserManager = DefaultBotUserManager.getInstance();
                 if (botUserManager.canDevoice(channelUser, myChannel))
                     this.MODE(channelName, "-v", nicks.toString());
-                else logger.fine(StringTool.cat(new String[] {
+                else logger.info(StringTool.cat(new String[] {
                     "PRIVMSG 'devoice' not allowed for ",
                     channelUser.getNick(), " on ",
                     channelName, " ..."}));
             }
-            else logger.fine(StringTool.cat(new String[] {
+            else logger.info(StringTool.cat(new String[] {
                     "PRIVMSG 'devoice' channel ",
                     channelName, " is not one of mine ..."}));
         }
@@ -454,7 +454,7 @@ public class JBMessageHandler extends IRCMessageAdapter {
         // use env to fire it
         // out command handlers will pick it up
         if (env != null) {
-            logger.fine("Handling MODE message ...");
+            logger.info("Handling MODE message ...");
             IRCCommandEvent evt = new IRCCommandEvent(env, MessageNames.CHANNEL_MODE);
             evt.addParameter(channel);
             evt.addParameter(modes);
@@ -472,7 +472,7 @@ public class JBMessageHandler extends IRCMessageAdapter {
 
     public void WHO(String mask, String operator) throws MessageHandlerException {
         if (env != null) {
-            logger.fine("Handling WHO message ...");
+            logger.info("Handling WHO message ...");
             IRCCommandEvent evt = new IRCCommandEvent(env, MessageNames.WHO);
             evt.addParameter(mask);
             evt.addParameter(operator);

@@ -93,7 +93,7 @@ public class Connection implements Runnable {
      */    
     public void start() {
         if (connectionThread == null) {
-            logger.fine("Starting connection thread ...");
+            logger.info("Starting connection thread ...");
             connectionThread = new Thread(this);
             connectionThread.start();
         }
@@ -115,7 +115,7 @@ public class Connection implements Runnable {
     /** Stop using the connection
      */    
     public void stop() {
-        logger.fine("Stopping the connection ...");
+        logger.info("Stopping the connection ...");
         this.disconnect();
         connectionThread = null;
     }
@@ -125,7 +125,7 @@ public class Connection implements Runnable {
      */    
     private void readLine() throws IOException {
         if ((inbound = in.readLine()) != null) {
-            logger.fine("Received inbound message, notifying observers ...");
+            logger.info("Received inbound message, notifying observers ...");
             support.firePropertyChange("inbound", this.inbound, inbound);
         }
         else this.stop();
@@ -140,7 +140,7 @@ public class Connection implements Runnable {
             if (out != null) {
                 out.write(StringTool.cat(new String[] {outbound, LINE_TERMINATOR}));
                 out.flush();
-                logger.info("WROTE OUTBOUND STRING TO SERVER");
+                logger.info("WROTE " + outbound);
             }
             else logger.warning("Output stream was null ...");
         }
@@ -151,7 +151,7 @@ public class Connection implements Runnable {
      */    
     private void disconnect() {
         try {
-            logger.fine("Disconnecting ...");
+            logger.info("Disconnecting ...");
             if (out != null) out.close();
             else logger.warning("Tried to disconnect but the outstream was already null ...");
             if (in != null) in.close();

@@ -95,13 +95,13 @@ public class IRCScriptResource {
             addressee.startsWith("!") || addressee.startsWith("&")) {
                 
                 // addressee is a channel
-                logger.fine("Script resource replying to a channel ...");
+                logger.info("Script resource replying to a channel ...");
                 recipient = addressee;
         }
         else {
             
                 // addressee is the client
-                logger.fine("Script resource replying to a nickname ...");
+                logger.info("Script resource replying to a nickname ...");
                 recipient = nick;
         }
         
@@ -112,7 +112,7 @@ public class IRCScriptResource {
         logger.finer(StringTool.cat(new String[] {"Recipient is ", recipient}));
         logger.finer(StringTool.cat(new String[] {"Reply is ", reply}));
         try {
-            logger.fine("Firing command event ...");
+            logger.info("Firing command event ...");
             env.fireIRCCommandEvent(ice);
         }
         catch (MessageHandlerException mhe) {

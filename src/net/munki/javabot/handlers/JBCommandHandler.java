@@ -45,7 +45,7 @@ public class JBCommandHandler extends IRCCommandAdapter {
      */    
     public void dispatch(IRCCommandEvent evt) throws MessageHandlerException {
         if ((evt.getSource() instanceof BotEnv) && (evt.getActionCommand() instanceof String)) {
-            logger.fine("Command event is valid; dispatching ...");
+            logger.info("Command event is valid; dispatching ...");
             this.handleMessage(evt);
         }
     }
@@ -56,7 +56,7 @@ public class JBCommandHandler extends IRCCommandAdapter {
         String message = (String)evt.getActionCommand();
 
         if (message.equals(MessageNames.CHANNEL_MODE)) {
-            logger.fine("Command Handler received a CHANNEL_MODE command ...");
+            logger.info("Command Handler received a CHANNEL_MODE command ...");
             String channel;
             String modes;
             String nicknames;
@@ -65,7 +65,7 @@ public class JBCommandHandler extends IRCCommandAdapter {
                 channel = (String)parameters[0];
                 modes = (String)parameters[1];
                 nicknames = (String)parameters[2];
-                logger.fine(StringTool.cat(new String[] {
+                logger.info(StringTool.cat(new String[] {
                     "Dispatching MODE command on ",
                     channel,
                     " with modes ",
@@ -80,14 +80,14 @@ public class JBCommandHandler extends IRCCommandAdapter {
             else logger.warning("Invalid number of parameters for CHANNEL_MODE command ...");
         }
         else if (message.equals(MessageNames.WHO)) {
-            logger.fine("Command Handler received a WHO command ...");
+            logger.info("Command Handler received a WHO command ...");
             String mask;
             String operator;
             Object[] parameters = (evt.getParameters()).toArray();
             if (parameters.length == 2) {
                 mask = (String)parameters[0];
                 operator = (String)parameters[1];
-                logger.fine(StringTool.cat(new String[] {
+                logger.info(StringTool.cat(new String[] {
                     "Dispatching WHO command for ",
                     mask,
                     " ..."
