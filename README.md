@@ -8,6 +8,5 @@ Also, the coding needs to be updated in places to take advantage of Java's new f
 
 It needs some external JARs which may also need updating, but which I can supply if you are interested in helping out.
 
-Since I changed the way the JBMessageHandler, JBCommandHandler and JBReplyHandler plugins are loaded, this part no longer works. I need to learn more about the new classloading mechanism in Java.
-
+For TODO's check out issues.
 
