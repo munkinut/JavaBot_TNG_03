@@ -8,6 +8,7 @@ package net.munki.irc.connection;
 
 import net.munki.util.string.StringTool;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.*;
@@ -125,8 +126,9 @@ public class Connection implements Runnable {
      */    
     private void readLine() throws IOException {
         if ((inbound = in.readLine()) != null) {
-            logger.info("Received inbound message, notifying observers ...");
-            support.firePropertyChange("inbound", this.inbound, inbound);
+            logger.info("READ MESSAGE FROM SERVER: " + inbound);
+            PropertyChangeEvent evt = new PropertyChangeEvent(this, inbound, null, inbound);
+            support.firePropertyChange(evt);
         }
         else this.stop();
     }
@@ -140,7 +142,7 @@ public class Connection implements Runnable {
             if (out != null) {
                 out.write(StringTool.cat(new String[] {outbound, LINE_TERMINATOR}));
                 out.flush();
-                logger.info("WROTE " + outbound);
+                logger.info("WROTE MESSAGE TO SERVER: " + outbound);
             }
             else logger.warning("Output stream was null ...");
         }
