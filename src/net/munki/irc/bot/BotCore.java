@@ -137,13 +137,16 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
         String[] nicks = new String[nicknames.length + 1];
         System.arraycopy(nicknames, 0, nicks, 0, nicknames.length);
         nicks[nicknames.length] = BotCore.DEFAULT_NICK;
+        logger.info("Nicks initialised ...");
         ArrayList<Channel> channels = new ArrayList<>();
         for (String chan : chans) {
             if (Validator.validChannelName(chan)) {
+                logger.info("Channel name " + chan + "valid ...");
                 Channel channel = new Channel(chan, "", "", new ArrayList<>());
                 channels.add(channel);
             }
         }
+        logger.info("Channels initialised ...");
         PrintStream output = System.out;
         env = new BotEnv(nicks, nickIndex, channels, messageListeners, commandListeners, replyListeners, scriptListeners, output);
     }
@@ -183,111 +186,6 @@ public class BotCore implements PropertyChangeListener, ServiceListenerInterface
         if (jython) registerScriptHandler(new JythonScriptHandler());
         if (jacl) registerScriptHandler(new JaclScriptHandler());
     }
-    
-    /** Initialises the plugins. */    
-/*
-    private void initPlugins() {
-        logger.info("Initialising plugins ...");
-        ClassLoader classLoader = new VanillaClassLoader(BotCore.class.getClassLoader(), PLUGINS_DIR);
-        logger.info("Acquiring plugin list ...");
-        ArrayList<String> classesToLoad = getPluginList(PLUGINS_DIR);
-        for (String s : classesToLoad) {
-            try {
-                Class myClass = classLoader.loadClass(s);
-                logger.info(StringTool.cat(new String[]{
-                        "Plugin ",
-                        myClass.getName(),
-                        " found ..."
-                }));
-                if (IRCCommandListener.class.isAssignableFrom(myClass)) {
-                    IRCCommandListener icl = (IRCCommandListener) myClass.getDeclaredConstructor().newInstance();
-                    logger.info(StringTool.cat(new String[]{
-                            "Plugin ",
-                            myClass.getName(),
-                            " initialised ..."
-                    }));
-                    registerCommandHandler(icl);
-                } else if (IRCMessageListener.class.isAssignableFrom(myClass)) {
-                    IRCMessageListener iml = (IRCMessageListener) myClass.getDeclaredConstructor().newInstance();
-                    logger.info(StringTool.cat(new String[]{
-                            "Plugin ",
-                            myClass.getName(),
-                            " initialised ..."
-                    }));
-                    registerMessageHandler(iml);
-                } else if (IRCReplyListener.class.isAssignableFrom(myClass)) {
-                    IRCReplyListener irl = (IRCReplyListener) myClass.getDeclaredConstructor().newInstance();
-                    logger.info(StringTool.cat(new String[]{
-                            "Plugin ",
-                            myClass.getName(),
-                            " initialised ..."
-                    }));
-                    registerReplyHandler(irl);
-                } else logger.warning(StringTool.cat(new String[]{
-                        "The plugin ",
-                        s,
-                        " was not valid.  Please ensure it extends one of the ",
-                        " handler classes and that it ends with a .mod extension."
-                }));
-            } catch (ClassNotFoundException cnfe) {
-                logger.warning(StringTool.cat(new String[]{
-                        "The class ",
-                        s,
-                        " could not be found."
-                }));
-            } catch (InstantiationException ie) {
-                logger.warning(StringTool.cat(new String[]{
-                        "The class ",
-                        s,
-                        " could not be instantiated."
-                }));
-            } catch (IllegalAccessException iae) {
-                logger.warning(StringTool.cat(new String[]{
-                        "The class ",
-                        s,
-                        " could not be accessed.",
-                        " Please check you security manager settings",
-                        " and file permissions."
-                }));
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-*/
-
-/*
-    private static ArrayList<String> getPluginList(String location) {
-        File dir = new File(location);
-        ArrayList<String> outList = new ArrayList<>();
-        if (!dir.exists()) return outList;
-        File[] filesList = dir.listFiles();
-        for (File file : Objects.requireNonNull(filesList)) {
-            String fileStr = file.toString();
-            if (file.isDirectory()) outList.addAll(getPluginList(fileStr));
-            else { // it's a file
-                String replaceSlash;
-                String replacement = ".";
-                String replaceClass = ".mod";
-                String replacePlugins = StringTool.cat(new String[]{PLUGINS_DIR, "."});
-                String empty = "";
-//                if (FILE_SEPARATOR.equals("\\")) replaceSlash = ("\\" + FILE_SEPARATOR);
-//                else replaceSlash = FILE_SEPARATOR;
-                if (separator.equals("\\")) {
-                    replaceSlash = (new String("\\") + separator);
-                } else replaceSlash = separator;
-
-                String unslashedFile = fileStr.replaceAll(replaceSlash, replacement);
-                String outFileWithPlugins = unslashedFile.replaceAll(replaceClass, empty);
-                String outFile = outFileWithPlugins.replaceAll(replacePlugins, empty);
-                outList.add(outFile);
-            }
-        }
-        return outList;
-    }
-*/
 
     /** Sets the output stream.
      * @param out Output stream to use
