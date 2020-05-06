@@ -8,5 +8,5 @@ Also, the coding needs to be updated in places to take advantage of Java's new f
 
 It needs some external JARs which may also need updating, but which I can supply if you are interested in helping out.
 
-For TODO's check out issues.
+For TODO's check out issues on my GitHub repo.
 
